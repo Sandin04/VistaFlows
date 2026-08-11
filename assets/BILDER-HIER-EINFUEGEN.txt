@@ -1,0 +1,15 @@
+WICHTIG - vor dem Livegang erledigen
+
+In diesem Ordner fehlen noch zwei Bilddateien. Sie muessen exakt so heissen:
+
+  1. VistaFlows_Logo.png       -> Logo in Navigation und Footer
+  2. VistaFlows_Favicon.png    -> Icon im Browser-Tab
+  3. sandin_jagurdzija.jpg     -> Foto im Bereich "Ueber mich"
+
+Diese Dateien hast du bereits in deinem alten Repo unter assets/.
+Kopiere sie einfach hierher, dann greifen alle Verweise automatisch.
+
+Bereits enthalten:
+  og-image.png  -> Vorschaubild fuer WhatsApp, LinkedIn, Facebook, X (1200x630)
+
+Diese Datei danach loeschen.
