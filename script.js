@@ -178,9 +178,16 @@
       });
     });
 
+    /* Beim Laden bleibt die Karte zu, damit das Bild sichtbar ist.
+       Die Inhalte werden trotzdem schon einmal befüllt. */
     document.querySelectorAll(".tour-screen, .portfolio-screen").forEach(function (scope) {
       var active = scope.querySelector(".hotspot.is-active") || scope.querySelector(".hotspot");
-      if (active && scope.querySelector("[data-hotspot-card]")) showCard(active);
+      var card = scope.querySelector("[data-hotspot-card]");
+      if (active && card) {
+        showCard(active);
+        card.classList.remove("active");
+        scope.classList.remove("has-card");
+      }
     });
 
     /* ------------------------------------------------- Formulare --------- */
