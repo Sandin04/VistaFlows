@@ -1,0 +1,109 @@
+---
+// Nur in `npm run dev` erreichbar: /_dev/break-ui (siehe astro.config.mjs, Integration „break-ui“).
+// Rendert echte Komponenten mit Demo- und Worst-Case-Daten. Umschalten unten in der Mitte,
+// die Auswahl steht in der Adresse (?data=worst), damit ein Neuladen sie behält.
+import Base from "../../src/layouts/Base.astro";
+import PlanCard from "../../src/components/PlanCard.astro";
+import Faq from "../../src/components/Faq.astro";
+import Crumbs from "../../src/components/Crumbs.astro";
+import { fixtures } from "./fixtures";
+
+const states = [
+  { id: "demo", label: "Demo" },
+  { id: "worst", label: "Worst case" },
+  { id: "empty", label: "Leer" },
+  { id: "one", label: "Eins" },
+] as const;
+---
+
+<Base title="Break-UI (nur lokal)" description="Lokale Testseite mit Extremdaten. Nicht öffentlich." path="/_dev/break-ui" noindex stickyCta={false}>
+  {
+    states.map((s, i) => {
+      const f = fixtures[s.id];
+      return (
+        <div data-state={s.id} hidden={i !== 0 ? true : undefined}>
+          <section class="night page-hero">
+            <div class="shell">
+              <Crumbs items={f.crumbs} />
+              <h1>Extremdaten: {s.label}</h1>
+            </div>
+          </section>
+          <section class="section section--paper">
+            <div class="shell">
+              <h2>Paketkarten</h2>
+              <div class="plans mt-s">
+                {f.plans.map((p) => (
+                  <PlanCard paket={p} />
+                ))}
+              </div>
+            </div>
+          </section>
+          <section class="section">
+            <div class="shell split split--top">
+              <div class="section-head">
+                <h2>Fragen</h2>
+              </div>
+              <Faq items={f.faq} openFirst />
+            </div>
+          </section>
+        </div>
+      );
+    })
+  }
+  <div class="bu-toggle" role="group" aria-label="Testdaten">
+    {
+      states.map((s, i) => (
+        <button type="button" data-set={s.id} aria-pressed={i === 0 ? "true" : "false"}>
+          {s.label}
+        </button>
+      ))
+    }
+  </div>
+</Base>
+
+<style>
+  .bu-toggle {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    z-index: 100;
+    display: flex;
+    gap: 2px;
+    padding: 3px;
+    border-radius: 999px;
+    background: #d9d9d9;
+    font: 13px/1 system-ui, sans-serif;
+    transform: translateX(-50%);
+  }
+  .bu-toggle button {
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #333;
+    font: inherit;
+    cursor: pointer;
+  }
+  .bu-toggle button[aria-pressed="true"] {
+    background: #fff;
+    color: #000;
+  }
+</style>
+
+<script>
+  const show = (id: string) => {
+    document.querySelectorAll<HTMLElement>("[data-state]").forEach((el) => (el.hidden = el.dataset.state !== id));
+    document.querySelectorAll<HTMLButtonElement>("[data-set]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.set === id)));
+  };
+  const initial = new URLSearchParams(location.search).get("data") || "demo";
+  show(initial);
+  document.querySelectorAll<HTMLButtonElement>("[data-set]").forEach((b) =>
+    b.addEventListener("click", () => {
+      const id = b.dataset.set || "demo";
+      const url = new URL(location.href);
+      url.searchParams.set("data", id);
+      history.replaceState(null, "", url);
+      show(id);
+    }),
+  );
+</script>

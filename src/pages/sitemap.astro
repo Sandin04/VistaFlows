@@ -1,0 +1,87 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { leistungenMenu, rechtlichLinks } from "../data/navigation";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "Sitemap", href: "/sitemap" },
+];
+
+const artikel = (await getCollection("ratgeber")).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
+
+const gruppen = [
+  {
+    titel: "Hauptseiten",
+    links: [
+      { label: "Startseite", href: "/" },
+      { label: "Leistungen", href: "/leistungen" },
+      { label: "Preise", href: "/preise" },
+      { label: "Branchen", href: "/branchen" },
+      { label: "Über mich", href: "/ueber-mich" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Kontakt", href: "/kontakt" },
+      { label: "KI-Sichtbarkeits-Check", href: "/ki-sichtbarkeits-check" },
+    ],
+  },
+  {
+    titel: "Leistungen",
+    links: [
+      ...leistungenMenu.filter((l) => !l.href.includes("#")).map((l) => ({ label: l.label, href: l.href })),
+      { label: "Website-Entwicklung", href: "/leistungen#website" },
+      { label: "Automatisierung mit n8n", href: "/leistungen#automatisierung" },
+    ],
+  },
+  {
+    titel: "Ratgeber",
+    links: [{ label: "Alle Ratgeber", href: "/ratgeber" }, ...artikel.map((a) => ({ label: a.data.title, href: `/ratgeber/${a.id}` }))],
+  },
+  {
+    titel: "Branchen",
+    links: [
+      { label: "Hotels und Ferienunterkünfte", href: "/branchen#hotel" },
+      { label: "Praxen", href: "/branchen#praxis" },
+      { label: "Showrooms und Handel", href: "/branchen#showroom" },
+      { label: "Fitnessstudios", href: "/branchen#fitness" },
+      { label: "Immobilien", href: "/branchen#immobilien" },
+    ],
+  },
+  {
+    titel: "Rechtliches",
+    links: rechtlichLinks.filter((l) => l.href !== "/sitemap"),
+  },
+];
+---
+
+<Base
+  title="Sitemap: alle Seiten von VistaFlows im Überblick"
+  description="Alle Seiten von VistaFlows auf einen Blick: Leistungen, Preise, Ratgeber zu SEO, GEO und 360°-Rundgang, Branchen, Kontakt und rechtliche Informationen."
+  path="/sitemap"
+  og="/og/start.png"
+  crumbs={crumbs}
+>
+  <PageHero crumbs={crumbs} title="Alle Seiten im Überblick" />
+  <section class="section section--paper">
+    <div class="shell">
+      <div class="principles">
+        {
+          gruppen.map((g) => (
+            <div>
+              <h2 class="title-form">{g.titel}</h2>
+              <ul class="checks">
+                {g.links.map((l) => (
+                  <li>
+                    <a class="text-link" href={l.href}>
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,12 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../data/site";
+---
+
+<aside class="sticky-cta" aria-label="Schnellkontakt">
+  <a class="btn btn--on-dark" href={site.phone.href} aria-label={`Anrufen: ${site.phone.display}`}>
+    <Icon name="phone" size="sm" />
+    <span>Anrufen</span>
+  </a>
+  <a class="btn btn--primary" href="/kontakt">Erstgespräch anfragen</a>
+</aside>

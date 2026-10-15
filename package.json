@@ -1,11 +1,36 @@
 {
   "name": "vistaflows-website",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "private": true,
-  "description": "VistaFlows – Websites & 360° Touren. Statische Multi-Page-Website ohne Build-Schritt.",
-  "scripts": {
-    "start": "npx serve ."
-  },
+  "type": "module",
+  "description": "VistaFlows – Websites, SEO & GEO und 360°-Rundgänge für lokale Unternehmen. Astro (statisch) + Vercel-Funktion für Anfragen.",
   "author": "Sandin Jagurdzija",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "node tools/dev-server.mjs",
+    "check": "astro check",
+    "test": "node --test \"tests/*.test.mjs\"",
+    "check:links": "node tools/check-site.mjs",
+    "qa": "astro check && npm test && astro build && node tools/check-site.mjs",
+    "assets": "node tools/prepare-assets.mjs",
+    "render:og": "node --experimental-strip-types tools/render.mjs og",
+    "render:poster": "node --experimental-strip-types tools/render.mjs poster"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "astro": "^7.3.8",
+    "pannellum": "^2.5.7",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^22.20.5",
+    "playwright-core": "^1.64.0",
+    "typescript": "^6.0.3"
+  }
 }

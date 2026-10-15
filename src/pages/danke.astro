@@ -1,0 +1,45 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../data/site";
+---
+
+<Base
+  title="Danke für deine Anfrage | VistaFlows"
+  description="Deine Anfrage ist bei VistaFlows angekommen. Ich melde mich innerhalb von 24 Stunden an Werktagen persönlich bei dir."
+  path="/danke"
+  noindex
+  stickyCta={false}
+>
+  <section class="night night--glow status-page">
+    <div class="shell">
+      <h1 data-danke-titel>Danke, deine Anfrage ist angekommen.</h1>
+      <p class="lead" data-danke-text>
+        Ich melde mich innerhalb von 24 Stunden an Werktagen persönlich bei dir. Eine Eingangsbestätigung ist an deine E-Mail-Adresse unterwegs. Falls sie nicht ankommt, schau bitte im Spam-Ordner nach.
+      </p>
+      <ol class="next-steps">
+        <li><strong>Ich melde mich</strong><span>per E-Mail oder telefonisch, innerhalb von 24 Stunden an Werktagen.</span></li>
+        <li><strong>Kostenloses Erstgespräch</strong><span>rund 20 Minuten, per Telefon oder Video.</span></li>
+        <li><strong>Schriftliches Festpreisangebot</strong><span>mit klarem Umfang. Du entscheidest in Ruhe.</span></li>
+      </ol>
+      <p class="promise">Eilig? Ruf an: <a href={site.phone.href}>{site.phone.display}</a></p>
+      <ul class="status-links">
+        <li><a href="/ratgeber">Ratgeber lesen <Icon name="arrow" size="sm" /></a></li>
+        <li><a href="/leistungen/360-grad-rundgang#demo">360°-Demo ansehen <Icon name="arrow" size="sm" /></a></li>
+        <li><a href="/">Zur Startseite <Icon name="arrow" size="sm" /></a></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Eigene Texte für den KI-Check (/danke?typ=ki-check). Ohne JavaScript bleibt der allgemeine Text.
+  if (new URLSearchParams(location.search).get("typ") === "ki-check") {
+    const titel = document.querySelector("[data-danke-titel]");
+    const text = document.querySelector("[data-danke-text]");
+    if (titel) titel.textContent = "Danke, dein KI-Sichtbarkeits-Check ist angefordert.";
+    if (text)
+      text.textContent =
+        "Ich stelle ChatGPT, Perplexity, Gemini und der Google-Suche 10 Fragen zu deiner Branche und deinem Ort und schicke dir den Kurzbericht per E-Mail. Eine Eingangsbestätigung ist schon unterwegs. Falls sie nicht ankommt, schau bitte im Spam-Ordner nach.";
+  }
+</script>

@@ -1,0 +1,70 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { site } from "../data/site";
+import { szenen } from "../data/rundgaenge";
+---
+
+<Legal
+  title="Impressum: Anbieterkennzeichnung | VistaFlows"
+  description="Impressum und Anbieterkennzeichnung von VistaFlows, Inhaber Sandin Jagurdzija, Hans-Böckler-Straße 235, 46242 Bottrop."
+  path="/impressum"
+  heading="Impressum"
+  crumb="Impressum"
+>
+  <h2>Angaben gemäß § 5 DDG</h2>
+  <p>
+    {site.name}<br />
+    Inhaber: {site.owner}<br />
+    {site.address.street}<br />
+    {site.address.zip} {site.address.city}<br />
+    {site.address.country}
+  </p>
+
+  <h2>Kontakt</h2>
+  <p>
+    Telefon: <a href={site.phone.href}>{site.phone.display}</a><br />
+    E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+
+  <h2>Umsatzsteuer</h2>
+  <p>{site.taxNote} Eine Umsatzsteuer-Identifikationsnummer liegt daher nicht vor.</p>
+
+  <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+  <p>
+    {site.owner}<br />
+    {site.address.street}<br />
+    {site.address.zip} {site.address.city}
+  </p>
+
+  <h2>Verbraucherstreitbeilegung</h2>
+  <p>Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+  <h2>Haftung für Inhalte</h2>
+  <p>
+    Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
+  </p>
+
+  <h2>Haftung für Links</h2>
+  <p>
+    Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+  </p>
+
+  <h2>Urheberrecht</h2>
+  <p>
+    Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+  </p>
+
+  <h2>Bildnachweise</h2>
+  <ul>
+    {
+      szenen.map(({ quelle }) =>
+        quelle ? (
+          <li>
+            Beispiel-Panorama „{quelle.name}“: {quelle.autor}, <a href={quelle.url} target="_blank" rel="noopener noreferrer">Poly Haven</a>, Lizenz CC0. Nicht von VistaFlows aufgenommen.
+          </li>
+        ) : null,
+      )
+    }
+    <li>Icons und Grafiken: eigene Gestaltung.</li>
+  </ul>
+</Legal>

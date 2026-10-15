@@ -1,0 +1,40 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  text?: string;
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string };
+}
+
+const {
+  title = "Lass uns über dein Projekt sprechen.",
+  text = "Im kostenlosen Erstgespräch schaue ich mir deine aktuelle Seite an und sage dir konkret, was sie dich gerade kostet und was sich mit welchem Aufwand ändern lässt. Unverbindlich und ohne Verkaufsdruck.",
+  primary = { label: "Kostenloses Erstgespräch anfragen", href: "/kontakt" },
+  secondary = { label: `Anrufen: ${site.phone.display}`, href: site.phone.href },
+} = Astro.props;
+
+// „Kostenloses …“ entfällt auf schmalen Bildschirmen (.hide-narrow), damit der Button einzeilig bleibt
+const kurz = primary.label.startsWith("Kostenloses ") ? primary.label.slice("Kostenloses ".length) : null;
+---
+
+<section class="section">
+  <div class="shell">
+    <div class="cta-band">
+      <div>
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </div>
+      <div class="cta-band__actions">
+        <a class="btn btn--primary" href={primary.href}>
+          <span>{kurz ? <><span class="hide-narrow">Kostenloses </span>{kurz}</> : primary.label}</span>
+          <Icon name="arrow" size="sm" class="ico-arrow" />
+        </a>
+        <a class="btn btn--on-dark" href={secondary.href}>{secondary.label}</a>
+        <p class="promise">{site.responsePromise}</p>
+      </div>
+    </div>
+  </div>
+</section>

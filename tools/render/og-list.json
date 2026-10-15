@@ -1,0 +1,20 @@
+[
+  {"file":"start","k":"Webdesign aus Bottrop","t":"Websites, die *Anfragen* bringen.","s":"Für lokale Unternehmen, mit SEO, GEO und 360°-Rundgang."},
+  {"file":"leistungen","k":"Leistungen","t":"Website, Sichtbarkeit und *360°-Rundgang* aus einer Hand.","s":"Website-Entwicklung, SEO & GEO, lokale SEO, Automatisierung mit n8n."},
+  {"file":"seo-geo","k":"SEO & GEO","t":"Gefunden werden bei Google *und in KI-Antworten*.","s":"Kostenloser KI-Check · Audit 490 € · Betreuung ab 390 € pro Monat"},
+  {"file":"lokale-seo","k":"Lokale SEO","t":"Vorne in *Google Maps* und in deiner Stadt.","s":"Google-Unternehmensprofil, Bewertungen, einheitliche Firmendaten."},
+  {"file":"360-grad-rundgang","k":"360°-Rundgang","t":"Räume zeigen, *bevor jemand anruft*.","s":"Mit Infopunkten und Anfrage-Button. Ab 590 € einmalig, ohne Abo."},
+  {"file":"ki-check","k":"Kostenlos","t":"Wirst du in *ChatGPT & Co.* genannt?","s":"Der KI-Sichtbarkeits-Check: 10 Kundenfragen in 4 KI-Systemen."},
+  {"file":"preise","k":"Preise","t":"Offene Pakete statt *„Preis auf Anfrage“*.","s":"Website ab 1.190 € · SEO & GEO ab 390 €/Monat · Rundgang ab 590 €"},
+  {"file":"kontakt","k":"Kontakt","t":"Lass uns über dein *Projekt* sprechen.","s":"Kostenloses Erstgespräch · Antwort innerhalb von 24 Stunden an Werktagen"},
+  {"file":"branchen","k":"Branchen","t":"Andere Branche, *andere Argumente*.","s":"Hotels, Praxen, Showrooms, Fitnessstudios, Immobilien."},
+  {"file":"ueber-mich","k":"Über mich","t":"Eine Person, *kein Callcenter*.","s":"Sandin Jagurdzija, Gründer von VistaFlows aus Bottrop."},
+  {"file":"faq","k":"Häufige Fragen","t":"Antworten, *bevor* du fragen musst.","s":"Ablauf, Preise, SEO und GEO, 360°-Rundgang."},
+  {"file":"ratgeber","k":"Ratgeber","t":"SEO, GEO und 360° *verständlich erklärt*.","s":"Mit Quellen, ohne Versprechen, die niemand halten kann."},
+  {"file":"ratgeber-was-ist-geo","k":"Ratgeber · GEO","t":"Was ist *GEO*?","s":"Generative Engine Optimization einfach erklärt."},
+  {"file":"ratgeber-seo-vs-geo","k":"Ratgeber · GEO","t":"SEO und GEO: *der Unterschied*.","s":"Und warum lokale Unternehmen beides brauchen."},
+  {"file":"ratgeber-llms-txt","k":"Ratgeber · GEO","t":"*llms.txt*: was sie kann und was nicht.","s":"Aufbau, Beispiel und ehrliche Einordnung."},
+  {"file":"ratgeber-chatgpt","k":"Ratgeber · GEO","t":"Bei *ChatGPT* gefunden werden.","s":"Sieben Schritte für lokale Unternehmen."},
+  {"file":"ratgeber-ai-overviews","k":"Ratgeber · SEO","t":"Google *AI Overviews* und KI-Modus.","s":"Was lokale Betriebe jetzt tun sollten."},
+  {"file":"ratgeber-360-kosten","k":"Ratgeber · 360°","t":"Was kostet ein *360°-Rundgang*?","s":"Marktpreise, laufende Kosten und Kostenfallen."}
+]

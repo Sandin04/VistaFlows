@@ -1,0 +1,240 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Icon from "../../components/Icon.astro";
+import PlanCard from "../../components/PlanCard.astro";
+import Faq from "../../components/Faq.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { seoGeoEinstieg, seoGeoPakete, vertragsbedingungen, eur } from "../../data/pakete";
+import { service, faqPage } from "../../data/schema";
+import { faqSeoGeo } from "../../data/faq";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "Leistungen", href: "/leistungen" },
+  { name: "SEO & GEO", href: "/leistungen/seo-geo" },
+];
+
+const schema = [
+  service({
+    name: "SEO und GEO für lokale Unternehmen",
+    serviceType: "Suchmaschinenoptimierung und Generative Engine Optimization",
+    description:
+      "Lokale SEO und GEO aus einer Hand: Sichtbarkeit bei Google, in Google Maps und in KI-Antworten von ChatGPT, Perplexity, Gemini und der Google-Suche mit KI-Übersicht. Mit monatlicher Messung.",
+    url: "/leistungen/seo-geo",
+    pakete: [...seoGeoEinstieg, ...seoGeoPakete],
+    area: "region",
+  }),
+  faqPage(faqSeoGeo),
+];
+---
+
+<Base
+  title="SEO & GEO Agentur Ruhrgebiet: Google & KI-Suche | VistaFlows"
+  description="SEO und GEO aus einer Hand: bei Google, in Maps und in KI-Antworten von ChatGPT & Co. gefunden werden. Kostenloser KI-Check, Betreuung ab 390 € im Monat."
+  path="/leistungen/seo-geo"
+  og="/og/seo-geo.png"
+  ogAlt="SEO und GEO: gefunden werden bei Google und in KI-Antworten"
+  crumbs={crumbs}
+  schema={schema}
+>
+  <PageHero
+    crumbs={crumbs}
+    title={`SEO- und <span class="nowrap">GEO-Agentur</span> aus dem Ruhrgebiet: gefunden werden bei Google und in KI-Antworten.`}
+    lead="Immer mehr Kunden fragen ChatGPT, Perplexity oder die KI-Übersicht von Google, bevor sie anrufen. VistaFlows verbindet klassische Suchmaschinenoptimierung mit Generative Engine Optimization (GEO), damit dein Unternehmen in beiden Welten vorkommt. Mit einem festen Ansprechpartner aus Bottrop statt eines Agentur-Teams."
+    split
+  >
+    <div class="actions">
+      <a class="btn btn--primary" href="/ki-sichtbarkeits-check">Kostenlosen KI-Check anfordern <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+      <a class="btn btn--on-dark" href="#pakete">Pakete ansehen</a>
+    </div>
+    <aside class="glance" slot="aside" aria-label="SEO & GEO auf einen Blick">
+      <dl>
+        <div><dt>Einstieg</dt><dd>KI-Sichtbarkeits-Check, kostenlos</dd></div>
+        <div><dt>Audit</dt><dd>{eur(seoGeoEinstieg[1].betrag)} einmalig</dd></div>
+        <div><dt>Betreuung</dt><dd>ab {eur(seoGeoPakete[0].betrag)} pro Monat</dd></div>
+        <div><dt>Laufzeit</dt><dd>3 Monate, danach monatlich kündbar</dd></div>
+        <div><dt>Gemessen in</dt><dd>Google, ChatGPT, Perplexity, Gemini</dd></div>
+      </dl>
+    </aside>
+  </PageHero>
+
+  <section class="section section--paper" aria-labelledby="warum-titel">
+    <div class="shell">
+      <div class="answer">
+        <p>
+          <strong>Kurz gesagt:</strong> SEO bringt dich in die Google-Trefferliste und nach vorne in Google Maps. GEO sorgt dafür, dass KI-Systeme dein Unternehmen in ihren Antworten nennen und als Quelle verlinken. Beides braucht dasselbe Fundament: eine schnelle, technisch saubere Website, eindeutige Firmendaten und Inhalte, die Fragen klar beantworten.
+        </p>
+      </div>
+      <div class="split split--top">
+        <div>
+          <h2 id="warum-titel">Warum SEO allein nicht mehr reicht</h2>
+          <p class="muted">
+            Seit März 2025 zeigt Google auch in Deutschland KI-Übersichten über den Suchergebnissen, seit Oktober 2025 gibt es zusätzlich den KI-Modus. ChatGPT, Perplexity und Gemini beantworten Fragen direkt und nennen dabei nur wenige Betriebe und Quellen. Microsoft weist in den Bing Webmaster Tools seit 2026 sogar aus, wie oft eine Website in Copilot-Antworten zitiert wird.
+          </p>
+          <p class="muted">
+            Für lokale Unternehmen heißt das: Die Frage „Welcher Physiotherapeut in Essen hat abends Termine?“ wird zunehmend nicht mehr mit zehn blauen Links beantwortet, sondern mit zwei oder drei Namen. Wer dort vorkommt, wird angerufen. Wer fehlt, kommt in der Abwägung gar nicht erst vor, auch wenn seine Leistung besser ist.
+          </p>
+        </div>
+        <div class="panel panel--stone">
+          <h3>Was sich nicht ändert</h3>
+          <p class="muted mb-0">
+            Google sagt ausdrücklich, dass es für KI-Übersichten und KI-Modus keine Sonderoptimierung braucht: Eine Seite muss indexiert sein und ein Snippet zeigen dürfen. Gute SEO bleibt also die Grundlage für GEO. Dazu kommt, was KI-Systeme besonders gut verarbeiten: eindeutige Fakten, klare Antworten und Erwähnungen auf vertrauenswürdigen Seiten. <a class="text-link" href="/ratgeber/google-ai-overviews">Mehr zu Google AI Overviews</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="vergleich-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="vergleich-titel">SEO und GEO: gleiches Fundament, anderes Ziel</h2>
+        <p>Beides gehört zusammen. Der Unterschied liegt darin, wofür optimiert und wie gemessen wird. <a class="text-link" href="/ratgeber/seo-vs-geo">Der Unterschied im Detail</a></p>
+      </div>
+      <div class="versus">
+        <div class="versus__col">
+          <h3><Icon name="search" /> SEO</h3>
+          <ul class="checks">
+            <li><strong>Ziel:</strong> gute Platzierung in der Google-Trefferliste und in Google Maps</li>
+            <li><strong>Hebel:</strong> Technik, Suchbegriffe, Inhalte, Verlinkung, Google-Unternehmensprofil</li>
+            <li><strong>Messung:</strong> Google Search Console: Klicks, Impressionen, Positionen</li>
+          </ul>
+        </div>
+        <div class="versus__col versus__col--accent">
+          <h3><Icon name="sparkle" /> GEO</h3>
+          <ul class="checks">
+            <li><strong>Ziel:</strong> Nennung und Verlinkung in KI-Antworten von ChatGPT, Perplexity, Gemini und Google</li>
+            <li><strong>Hebel:</strong> eindeutige Firmendaten, zitierfähige Antworten, strukturierte Daten, Erwähnungen, Crawler-Zugriff</li>
+            <li><strong>Messung:</strong> festes Fragen-Set in KI-Systemen, KI-Bericht in Bing Webmaster Tools, Besuche aus KI-Quellen</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="hebel-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="hebel-titel">Fünf Hebel, an denen ich arbeite</h2>
+        <p>Keine Tricks, sondern die Arbeit, die Google und KI-Systeme gleichermaßen belohnen. Was davon bei dir zuerst kommt, steht nach dem Audit fest.</p>
+      </div>
+      <div class="services">
+        <article class="tile tile--third">
+          <h3 class="has-glyph"><Icon name="bolt" class="glyph" /><span>Technische Basis</span></h3>
+          <p>Schnelle Ladezeit, saubere Indexierung, strukturierte Daten. Die Crawler von Google, OpenAI, Anthropic und Perplexity dürfen deine Seiten lesen, damit sie überhaupt zitiert werden können.</p>
+        </article>
+        <article class="tile tile--third">
+          <h3 class="has-glyph"><Icon name="key" class="glyph" /><span>Eindeutige Firmendaten</span></h3>
+          <p>Name, Adresse, Telefonnummer, Leistungen und Öffnungszeiten stehen überall gleich: auf der Website, im Google-Profil, bei Bing, Apple und in Verzeichnissen. KI-Systeme vertrauen Angaben, die sich nicht widersprechen.</p>
+        </article>
+        <article class="tile tile--third">
+          <h3 class="has-glyph"><Icon name="quote" class="glyph" /><span>Zitierfähige Inhalte</span></h3>
+          <p>Antwort zuerst, dann die Details. Konkrete Preise, Abläufe und Zahlen statt Werbesprache. FAQ und Ratgeber beantworten genau die Fragen, die deine Kunden einer KI stellen.</p>
+        </article>
+        <article class="tile tile--half">
+          <h3 class="has-glyph"><Icon name="star" class="glyph" /><span>Lokale Signale</span></h3>
+          <p>Ein vollständiges Google-Unternehmensprofil mit Beiträgen und Fotos, dazu Bewertungen, in denen echte Kunden beschreiben, was sie erlebt haben. Beides fließt in Google Maps und in KI-Antworten zu lokalen Fragen ein. <a class="text-link" href="/leistungen/lokale-seo">Lokale SEO im Detail</a></p>
+        </article>
+        <article class="tile tile--half">
+          <h3 class="has-glyph"><Icon name="users" class="glyph" /><span>Erwähnungen auf anderen Seiten</span></h3>
+          <p>KI-Systeme lernen auch aus dem, was andere über dich schreiben: lokale Presse, Verbände, Kammern, Branchenportale. Diese Erwähnungen baue ich gezielt auf, ohne gekaufte Links.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section night night--glow" aria-labelledby="messen-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="messen-titel">Messen statt raten</h2>
+        <p class="lead">
+          KI-Antworten schwanken von Tag zu Tag. Deshalb zählt nicht eine einzelne Antwort, sondern der Trend über Monate. So mache ich ihn sichtbar:
+        </p>
+      </div>
+      <ol class="steps steps--stack">
+        <li><h3>Festes Fragen-Set</h3><p>20 Fragen, die deine Kunden wirklich stellen, abgestimmt auf Branche und Ort.</p></li>
+        <li><h3>Jeden Monat in 4 Systemen</h3><p>ChatGPT, Perplexity, Gemini und die Google-Suche mit KI-Übersicht, dokumentiert mit Screenshots.</p></li>
+        <li><h3>Google und Bing dazu</h3><p>Search Console für Google, der KI-Bericht der Bing Webmaster Tools für Copilot, Besuche aus KI-Quellen in deiner Statistik.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="pakete" aria-labelledby="pakete-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="pakete-titel">Pakete und Preise für SEO & GEO</h2>
+        <p>Starte mit dem kostenlosen Check oder dem Audit. Die laufende Betreuung hat feste Monatspreise. {vertragsbedingungen.seoGeo}</p>
+      </div>
+      <div class="plans">
+        {seoGeoEinstieg.map((p) => <PlanCard paket={p} />)}
+      </div>
+      <h3 class="mt-l">Laufende Betreuung</h3>
+      <p class="muted">Welches Paket passt? Ein Standort mit einer Kernleistung: <strong>Lokal sichtbar</strong>. Mehrere Leistungen oder spürbare Konkurrenz vor Ort: <strong>Wachstum</strong>. Mehrere Standorte oder Leistungsbereiche: <strong>Marktführer</strong>.</p>
+      <div class="plans mt-m">
+        {seoGeoPakete.map((p) => <PlanCard paket={p} />)}
+      </div>
+      <p class="plans-note">Alle Preise sind Endpreise nach § 19 UStG, es kommt keine Umsatzsteuer dazu.</p>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="ehrlich-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="ehrlich-titel">Was GEO nicht kann</h2>
+        <p class="muted">Ehrlich gesagt: Niemand kann garantieren, dass ChatGPT oder Google dein Unternehmen nennt. Die Systeme gehören anderen Firmen und ändern sich laufend. Wer dir eine Garantie verspricht, verspricht etwas, das er nicht in der Hand hat.</p>
+      </div>
+      <ul class="checks checks--minus">
+        <li>Keine Garantie auf Platz 1 bei Google oder auf eine Nennung in KI-Antworten</li>
+        <li>Kein schneller Trick: sichtbare Wirkung braucht meist mehrere Monate</li>
+        <li>Kein Ersatz für gute Arbeit: schlechte Bewertungen lassen sich nicht wegoptimieren</li>
+        <li>Keine gekauften Links, keine austauschbaren Massentexte</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="hier-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="hier-titel">So ist diese Website gebaut</h2>
+        <p class="muted">Ich verkaufe nichts, was ich nicht selbst einsetze. Diese Website folgt demselben Standard, den deine bekommt.</p>
+      </div>
+      <ul class="checks">
+        <li>Strukturierte Daten auf jeder Seite: Unternehmen, Leistungen, Preise, Fragen</li>
+        <li>Eine <a class="text-link" href="/llms.txt">llms.txt</a> mit den wichtigsten Seiten für KI-Systeme</li>
+        <li>Crawler von Google, OpenAI, Anthropic und Perplexity sind ausdrücklich erlaubt</li>
+        <li>Jede Seite beantwortet zuerst die Frage und belegt Zahlen mit Quellen</li>
+        <li>Keine Tracking-Cookies, kein Cookie-Banner nötig</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="faq-titel">
+    <div class="shell split split--top">
+      <div class="section-head">
+        <h2 id="faq-titel">Häufige Fragen zu SEO und GEO</h2>
+        <p>Deine Frage fehlt? Schreib mir oder ruf an, ich antworte persönlich.</p>
+      </div>
+      <Faq items={faqSeoGeo} />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="mehr-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="mehr-titel">Weiterlesen im Ratgeber</h2>
+      </div>
+      <ul class="article-list">
+        <li><a href="/ratgeber/was-ist-geo"><div><h3>Was ist GEO? Generative Engine Optimization einfach erklärt</h3><p>Wie KI-Suchsysteme Antworten zusammenstellen und welche Inhalte sie zitieren.</p></div><Icon name="arrow" class="ico-arrow" /></a></li>
+        <li><a href="/ratgeber/bei-chatgpt-gefunden-werden"><div><h3>Bei ChatGPT gefunden werden: Anleitung für lokale Unternehmen</h3><p>Sieben Schritte vom Crawler-Zugriff bis zu Bewertungen.</p></div><Icon name="arrow" class="ico-arrow" /></a></li>
+        <li><a href="/ratgeber/llms-txt"><div><h3>llms.txt: was die Datei kann und was nicht</h3><p>Mit Beispiel zum Kopieren und einer ehrlichen Einordnung.</p></div><Icon name="arrow" class="ico-arrow" /></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Wie sichtbar bist du in ChatGPT & Co.?"
+    text="Der KI-Sichtbarkeits-Check zeigt es dir kostenlos: 10 echte Kundenfragen in 4 KI-Systemen, mit Kurzbericht und 15 Minuten Gespräch zu den wichtigsten Hebeln."
+    primary={{ label: "Kostenlosen KI-Check anfordern", href: "/ki-sichtbarkeits-check" }}
+  />
+</Base>

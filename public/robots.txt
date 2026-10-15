@@ -1,0 +1,49 @@
+# robots.txt für www.vistaflows.com
+# Danke-, Fehler- und Rechtsseiten sind per <meta name="robots" content="noindex"> ausgeschlossen
+# und hier bewusst NICHT gesperrt, damit Suchmaschinen das noindex lesen können.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# KI-Suchsysteme ausdrücklich erlaubt (GEO): Suche und Nutzerabrufe
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /api/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /api/
+
+# Training von KI-Modellen erlaubt (Entscheidung des Inhabers, jederzeit änderbar)
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://www.vistaflows.com/sitemap.xml

@@ -1,0 +1,297 @@
+---
+import { Picture } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import TourViewer from "../components/TourViewer.astro";
+import Founder from "../components/Founder.astro";
+import Faq from "../components/Faq.astro";
+import CtaBand from "../components/CtaBand.astro";
+import hotelPoster from "../assets/img/tour-hotelzimmer.jpg";
+import { site } from "../data/site";
+import { websitePakete, seoGeoPakete, rundgangPakete, eur } from "../data/pakete";
+import { person, service } from "../data/schema";
+import { faqAllgemein, faqPreise, faqSeoGeo } from "../data/faq";
+
+const ab = (n: number) => `ab ${eur(n)}`;
+const startFaq = [faqAllgemein[1], faqPreise[0], faqSeoGeo[0], faqPreise[2]];
+
+const schema = [
+  person(),
+  service({
+    name: "Website-Entwicklung für lokale Unternehmen",
+    serviceType: "Webdesign und Website-Entwicklung",
+    description: "Moderne, schnelle Websites für lokale Unternehmen mit SEO-Grundlage, GEO-Grundlage und Anfrage-Strecke.",
+    url: "/leistungen",
+    pakete: websitePakete,
+    area: "de",
+  }),
+];
+---
+
+<Base
+  title="Webdesign aus Bottrop für lokale Unternehmen | VistaFlows"
+  description="Websites für lokale Unternehmen im Ruhrgebiet: schnell, klar und auf Anfragen ausgerichtet. Mit lokaler SEO, GEO für ChatGPT & Co. und 360°-Rundgang."
+  path="/"
+  og="/og/start.png"
+  schema={schema}
+>
+  <section class="night night--glow hero">
+    <div class="shell hero__grid">
+      <div>
+        <h1>Eine Website, die Vertrauen aufbaut – und <span class="accent">Anfragen bringt</span>.</h1>
+        <p class="hero__lead">
+          VistaFlows ist ein Webdesign-Studio aus Bottrop. Ich baue moderne, schnelle Websites für lokale Unternehmen, so aufgebaut, dass Interessenten dich bei Google und in KI-Antworten finden und dir vom ersten Blick an vertrauen.
+        </p>
+        <div class="actions">
+          <a class="btn btn--primary" href="/kontakt"><span><span class="hide-narrow">Kostenloses </span>Erstgespräch anfragen</span> <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+          <a class="btn btn--on-dark" href="/preise">Preise ansehen</a>
+        </div>
+        <p class="promise">{site.responsePromise} · unverbindlich und kostenlos</p>
+        <ul class="facts-row">
+          <li><Icon name="check" /> Festpreis nach dem Erstgespräch</li>
+          <li><Icon name="check" /> Domain und Hosting auf deinen Namen</li>
+          <li><Icon name="check" /> Ein Ansprechpartner von Anfang an</li>
+        </ul>
+      </div>
+      <div>
+        <TourViewer scenes={["cafe", "hotelzimmer"]} eager uid="hero-tour" />
+      </div>
+    </div>
+  </section>
+
+  <div class="trades-strip section--paper">
+    <div class="shell">
+      <p>Für Betriebe mit Standort:</p>
+      <ul class="trades">
+        <li><a href="/branchen#hotel">Hotels</a></li>
+        <li><a href="/branchen#praxis">Praxen</a></li>
+        <li><a href="/branchen#showroom">Showrooms</a></li>
+        <li><a href="/branchen#fitness">Fitnessstudios</a></li>
+        <li><a href="/branchen#immobilien">Immobilien</a></li>
+        <li><a href="/branchen#weitere">Handwerk, Gastronomie, Kanzleien</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="section section--paper" aria-labelledby="verlust-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="verlust-titel">Die meisten lokalen Unternehmen verlieren Anfragen, bevor das Telefon klingelt.</h2>
+        <p>Wer dich sucht, entscheidet in Sekunden: bei Google, auf Google Maps und immer öfter in ChatGPT & Co. An drei Stellen geht dabei Kundschaft verloren.</p>
+      </div>
+      <ol class="journey">
+        <li class="journey__step">
+          <h3 class="has-glyph"><Icon name="search" class="glyph" /><span>Nicht gefunden</span></h3>
+          <p>Bei Google, in Maps oder in KI-Antworten tauchen andere Betriebe auf. Dein Angebot existiert für Suchende schlicht nicht.</p>
+          <p class="journey__fix"><Icon name="arrow" /><span>Lösung: <a href="/leistungen/seo-geo">SEO & GEO</a> und <a href="/leistungen/lokale-seo">lokale SEO</a></span></p>
+        </li>
+        <li class="journey__step">
+          <h3 class="has-glyph"><Icon name="eye" class="glyph" /><span>Nicht überzeugt</span></h3>
+          <p>Die Website lädt langsam, ist auf dem Handy mühsam oder sagt nicht klar, was du anbietest. Interessenten gehen zurück zur Trefferliste.</p>
+          <p class="journey__fix"><Icon name="arrow" /><span>Lösung: <a href="/leistungen#website">eine Website, die überzeugt</a></span></p>
+        </li>
+        <li class="journey__step">
+          <h3 class="has-glyph"><Icon name="workflow" class="glyph" /><span>Nicht nachgefasst</span></h3>
+          <p>Anfragen liegen im Postfach, Rückrufe gehen im Tagesgeschäft unter. Der Kunde bucht woanders, weil dort jemand schneller war.</p>
+          <p class="journey__fix"><Icon name="arrow" /><span>Lösung: <a href="/leistungen#automatisierung">Automatisierung mit n8n</a></span></p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="leistungen-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="leistungen-titel">Die Website ist das Fundament. Sichtbarkeit und Rundgang machen daraus Anfragen.</h2>
+        <p>Alles wird zusammen geplant statt nacheinander dazugekauft, damit Struktur, Texte und Technik auf dasselbe Ziel einzahlen: mehr passende Anfragen.</p>
+      </div>
+      <div class="services">
+        <article class="tile tile--core">
+          <div>
+            <h3 class="has-glyph"><Icon name="monitor" class="glyph" /><span>Website-Entwicklung</span></h3>
+            <p>Deine Website ist meist der erste echte Kontakt mit deinem Unternehmen. Ich baue sie so, dass Besucher sofort verstehen, was du anbietest, für wen und warum sie dich kontaktieren sollten. Kein Baukasten-Look, keine überladenen Vorlagen.</p>
+            <p class="tile__price">{ab(websitePakete[0].betrag)} einmalig · Festpreis nach Erstgespräch</p>
+            <a class="link-arrow" href="/leistungen#website">Mehr zur Website-Entwicklung <Icon name="arrow" size="sm" /></a>
+          </div>
+          <ul class="checks">
+            <li>Individuelles Design passend zu deiner Marke</li>
+            <li>Zuerst fürs Smartphone gebaut, schnell auf jedem Gerät</li>
+            <li>Klare Seitenstruktur statt endloser One-Pager</li>
+            <li>Anfrage-Strecke mit Formular und Danke-Seite</li>
+            <li>SEO- und GEO-Grundlage ab dem ersten Tag</li>
+          </ul>
+        </article>
+        <article class="tile tile--half tile--dark tile--link">
+          <h3 class="has-glyph"><Icon name="sparkle" class="glyph" /><span><a class="tile__link" href="/leistungen/seo-geo">SEO & GEO</a></span></h3>
+          <p>Gefunden werden bei Google und in KI-Antworten von ChatGPT, Perplexity, Gemini und der Google-Suche mit KI-Übersicht.</p>
+          <p class="tile__price">{ab(seoGeoPakete[0].betrag)} pro Monat · KI-Check kostenlos</p>
+          <span class="link-arrow" aria-hidden="true">SEO & GEO ansehen <Icon name="arrow" size="sm" /></span>
+        </article>
+        <article class="tile tile--half tile--link">
+          <h3 class="has-glyph"><Icon name="cube360" class="glyph" /><span><a class="tile__link" href="/leistungen/360-grad-rundgang">360°-Rundgang</a></span></h3>
+          <p>Räume, Ausstattung und Atmosphäre zeigen, bevor jemand anruft. Mit Infopunkten und Anfrage-Button, direkt in deiner Website, ohne Abo.</p>
+          <p class="tile__price">{ab(rundgangPakete[0].betrag)} einmalig</p>
+          <span class="link-arrow" aria-hidden="true">Rundgang ansehen <Icon name="arrow" size="sm" /></span>
+        </article>
+        <article class="tile tile--half tile--link">
+          <h3 class="has-glyph"><Icon name="map" class="glyph" /><span><a class="tile__link" href="/leistungen/lokale-seo">Lokale SEO</a></span></h3>
+          <p>Google-Unternehmensprofil, Maps, Bewertungen und einheitliche Firmendaten, damit du in deiner Stadt vorne auftauchst.</p>
+          <span class="link-arrow" aria-hidden="true">Lokale SEO ansehen <Icon name="arrow" size="sm" /></span>
+        </article>
+        <article class="tile tile--half tile--link">
+          <h3 class="has-glyph"><Icon name="workflow" class="glyph" /><span><a class="tile__link" href="/leistungen#automatisierung">Automatisierung mit n8n</a></span></h3>
+          <p>Anfragen landen automatisch bei dir, in deiner Tabelle oder im CRM. Eingangsbestätigung und Erinnerungen laufen von selbst.</p>
+          <span class="link-arrow" aria-hidden="true">Automatisierung ansehen <Icon name="arrow" size="sm" /></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section night night--glow" aria-labelledby="geo-titel">
+    <div class="shell split">
+      <div>
+        <h2 id="geo-titel">Gefunden werden – bei Google und in ChatGPT.</h2>
+        <p class="lead">
+          Immer mehr Menschen fragen eine KI, statt selbst zu suchen. ChatGPT, Perplexity, Gemini und die KI-Übersicht von Google antworten mit wenigen Namen und verlinken ihre Quellen. Wer dort nicht vorkommt, wird gar nicht erst gefragt.
+        </p>
+        <ul class="checks">
+          <li>Google-Unternehmensprofil, Maps und lokale Suchbegriffe</li>
+          <li>Eindeutige Firmendaten, strukturierte Daten und llms.txt</li>
+          <li>Inhalte, die Google und KI-Systeme zitieren können</li>
+          <li>Monatlicher Bericht: Wirst du genannt, und wo nicht?</li>
+        </ul>
+        <div class="actions mt-l">
+          <a class="btn btn--primary" href="/ki-sichtbarkeits-check">Kostenlosen KI-Check anfordern <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+          <a class="btn btn--on-dark" href="/ratgeber/was-ist-geo">Was ist GEO?</a>
+        </div>
+      </div>
+      <figure class="answer-demo" aria-label="Schematische Darstellung einer KI-Antwort">
+        <p class="answer-demo__q">Wo bekomme ich in Essen kurzfristig einen Termin für Physiotherapie, auch abends?</p>
+        <div class="answer-demo__a">
+          <p>Drei Praxen in Essen bieten laut ihren Websites Abendtermine an. <b>Praxis A</b> nimmt Termine bis 20 Uhr an und ist mit der U-Bahn erreichbar. <b>Praxis B</b> …</p>
+          <p class="answer-demo__src">
+            <span class="visually-hidden">Quellen: </span><span>Website Praxis A</span><span>Google Maps</span><span>Bewertungsportal</span>
+          </p>
+        </div>
+        <figcaption class="answer-demo__note">Schematische Darstellung, keine echte KI-Antwort. Genannt wird, wessen Angaben klar, aktuell und belegbar sind.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="rundgang-titel">
+    <div class="shell split split--reverse">
+      <div>
+        <h2 id="rundgang-titel">Wenn deine Räume das Verkaufsargument sind: der 360°-Rundgang.</h2>
+        <p class="muted">
+          Ein Rundgang ist kein Muss. Aber wo Räume, Ausstattung oder Atmosphäre über den Auftrag entscheiden, zeigt er mehr als jedes Foto. Infopunkte beantworten Fragen genau dort, wo sie entstehen, und ein Button führt direkt zur Anfrage.
+        </p>
+        <ol class="steps steps--stack">
+          <li><h3>Aufnahme vor Ort</h3><p>Ich fotografiere deine Räume mit einer 360°-Kamera, im Ruhrgebiet ohne Anfahrtskosten.</p></li>
+          <li><h3>Infopunkte und Buttons</h3><p>Leistungen, Preise oder Ausstattung erscheinen direkt im Bild.</p></li>
+          <li><h3>Einbindung ohne Abo</h3><p>Der Rundgang läuft in deiner Website. Laufende Gebühren fallen nicht an.</p></li>
+        </ol>
+        <p class="tile__price mt-m">{ab(rundgangPakete[0].betrag)} einmalig · bis zu 8 Standpunkte</p>
+        <a class="btn btn--secondary" href="/leistungen/360-grad-rundgang">Rundgang-Pakete ansehen <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+      </div>
+      <a class="tour" href="/leistungen/360-grad-rundgang#demo">
+        <div class="tour__screen">
+          <div class="tour__poster">
+            <Picture src={hotelPoster} formats={["avif", "webp"]} widths={[480, 800, 1200]} sizes="(max-width: 980px) calc(100vw - 2 * var(--gutter)), 520px" alt="Vorschau des Beispiel-Rundgangs Hotelzimmer mit zwei Infopunkten" loading="lazy" />
+          </div>
+          <div class="tour__shade" aria-hidden="true"></div>
+          <span class="tour__badge"><Icon name="cube360" size="sm" /> Beispiel-Panorama · CC0</span>
+          <p class="tour__hint"><strong>Hotelzimmer: Doppelzimmer mit Arbeitsplatz</strong><span>Zum Beispiel-Rundgang mit Infopunkten</span></p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="gruender-titel">
+    <div class="shell">
+      <Founder headingId="gruender-titel" />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="preise-titel">
+    <div class="shell split split--top">
+      <div class="section-head">
+        <h2 id="preise-titel">Offene Preise statt „Preis auf Anfrage“.</h2>
+        <p>Jedes Paket hat einen festen Rahmen. Den genauen Umfang legen wir im kostenlosen Erstgespräch fest, danach bekommst du ein schriftliches Festpreisangebot. {site.priceNote}</p>
+        <a class="btn btn--primary" href="/preise">Alle Pakete vergleichen <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+      </div>
+      <ul class="price-list">
+        <li>
+          <span class="price-list__name">Website<small>Starter, Professional oder Growth</small></span>
+          <span class="price-list__value">{ab(websitePakete[0].betrag)} <small>einmalig</small></span>
+          <a class="link-arrow" href="/preise#website">Pakete <Icon name="arrow" size="sm" /></a>
+        </li>
+        <li>
+          <span class="price-list__name">SEO & GEO<small>laufende Betreuung, 3 Monate Mindestlaufzeit</small></span>
+          <span class="price-list__value">{ab(seoGeoPakete[0].betrag)} <small>pro Monat</small></span>
+          <a class="link-arrow" href="/preise#seo-geo">Pakete <Icon name="arrow" size="sm" /></a>
+        </li>
+        <li>
+          <span class="price-list__name">360°-Rundgang<small>Aufnahme, Infopunkte, Einbindung</small></span>
+          <span class="price-list__value">{ab(rundgangPakete[0].betrag)} <small>einmalig</small></span>
+          <a class="link-arrow" href="/preise#rundgang">Pakete <Icon name="arrow" size="sm" /></a>
+        </li>
+        <li>
+          <span class="price-list__name">KI-Sichtbarkeits-Check<small>10 Fragen in 4 KI-Systemen, Kurzbericht</small></span>
+          <span class="price-list__value">kostenlos</span>
+          <a class="link-arrow" href="/ki-sichtbarkeits-check">Anfordern <Icon name="arrow" size="sm" /></a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="ratgeber-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="ratgeber-titel">Ratgeber: verständlich statt Fachchinesisch.</h2>
+        <p>Was GEO ist, wie Unternehmen in ChatGPT genannt werden und was ein Rundgang kostet. Mit Quellen, ohne Versprechen, die niemand halten kann.</p>
+      </div>
+      <ul class="article-list">
+        <li>
+          <a href="/ratgeber/was-ist-geo">
+            <div>
+              <h3>Was ist GEO? Generative Engine Optimization einfach erklärt</h3>
+              <p>Wie KI-Suchsysteme Antworten zusammenstellen und was lokale Unternehmen konkret tun können.</p>
+            </div>
+            <Icon name="arrow" class="ico-arrow" />
+          </a>
+        </li>
+        <li>
+          <a href="/ratgeber/bei-chatgpt-gefunden-werden">
+            <div>
+              <h3>Bei ChatGPT gefunden werden: Anleitung für lokale Unternehmen</h3>
+              <p>Sieben Schritte, die du heute prüfen kannst, vom Crawler-Zugriff bis zu Bewertungen.</p>
+            </div>
+            <Icon name="arrow" class="ico-arrow" />
+          </a>
+        </li>
+        <li>
+          <a href="/ratgeber/360-grad-rundgang-kosten">
+            <div>
+              <h3>Was kostet ein 360°-Rundgang? Preise und Kostenfallen</h3>
+              <p>Marktpreise nach Standpunkten, Hosting-Gebühren und worauf du beim Angebot achten solltest.</p>
+            </div>
+            <Icon name="arrow" class="ico-arrow" />
+          </a>
+        </li>
+      </ul>
+      <p class="mt-m"><a class="link-arrow" href="/ratgeber">Alle Ratgeber <Icon name="arrow" size="sm" /></a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-titel">
+    <div class="shell split split--top">
+      <div class="section-head">
+        <h2 id="faq-titel">Häufige Fragen</h2>
+        <p>Die wichtigsten Antworten vorab. Alle weiteren findest du in den <a class="text-link" href="/faq">häufigen Fragen</a>.</p>
+      </div>
+      <Faq items={startFaq} />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

@@ -1,0 +1,23 @@
+alt,neu,status,umsetzung,hinweis
+/,/,200,bleibt,Startseite unverändert
+/leistungen,/leistungen,200,bleibt,Anker #website #seo #automatisierung #tour bleiben als Abschnitte erhalten
+/branchen,/branchen,200,bleibt,Anker #hotel #praxis #showroom #fitness #immobilien bleiben
+/preise,/preise,200,bleibt,
+/ueber-mich,/ueber-mich,200,bleibt,
+/faq,/faq,200,bleibt,
+/kontakt,/kontakt,200,bleibt,
+/impressum,/impressum,200,bleibt,noindex wie bisher
+/datenschutz,/datenschutz,200,bleibt,noindex wie bisher
+/agb,/agb,200,bleibt,noindex wie bisher
+/widerruf,/widerruf,200,bleibt,noindex wie bisher
+/danke,/danke,200,bleibt,noindex; nicht mehr per robots.txt sperren
+/danke-widerruf,/danke-widerruf,200,bleibt,noindex; nicht mehr per robots.txt sperren
+/fehler,/fehler,200,bleibt,noindex
+/*.html,/*,308,Vercel cleanUrls,"z. B. /leistungen.html → /leistungen (wie bisher, nach Deploy prüfen)"
+/*/,/*,308,Vercel trailingSlash false,"z. B. /leistungen/ → /leistungen (wie bisher, nach Deploy prüfen)"
+http://www.vistaflows.com/*,https://www.vistaflows.com/*,308,Vercel,wie bisher
+https://vistaflows.com/*,https://www.vistaflows.com/*,308,Vercel Domain-Einstellung,wie bisher
+/ki-check,/ki-sichtbarkeits-check,301,vercel.json redirects,Kurz-URL für Social Media und QR-Codes
+/rundgang,/leistungen/360-grad-rundgang,301,vercel.json redirects,Kurz-URL für Social Media und QR-Codes
+/geo,/leistungen/seo-geo,301,vercel.json redirects,Kurz-URL für Social Media und QR-Codes
+/seo,/leistungen/seo-geo,301,vercel.json redirects,Kurz-URL für Social Media und QR-Codes

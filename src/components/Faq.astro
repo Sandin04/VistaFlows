@@ -1,0 +1,26 @@
+---
+// Akkordeon ohne JavaScript (<details>): zugänglich, funktioniert überall.
+// Antworten dürfen einfache Links enthalten (HTML).
+import type { FaqEntry } from "../data/schema";
+
+interface Props {
+  items: FaqEntry[];
+  /** Erste Frage geöffnet anzeigen */
+  openFirst?: boolean;
+}
+
+const { items, openFirst = false } = Astro.props;
+---
+
+<div class="faq">
+  {
+    items.map((item, i) => (
+      <details class="faq__item" open={openFirst && i === 0 ? true : undefined}>
+        <summary class="faq__q">{item.q}</summary>
+        <div class="faq__a">
+          <p set:html={item.a} />
+        </div>
+      </details>
+    ))
+  }
+</div>

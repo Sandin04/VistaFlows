@@ -1,0 +1,179 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import CtaBand from "../components/CtaBand.astro";
+import type { IconName } from "../components/Icon.astro";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "Branchen", href: "/branchen" },
+];
+
+type Branche = {
+  id: string;
+  icon: IconName;
+  titel: string;
+  text: string;
+  punkte: string[];
+  passt: string;
+  paket: string;
+};
+
+const branchen: Branche[] = [
+  {
+    id: "hotel",
+    icon: "users",
+    titel: "Hotels, Apartments und Ferienunterkünfte",
+    text: "Gäste wollen vor der Buchung Sicherheit. Zeig Zimmer, Lobby, Frühstücksraum und Außenbereiche so, als wären sie schon da, eingebettet in eine Website, die direkt zur Buchung oder Anfrage führt.",
+    punkte: [
+      "Zimmer und Ausstattung im Rundgang statt in langen Listen",
+      "Buchungs- oder Anfrage-Button direkt im Rundgang",
+      "Weniger Rückfragen zu Größe, Lage und Ausstattung",
+      "Sichtbar in KI-Antworten auf Fragen wie „ruhiges Hotel in Bottrop“",
+    ],
+    passt: "Website Professional + Rundgang Business",
+    paket: "rundgang-business",
+  },
+  {
+    id: "praxis",
+    icon: "shield",
+    titel: "Praxen und Therapiezentren",
+    text: "Patientinnen und Patienten möchten wissen, was sie erwartet. Eine klare Website mit Leistungen, Terminwegen und auf Wunsch einem Rundgang durch Empfang und Behandlungsräume nimmt die Unsicherheit vor dem ersten Besuch.",
+    punkte: [
+      "Praxisräume und barrierefreie Wege sichtbar machen",
+      "Terminbuchung oder Rückruf-Formular prominent einbinden",
+      "Leistungen verständlich erklären, ohne Heilversprechen",
+      "Lokale Suche: Fachrichtung plus Stadtteil",
+    ],
+    passt: "Website Professional + Lokal sichtbar",
+    paket: "professional",
+  },
+  {
+    id: "showroom",
+    icon: "layers",
+    titel: "Showrooms und lokaler Handel",
+    text: "Wenn deine Ausstellung Teil des Verkaufsarguments ist, darf sie online nicht versteckt bleiben. Zeig Produkte und Beratungsbereiche und erkläre Details direkt im Bild.",
+    punkte: [
+      "Produkte und Bereiche mit Infopunkten hervorheben",
+      "Beratungstermin direkt aus dem Rundgang anfragen",
+      "Website und Rundgang im gleichen Erscheinungsbild",
+      "Öffnungszeiten und Anfahrt überall einheitlich",
+    ],
+    passt: "Website Professional + Rundgang Kompakt",
+    paket: "rundgang-kompakt",
+  },
+  {
+    id: "fitness",
+    icon: "target",
+    titel: "Fitnessstudios und Freizeitangebote",
+    text: "Mitglieder entscheiden oft nach Gefühl. Zeig Geräte, Kursräume und Umkleiden, damit sich Interessenten das Training vorstellen können, mit einem klaren Button für das Probetraining.",
+    punkte: [
+      "Atmosphäre und Ausstattung im Rundgang erlebbar machen",
+      "Probetraining prominent platzieren",
+      "Kursplan und Preise verständlich aufbereiten",
+      "Anfragen automatisch weiterleiten und nachfassen",
+    ],
+    passt: "Website Growth + Rundgang Business",
+    paket: "growth",
+  },
+  {
+    id: "immobilien",
+    icon: "key",
+    titel: "Immobilien, Büros und Gewerbeflächen",
+    text: "Interessenten vor der Besichtigung qualifizieren: Schnitt, Licht und Atmosphäre werden digital erlebbar. Das spart Termine ohne echtes Interesse.",
+    punkte: [
+      "Objekte rund um die Uhr präsentieren",
+      "Weniger Besichtigungen ohne echtes Interesse",
+      "Eigene Objektseite statt nur Portal-Eintrag",
+      "Rundgang mit mehreren Etagen im Premium-Paket",
+    ],
+    passt: "Rundgang Business oder Premium",
+    paket: "rundgang-premium",
+  },
+];
+---
+
+<Base
+  title="Branchen: Websites für Hotels, Praxen, Studios | VistaFlows"
+  description="Websites, SEO & GEO und 360°-Rundgänge für Hotels, Praxen, Showrooms, Fitnessstudios und Immobilien im Ruhrgebiet. Was in deiner Branche zählt."
+  path="/branchen"
+  og="/og/branchen.png"
+  ogAlt="Websites und 360°-Rundgänge nach Branche"
+  crumbs={crumbs}
+>
+  <PageHero
+    crumbs={crumbs}
+    title="Jede Branche braucht andere Bilder, andere Argumente und andere Buttons."
+    lead="VistaFlows arbeitet für lokale Unternehmen mit einem sichtbaren Standort. Hier steht, worauf es bei einer Website in deiner Branche ankommt und wann sich ein 360°-Rundgang zusätzlich lohnt."
+  >
+    <div class="actions">
+      <a class="btn btn--primary" href="/kontakt"><span><span class="hide-narrow">Kostenloses </span>Erstgespräch anfragen</span> <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+    </div>
+  </PageHero>
+
+  <nav class="section--paper trades-strip" aria-label="Branchen auf dieser Seite">
+    <div class="shell">
+      <p>Springen zu:</p>
+      <ul class="trades">
+        {branchen.map((b) => <li><a href={`#${b.id}`}>{b.titel.split(" ")[0].replace(",", "")}</a></li>)}
+        <li><a href="#weitere">Weitere Branchen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section section--paper" aria-label="Branchen im Detail">
+    <div class="shell">
+      {
+        branchen.map((b) => (
+          <article class="trade" id={b.id} aria-labelledby={`${b.id}-titel`}>
+            <div class="trade__aside">
+              <span class="trade__icon" aria-hidden="true">
+                <Icon name={b.icon} size="lg" />
+              </span>
+              <p class="trade__fit">
+                <strong>Passt meist:</strong>
+                {b.passt}
+              </p>
+            </div>
+            <div>
+              <h2 id={`${b.id}-titel`}>{b.titel}</h2>
+              <p class="muted">{b.text}</p>
+              <ul class="checks mt-m">
+                {b.punkte.map((p) => (
+                  <li>{p}</li>
+                ))}
+              </ul>
+              <a class="btn btn--secondary mt-s" href={`/kontakt?paket=${b.paket}`}>
+                Projekt anfragen <Icon name="arrow" size="sm" class="ico-arrow" />
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section" id="weitere" aria-labelledby="weitere-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="weitere-titel">Deine Branche ist nicht dabei?</h2>
+        <p class="muted">
+          Eine gute Website lohnt sich für jeden lokalen Betrieb, bei dem Kunden vorab online recherchieren: Kfz-Betriebe und Autohäuser, Handwerksbetriebe, Kanzleien und Steuerberatung, Restaurants und Cafés, Kosmetik- und Friseurstudios, Kitas oder Veranstaltungsräume. Ein 360°-Rundgang kommt dazu, wenn Räume oder Ausstattung mitverkaufen.
+        </p>
+        <a class="btn btn--primary" href="/kontakt">Kostenlos prüfen lassen <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+      </div>
+      <div class="panel panel--stone">
+        <h3>Für regulierte Branchen</h3>
+        <p class="muted mb-0">
+          Praxen, Kanzleien und Finanzberatung haben eigene Regeln für Werbung, etwa das Heilmittelwerbegesetz oder Berufsordnungen. Ich formuliere sachlich und ohne Heilversprechen. Die rechtliche Prüfung der Inhalte bleibt bei dir oder deiner Kammer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Lass uns über deine Branche sprechen."
+    text="Im kostenlosen Erstgespräch schauen wir uns dein Unternehmen an und klären, wie Website, Sichtbarkeit und Rundgang bei dir zusammenspielen. Unverbindlich und ohne Verkaufsdruck."
+  />
+</Base>

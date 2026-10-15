@@ -1,0 +1,107 @@
+---
+import Base from "../layouts/Base.astro";
+import Crumbs from "../components/Crumbs.astro";
+import Icon from "../components/Icon.astro";
+import AnfrageForm from "../components/AnfrageForm.astro";
+import { site } from "../data/site";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "Kontakt", href: "/kontakt" },
+];
+
+const schema = [
+  {
+    "@type": "ContactPage",
+    name: "Kontakt – VistaFlows",
+    url: `${site.url}/kontakt`,
+    about: { "@id": `${site.url}/#organisation` },
+  },
+];
+---
+
+<Base
+  title="Kontakt: Kostenloses Erstgespräch | VistaFlows Bottrop"
+  description={`Kontakt zu VistaFlows für Website, SEO & GEO oder 360°-Rundgang: per Formular oder unter ${site.phone.display}. Antwort in 24 Stunden an Werktagen.`}
+  path="/kontakt"
+  og="/og/kontakt.png"
+  ogAlt="Kontakt zu VistaFlows: kostenloses Erstgespräch"
+  crumbs={crumbs}
+  schema={schema}
+  stickyCta={false}
+>
+  <section class="night night--glow page-hero">
+    <div class="shell">
+      <Crumbs items={crumbs} />
+      <div class="page-hero__inner">
+        <h1>Lass uns über dein Projekt sprechen.</h1>
+        <p class="lead">
+          Füll das Formular aus oder ruf direkt an. Du bekommst eine klare Einschätzung, was deine aktuelle Website leistet, was ihr fehlt und was eine neue kosten würde. Unverbindlich und kostenlos.
+        </p>
+        <div class="actions">
+          <a class="btn btn--primary" href={site.phone.href}><Icon name="phone" size="sm" /> {site.phone.display} anrufen</a>
+          <a class="btn btn--on-dark" href={`mailto:${site.email}`}>E-Mail schreiben</a>
+        </div>
+        <p class="promise">{site.responsePromise}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="formular-titel">
+    <div class="shell contact-grid">
+      <div class="form-panel" id="anfrage">
+        <h2 class="title-form" id="formular-titel">Anfrage senden</h2>
+        <AnfrageForm variant="anfrage" idPrefix="kf" />
+      </div>
+
+      <div>
+        <h2>So erreichst du mich</h2>
+        <ul class="contact-list">
+          <li>
+            <a class="contact-item" href={site.phone.href}>
+              <Icon name="phone" />
+              <span><strong>{site.phone.display}</strong><small>{site.hours.display}</small></span>
+            </a>
+          </li>
+          <li>
+            <a class="contact-item" href={`mailto:${site.email}`}>
+              <Icon name="mail" />
+              <span><strong>{site.email}</strong><small>{site.responsePromise}</small></span>
+            </a>
+          </li>
+          <li>
+            <div class="contact-item">
+              <Icon name="pin" />
+              <span><strong>{site.address.street}, {site.address.zip} {site.address.city}</strong><small>Termine vor Ort im Ruhrgebiet, sonst per Telefon oder Video</small></span>
+            </div>
+          </li>
+        </ul>
+
+        <h2 class="mt-l">So geht es weiter</h2>
+        <ol class="next-steps">
+          <li><strong>Ich melde mich</strong><span>{site.responsePromise}, per E-Mail oder telefonisch, wie du möchtest.</span></li>
+          <li><strong>Kostenloses Erstgespräch</strong><span>Rund 20 Minuten: Ziel, Umfang, Zeitrahmen. Kein Verkaufsgespräch.</span></li>
+          <li><strong>Schriftliches Festpreisangebot</strong><span>Mit klarem Leistungsumfang. Du entscheidest in Ruhe.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="gebiet-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="gebiet-titel">Vor Ort im Ruhrgebiet, remote in ganz Deutschland</h2>
+        <p class="muted">
+          Website, SEO, GEO und Automatisierung setze ich ortsunabhängig um, die Abstimmung läuft per Telefon oder Video. Für 360°-Aufnahmen komme ich zu dir, im Ruhrgebiet ohne Anfahrtskosten.
+        </p>
+      </div>
+      <div>
+        <h3>Vor Ort für Aufnahmen</h3>
+        <ul class="places">
+          {site.onSiteArea.map((ort) => <li>{ort}</li>)}
+        </ul>
+        <p class="plans-note">Weitere Orte in NRW nach Absprache.</p>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<title>Poster-Render</title>
+<link rel="stylesheet" href="/public/vendor/pannellum/pannellum.css" />
+<style>
+  html, body { margin: 0; background: #11141b; }
+  #pano { width: 1600px; height: 1000px; }
+  .pnlm-controls-container, .pnlm-load-box, .pnlm-about-msg { display: none !important; }
+  .hs { width: 38px; height: 38px; box-sizing: border-box; border: 2px solid rgba(255,255,255,.9); border-radius: 50%;
+        background: #ff7a1a; box-shadow: 0 6px 18px rgba(0,0,0,.4); display: grid; place-items: center; }
+  .hs svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<div id="pano"></div>
+<script src="/public/vendor/pannellum/pannellum.js"></script>
+<script>
+  const p = new URLSearchParams(location.search);
+  const cfg = JSON.parse(p.get("cfg"));
+  window.ready = false;
+  const v = pannellum.viewer("pano", {
+    type: "equirectangular",
+    panorama: cfg.panorama,
+    autoLoad: true,
+    showControls: false,
+    yaw: cfg.yaw, pitch: cfg.pitch, hfov: cfg.hfov,
+    hotSpots: cfg.hotspots.map((h) => ({
+      pitch: h.pitch, yaw: h.yaw, cssClass: "hs",
+      createTooltipFunc: (div) => { div.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#0a0c11" stroke-width="2.4" stroke-linecap="round"><path d="M12 5.25v13.5M5.25 12h13.5"/></svg>'; }
+    })),
+  });
+  v.on("load", () => setTimeout(() => { window.ready = true; }, 600));
+</script>
+</body>
+</html>

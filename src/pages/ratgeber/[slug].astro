@@ -1,0 +1,155 @@
+---
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import Crumbs from "../../components/Crumbs.astro";
+import Icon from "../../components/Icon.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import portrait from "../../assets/img/sandin-jagurdzija.jpg";
+import { article } from "../../data/schema";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("ratgeber");
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const path = `/ratgeber/${entry.id}`;
+const alle = await getCollection("ratgeber");
+const verwandt = d.verwandt.map((id) => alle.find((e) => e.id === id)).filter((e) => e !== undefined);
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "Ratgeber", href: "/ratgeber" },
+  { name: d.crumb, href: path },
+];
+
+const datum = (iso: string) =>
+  new Intl.DateTimeFormat("de-DE", { day: "numeric", month: "long", year: "numeric" }).format(new Date(`${iso}T12:00:00`));
+
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+
+const ctas = {
+  "ki-check": {
+    title: "Wie sichtbar bist du in ChatGPT & Co.?",
+    text: "Der kostenlose KI-Sichtbarkeits-Check zeigt es dir: 10 echte Kundenfragen in 4 KI-Systemen, mit Kurzbericht.",
+    primary: { label: "Kostenlosen KI-Check anfordern", href: "/ki-sichtbarkeits-check" },
+    kurz: "KI-Check anfordern",
+  },
+  rundgang: {
+    title: "Sollen deine Räume online mitverkaufen?",
+    text: "Im kostenlosen Erstgespräch klären wir, ob sich ein Rundgang für dich lohnt, wie viele Standpunkte sinnvoll sind und was er kostet.",
+    primary: { label: "Rundgang anfragen", href: "/kontakt?paket=rundgang-business" },
+    kurz: "Rundgang anfragen",
+  },
+  erstgespraech: {
+    title: "Lass uns über dein Projekt sprechen.",
+    text: "Im kostenlosen Erstgespräch schaue ich mir deine Situation an und sage dir konkret, was sich lohnt und was nicht.",
+    primary: { label: "Kostenloses Erstgespräch anfragen", href: "/kontakt" },
+    kurz: "Erstgespräch anfragen",
+  },
+} as const;
+const cta = ctas[d.cta];
+---
+
+<Base
+  title={d.seoTitle}
+  description={d.description}
+  path={path}
+  og={d.og}
+  ogAlt={d.title}
+  ogType="article"
+  crumbs={crumbs}
+  published={d.published}
+  updated={d.updated}
+  schema={[article({ title: d.title, description: d.description, url: path, published: d.published, updated: d.updated, image: d.og })]}
+>
+  <section class="night night--glow page-hero">
+    <div class="shell">
+      <Crumbs items={crumbs} />
+      <div class="page-hero__inner">
+        <h1>{d.title}</h1>
+        <div class="byline">
+          <Image src={portrait} alt="" width={44} height={44} densities={[1, 2]} />
+          <p>
+            <strong>Sandin Jagurdzija</strong>, Gründer von VistaFlows<br />
+            <time datetime={d.updated}>Aktualisiert am {datum(d.updated)}</time> · {d.lesezeit} Minuten Lesezeit
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="shell article">
+      <div>
+        <div class="answer">
+          <p><strong>Kurz gesagt:</strong> {d.kurz}</p>
+        </div>
+        <div class="prose">
+          <Content />
+        </div>
+        <section class="sources" aria-labelledby="quellen-titel">
+          <h2 id="quellen-titel">Quellen</h2>
+          <ol>
+            {
+              d.quellen.map((q) => (
+                <li>
+                  <a href={q.url} target="_blank" rel="noopener noreferrer">
+                    {q.titel}
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+          <p class="small muted mt-s">Erstveröffentlichung: {datum(d.published)}. Ich prüfe die Angaben regelmäßig und aktualisiere den Artikel, wenn sich etwas ändert.</p>
+        </section>
+      </div>
+      <aside class="toc" aria-labelledby="toc-titel">
+        <h2 id="toc-titel">Inhalt</h2>
+        <ol>
+          {
+            toc.map((h) => (
+              <li class={h.depth === 3 ? "toc__sub" : undefined}>
+                <a href={`#${h.slug}`}>{h.text}</a>
+              </li>
+            ))
+          }
+        </ol>
+        <div class="toc__cta">
+          <p>{cta.text}</p>
+          <a class="btn btn--primary btn--sm btn--block" href={cta.primary.href}>{cta.kurz}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {
+    verwandt.length > 0 && (
+      <section class="section" aria-labelledby="verwandt-titel">
+        <div class="shell">
+          <div class="section-head">
+            <h2 id="verwandt-titel">Weiterlesen</h2>
+          </div>
+          <ul class="article-list">
+            {verwandt.map((v) => (
+              <li>
+                <a href={`/ratgeber/${v.id}`}>
+                  <div>
+                    <h3>{v.data.title}</h3>
+                    <p>{v.data.description}</p>
+                  </div>
+                  <Icon name="arrow" class="ico-arrow" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  <CtaBand title={cta.title} text={cta.text} primary={cta.primary} />
+</Base>

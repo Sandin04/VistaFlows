@@ -1,0 +1,189 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Icon from "../../components/Icon.astro";
+import TourViewer from "../../components/TourViewer.astro";
+import PlanCard from "../../components/PlanCard.astro";
+import Faq from "../../components/Faq.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { rundgangPakete, vertragsbedingungen, eur } from "../../data/pakete";
+import { service, faqPage } from "../../data/schema";
+import { faqRundgang } from "../../data/faq";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "Leistungen", href: "/leistungen" },
+  { name: "360°-Rundgang", href: "/leistungen/360-grad-rundgang" },
+];
+
+const schema = [
+  service({
+    name: "360-Grad-Rundgang",
+    serviceType: "Virtueller 360-Grad-Rundgang",
+    description:
+      "Virtuelle 360°-Rundgänge für Hotels, Praxen, Studios, Showrooms, Gastronomie und Immobilien im Ruhrgebiet: Aufnahme vor Ort, Infopunkte, Anfrage-Buttons, Einbindung in die Website ohne Abo.",
+    url: "/leistungen/360-grad-rundgang",
+    pakete: rundgangPakete,
+    area: "region",
+  }),
+  faqPage(faqRundgang),
+];
+
+const branchen = [
+  { icon: "users", titel: "Hotels und Ferienwohnungen", text: "Zimmer, Lobby, Frühstücksraum: Gäste sehen vor der Buchung, was sie erwartet, und buchen direkt aus dem Rundgang." },
+  { icon: "shield", titel: "Praxen", text: "Wartezimmer, Behandlungsräume, barrierefreier Zugang: Ein Rundgang nimmt Unsicherheit vor dem ersten Termin." },
+  { icon: "target", titel: "Studios und Fitness", text: "Geräte, Kursräume, Umkleiden: Interessenten stellen sich das Training vor und buchen das Probetraining." },
+  { icon: "layers", titel: "Showrooms und Handel", text: "Ausstellung und Beratungsbereiche zeigen, einzelne Produkte mit Infopunkten erklären." },
+  { icon: "calendar", titel: "Gastronomie und Eventräume", text: "Atmosphäre, Plätze und Räume für Feiern: Gäste wissen vorher, ob die Gruppe passt." },
+  { icon: "key", titel: "Immobilien und Gewerbeflächen", text: "Schnitt, Licht und Ausstattung vorab erlebbar machen und nur ernsthafte Interessenten besichtigen lassen." },
+] as const;
+---
+
+<Base
+  title="360 Grad Rundgang erstellen lassen ab 590 € | VistaFlows"
+  description="Virtueller 360-Grad-Rundgang für Hotels, Praxen, Studios und Showrooms im Ruhrgebiet: mit Infopunkten und Anfrage-Button, in deiner Website, ohne Abo. Ab 590 €."
+  path="/leistungen/360-grad-rundgang"
+  og="/og/360-grad-rundgang.png"
+  ogAlt="360-Grad-Rundgang mit Infopunkten und Anfrage-Button"
+  crumbs={crumbs}
+  schema={schema}
+>
+  <PageHero
+    crumbs={crumbs}
+    title="360-Grad-Rundgang erstellen lassen: Räume zeigen, bevor jemand anruft."
+    lead="Ein virtueller Rundgang zeigt Räume, Ausstattung und Atmosphäre so, als stünde man selbst darin. Bei VistaFlows bekommt er Infopunkte und Anfrage-Buttons und läuft direkt in deiner Website. Einmal bezahlt, ohne Abo-Gebühren."
+    split
+  >
+    <div class="actions">
+      <a class="btn btn--primary" href="#demo">Beispiel ausprobieren <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+      <a class="btn btn--on-dark" href="#pakete">Preise ansehen</a>
+    </div>
+    <aside class="glance" slot="aside" aria-label="360°-Rundgang auf einen Blick">
+      <dl>
+        <div><dt>Preis</dt><dd>ab {eur(rundgangPakete[0].betrag)} einmalig</dd></div>
+        <div><dt>Laufende Kosten</dt><dd>keine, kein Abo</dd></div>
+        <div><dt>Anfahrt</dt><dd>im Ruhrgebiet inklusive</dd></div>
+        <div><dt>Im Rundgang</dt><dd>Infopunkte und Anfrage-Buttons</dd></div>
+        <div><dt>Geräte</dt><dd>Smartphone, Tablet, Desktop</dd></div>
+      </dl>
+    </aside>
+  </PageHero>
+
+  <section class="section section--paper" id="demo" aria-labelledby="demo-titel">
+    <div class="shell split">
+      <div>
+        <div class="answer">
+          <p>
+            <strong>Kurz gesagt:</strong> Ein 360°-Rundgang besteht aus Rundum-Fotos von mehreren Standpunkten, durch die sich Besucher am Bildschirm frei umsehen. Infopunkte erklären Details, Buttons führen zur Anfrage. Bei VistaFlows kostet er ab {eur(rundgangPakete[0].betrag)} und läuft ohne Abo in deiner Website.
+          </p>
+        </div>
+        <h2 id="demo-titel">Probier es aus</h2>
+        <p class="muted">
+          Starte den Beispiel-Rundgang und zieh das Bild mit Maus oder Finger. Die orangen Punkte sind Infopunkte, wie sie auch in deinem Rundgang stehen würden: mit Erklärung, Bild oder Button. Unter dem Viewer erreichst du alle Infopunkte auch per Tastatur.
+        </p>
+        <p class="small muted">
+          Die Beispiel-Panoramen stammen von Poly Haven (Lizenz CC0) und wurden nicht von VistaFlows aufgenommen. Sie zeigen, wie die Technik funktioniert.
+        </p>
+      </div>
+      <TourViewer scenes={["cafe", "hotelzimmer"]} uid="demo-tour" sizes="(max-width: 980px) calc(100vw - 2 * var(--gutter)), 560px" />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="fuer-wen-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="fuer-wen-titel">Für wen sich ein Rundgang lohnt</h2>
+        <p>Immer dann, wenn Kunden dich vor dem ersten Besuch „sehen“ wollen. Wenn deine Räume für die Entscheidung keine Rolle spielen, brauchst du keinen Rundgang. Das sage ich dir im Erstgespräch ehrlich.</p>
+      </div>
+      <div class="services">
+        {
+          branchen.map((b) => (
+            <article class="tile tile--third">
+              <h3 class="has-glyph"><Icon name={b.icon} class="glyph" /><span>{b.titel}</span></h3>
+              <p>{b.text}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="plans-note">Mehr zu den einzelnen Branchen: <a class="text-link" href="/branchen">Websites und Rundgänge nach Branche</a>.</p>
+    </div>
+  </section>
+
+  <section class="section section--stone" aria-labelledby="unterschied-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="unterschied-titel">Was einen Rundgang zum Verkaufswerkzeug macht</h2>
+        <p class="muted">
+          Massenware endet oft bei schönen Bildern auf einer fremden Plattform. Ein Rundgang, der Anfragen bringt, ist in die Website eingebettet, erklärt, was zu sehen ist, und zeigt den nächsten Schritt.
+        </p>
+      </div>
+      <ul class="checks">
+        <li><strong>Infopunkte</strong> erklären Leistungen, Preise oder Ausstattung genau dort, wo Besucher hinsehen</li>
+        <li><strong>Anfrage- und Buchungs-Buttons</strong> im Rundgang, nicht versteckt im Menü</li>
+        <li><strong>In deiner Website</strong> statt auf einer fremden Plattform mit Werbung oder Abo</li>
+        <li><strong>Schnell:</strong> Der Rundgang lädt erst, wenn jemand ihn startet, und bremst deine Seite nicht</li>
+        <li><strong>Datenschutz:</strong> Gesichter und Kennzeichen werden unkenntlich gemacht, keine Cookies</li>
+        <li><strong>Auch bei Google:</strong> Ausgewählte 360°-Fotos erscheinen in deinem Google-Unternehmensprofil</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="ablauf-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="ablauf-titel">So entsteht dein Rundgang</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Planung</h3><p>Im Erstgespräch legen wir fest, welche Räume gezeigt werden und wo Infopunkte und Buttons hingehören.</p></li>
+        <li><h3>Aufnahme vor Ort</h3><p>Ich fotografiere die Standpunkte mit einer 360°-Kamera. Im Ruhrgebiet ohne Anfahrtskosten.</p></li>
+        <li><h3>Bearbeitung</h3><p>Panoramen werden ausgerichtet, retuschiert und verknüpft, Infopunkte und Buttons eingesetzt.</p></li>
+        <li><h3>Einbindung</h3><p>Der Rundgang geht in deiner Website online, ausgewählte Fotos zusätzlich im Google-Profil.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="pakete" aria-labelledby="pakete-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="pakete-titel">Preise für den 360°-Rundgang</h2>
+        <p>{vertragsbedingungen.rundgang}</p>
+      </div>
+      <div class="plans">
+        {rundgangPakete.map((p) => <PlanCard paket={p} />)}
+      </div>
+      <p class="plans-note">
+        Endpreise nach § 19 UStG. Den Rundgang gibt es auch einzeln für eine bestehende Website. Was Rundgänge am Markt kosten und worauf du bei Angeboten achten solltest: <a class="text-link" href="/ratgeber/360-grad-rundgang-kosten">Ratgeber zu den Kosten</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section night night--glow" aria-labelledby="technik-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="technik-titel">Die Technik dahinter, offen erklärt</h2>
+        <p class="lead">Kein Abo heißt: keine Plattform, die monatlich kassiert. Der Rundgang besteht aus deinen Panoramabildern und einem freien Viewer, beides liegt auf deiner Website.</p>
+      </div>
+      <ul class="checks">
+        <li>Viewer: Pannellum, Open Source unter MIT-Lizenz, ohne Plugin und ohne Fremdserver</li>
+        <li>Ein Standpunkt wiegt nach der Optimierung rund 200 bis 300 KB</li>
+        <li>Lässt sich in die meisten Website-Systeme einbinden, etwa WordPress, Wix oder Jimdo</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="faq-titel">
+    <div class="shell split split--top">
+      <div class="section-head">
+        <h2 id="faq-titel">Häufige Fragen zum 360°-Rundgang</h2>
+        <p>Deine Frage fehlt? Ruf an oder schreib mir.</p>
+      </div>
+      <Faq items={faqRundgang} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Sollen deine Räume online mitverkaufen?"
+    text="Im kostenlosen Erstgespräch klären wir, ob sich ein Rundgang für dich lohnt, wie viele Standpunkte sinnvoll sind und was er kostet."
+    primary={{ label: "Rundgang anfragen", href: "/kontakt?paket=rundgang-business" }}
+  />
+</Base>

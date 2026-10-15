@@ -1,0 +1,71 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import Faq from "../components/Faq.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { faqPage } from "../data/schema";
+import { faqAllgemein, faqAblauf, faqSeoGeo, faqRundgang, faqPreise, faqTechnik } from "../data/faq";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "FAQ", href: "/faq" },
+];
+
+const gruppen = [
+  { id: "allgemein", titel: "Allgemein", items: faqAllgemein },
+  { id: "ablauf", titel: "Ablauf und Umsetzung", items: faqAblauf },
+  { id: "seo-geo", titel: "SEO und GEO", items: faqSeoGeo },
+  { id: "rundgang", titel: "360°-Rundgang", items: faqRundgang },
+  { id: "preise", titel: "Preise und Vertrag", items: faqPreise },
+  { id: "technik", titel: "Technik", items: faqTechnik },
+];
+
+const alle = gruppen.flatMap((g) => g.items);
+---
+
+<Base
+  title="FAQ: Fragen zu Website, SEO & GEO und 360°-Rundgang"
+  description="Wie lange dauert eine Website? Was ist GEO? Was kostet ein 360°-Rundgang? Antworten auf die häufigsten Fragen an VistaFlows, kurz und konkret."
+  path="/faq"
+  og="/og/faq.png"
+  ogAlt="Häufige Fragen an VistaFlows"
+  crumbs={crumbs}
+  schema={[faqPage(alle)]}
+>
+  <PageHero
+    crumbs={crumbs}
+    title="Antworten auf die Fragen, die vor einem Website-Projekt auftauchen."
+    lead="Von Ablauf und Dauer über SEO, GEO und den 360°-Rundgang bis zu Preisen und Rechten. Wenn deine Frage fehlt, schreib mir, ich antworte persönlich."
+  >
+    <div class="actions">
+      <a class="btn btn--primary" href="/kontakt">Frage stellen <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+    </div>
+  </PageHero>
+
+  <nav class="section--paper trades-strip" aria-label="Themen">
+    <div class="shell">
+      <p>Themen:</p>
+      <ul class="trades">
+        {gruppen.map((g) => <li><a href={`#${g.id}`}>{g.titel}</a></li>)}
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="shell">
+      <div class="legal">
+        {
+          gruppen.map((g) => (
+            <div class="faq-group" id={g.id}>
+              <h2>{g.titel}</h2>
+              <Faq items={g.items} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Deine Frage war nicht dabei?" text="Schreib mir kurz, was du wissen willst. Du bekommst eine ehrliche Antwort, auch wenn sie lautet, dass VistaFlows für dein Vorhaben nicht das Richtige ist." />
+</Base>

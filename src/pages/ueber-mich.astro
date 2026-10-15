@@ -1,0 +1,98 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import Founder from "../components/Founder.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { site } from "../data/site";
+import { person } from "../data/schema";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "Über mich", href: "/ueber-mich" },
+];
+
+const prinzipien = [
+  { titel: "Erst zuhören, dann bauen", text: "Bevor irgendetwas gestaltet wird, verstehe ich dein Geschäft: Wer sind deine Kunden, was fragen sie ständig, und was soll passieren, wenn jemand auf deiner Website landet?" },
+  { titel: "Festpreis statt Stundenzettel", text: "Du bekommst vorab ein schriftliches Angebot mit klar definiertem Umfang. Was drinsteht, wird umgesetzt, ohne Nachforderungen mitten im Projekt." },
+  { titel: "Du behältst die Kontrolle", text: "Domain und Hosting laufen auf deinen Namen. Nach vollständiger Zahlung gehören dir die Nutzungsrechte an allem, was ich für dich erstellt habe." },
+  { titel: "Schnelle Rückmeldung", text: "Antwort innerhalb von 24 Stunden an Werktagen. Während eines Projekts bin ich für Rückfragen per E-Mail und Telefon erreichbar." },
+  { titel: "Kein Technik-Kauderwelsch", text: "Ich erkläre dir, was ich mache und warum, in normaler Sprache. Du musst kein Fachwissen mitbringen, um mitreden zu können." },
+  { titel: "Auch nach dem Livegang da", text: "Nach dem Start bekommst du eine Einweisung. Auf Wunsch übernehme ich die laufende Pflege, aber du bist zu nichts verpflichtet." },
+];
+---
+
+<Base
+  title="Über mich: Sandin Jagurdzija, Gründer von VistaFlows"
+  description="Hinter VistaFlows steht Sandin Jagurdzija aus Bottrop. Wie ich arbeite, was du erwarten kannst und warum du direkt mit mir sprichst, nicht mit einem Team."
+  path="/ueber-mich"
+  og="/og/ueber-mich.png"
+  ogAlt="Sandin Jagurdzija, Gründer von VistaFlows"
+  crumbs={crumbs}
+  schema={[person()]}
+>
+  <PageHero
+    crumbs={crumbs}
+    title="Hinter VistaFlows steht eine Person, kein Callcenter."
+    lead="Mein Name ist Sandin Jagurdzija. Ich habe VistaFlows in Bottrop gegründet, weil ich immer wieder dasselbe gesehen habe: Lokale Unternehmen leisten hervorragende Arbeit, aber online wirkt davon fast nichts. Das ändere ich."
+  >
+    <div class="actions">
+      <a class="btn btn--primary" href="/kontakt"><span><span class="hide-narrow">Kostenloses </span>Erstgespräch anfragen</span> <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+    </div>
+  </PageHero>
+
+  <section class="section section--paper" aria-labelledby="person-titel">
+    <div class="shell">
+      <Founder
+        heading="Warum ich VistaFlows persönlich aufbaue."
+        text="Lokale Unternehmen kaufen nicht nur Technik. Sie kaufen Vertrauen, eine klare Umsetzung und jemanden, der Verantwortung übernimmt. Bei mir sprichst du vom ersten Gespräch bis zum Livegang mit derselben Person. Es gibt keinen Projektmanager, der zwischen dir und der Umsetzung steht."
+        link={false}
+        eager
+        headingId="person-titel"
+      />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="arbeit-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="arbeit-titel">Wie ich arbeite und was du erwarten kannst</h2>
+        <p>Transparenz ist mir wichtiger als große Versprechen. Deshalb vorab, wie ein Projekt bei mir abläuft.</p>
+      </div>
+      <dl class="principles">
+        {
+          prinzipien.map((p) => (
+            <div>
+              <dt>{p.titel}</dt>
+              <dd>{p.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="gebiet-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="gebiet-titel">Vor Ort im Ruhrgebiet, remote deutschlandweit</h2>
+        <p class="muted">
+          Website, SEO, GEO und Automatisierung setze ich ortsunabhängig um, die Abstimmung läuft per Telefon oder Video. Für Fotos und 360°-Aufnahmen komme ich zu dir an den Standort.
+        </p>
+        <a class="btn btn--secondary" href="/kontakt">Standort anfragen <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+      </div>
+      <div>
+        <h3>Vor Ort für Aufnahmen</h3>
+        <ul class="places">
+          {site.onSiteArea.map((ort) => <li>{ort}</li>)}
+        </ul>
+        <p class="plans-note">Weitere Orte in NRW nach Absprache, bei größeren Projekten auch deutschlandweit.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Lieber erst mal kennenlernen?"
+    text="Kein Verkaufsgespräch, kein Druck. Wir reden 20 Minuten über dein Unternehmen, und du entscheidest danach in Ruhe."
+  />
+</Base>

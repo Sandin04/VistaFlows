@@ -1,0 +1,95 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Icon from "../../components/Icon.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { site } from "../../data/site";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "Ratgeber", href: "/ratgeber" },
+];
+
+const artikel = (await getCollection("ratgeber")).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
+const themen = [
+  { id: "geo", titel: "GEO und KI-Suche", filter: (t: string) => t === "GEO" },
+  { id: "seo", titel: "SEO und Google", filter: (t: string) => t === "SEO" },
+  { id: "rundgang", titel: "360°-Rundgang", filter: (t: string) => t === "360°" },
+];
+
+const datum = (iso: string) =>
+  new Intl.DateTimeFormat("de-DE", { day: "numeric", month: "long", year: "numeric" }).format(new Date(`${iso}T12:00:00`));
+
+const schema = [
+  {
+    "@type": "CollectionPage",
+    name: "Ratgeber von VistaFlows",
+    url: `${site.url}/ratgeber`,
+    inLanguage: "de-DE",
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: artikel.map((a, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${site.url}/ratgeber/${a.id}`,
+        name: a.data.title,
+      })),
+    },
+  },
+];
+---
+
+<Base
+  title="Ratgeber: SEO, GEO und 360°-Rundgang | VistaFlows"
+  description="Ratgeber für lokale Unternehmen: Was ist GEO, wie wirst du in ChatGPT genannt, was bringen llms.txt und AI Overviews, was kostet ein 360°-Rundgang?"
+  path="/ratgeber"
+  og="/og/ratgeber.png"
+  ogAlt="Ratgeber von VistaFlows zu SEO, GEO und 360°-Rundgängen"
+  crumbs={crumbs}
+  schema={schema}
+>
+  <PageHero
+    crumbs={crumbs}
+    title="Ratgeber: SEO, GEO und 360°-Rundgang verständlich erklärt."
+    lead="Für Inhaberinnen und Inhaber lokaler Unternehmen, die wissen wollen, was wirklich hilft. Jede Aussage mit Quelle, ohne Versprechen, die niemand halten kann."
+  />
+
+  <section class="section section--paper">
+    <div class="shell">
+      {
+        themen.map((thema) => {
+          const liste = artikel.filter((a) => thema.filter(a.data.thema));
+          return liste.length ? (
+            <div class="faq-group" id={thema.id}>
+              <h2>{thema.titel}</h2>
+              <ul class="article-list">
+                {liste.map((a) => (
+                  <li>
+                    <a href={`/ratgeber/${a.id}`}>
+                      <div>
+                        <h3>{a.data.title}</h3>
+                        <p>{a.data.description}</p>
+                        <p class="article-list__meta">
+                          <span>{a.data.lesezeit} Minuten Lesezeit</span>
+                          <span>Aktualisiert am {datum(a.data.updated)}</span>
+                        </p>
+                      </div>
+                      <Icon name="arrow" class="ico-arrow" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null;
+        })
+      }
+    </div>
+  </section>
+
+  <CtaBand
+    title="Lieber direkt wissen, wo du stehst?"
+    text="Der kostenlose KI-Sichtbarkeits-Check prüft 10 echte Kundenfragen in ChatGPT, Perplexity, Gemini und der Google-Suche."
+    primary={{ label: "Kostenlosen KI-Check anfordern", href: "/ki-sichtbarkeits-check" }}
+  />
+</Base>

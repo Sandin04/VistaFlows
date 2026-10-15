@@ -1,0 +1,53 @@
+---
+import Legal from "../layouts/Legal.astro";
+import AnfrageForm from "../components/AnfrageForm.astro";
+import { site } from "../data/site";
+---
+
+<Legal
+  title="Widerrufsbelehrung und Widerrufsformular | VistaFlows"
+  description="Widerrufsbelehrung für Verbraucher und Online-Widerrufsformular von VistaFlows mit Eingangsbestätigung per E-Mail."
+  path="/widerruf"
+  heading="Widerrufsbelehrung"
+  crumb="Widerruf"
+>
+  <p class="answer">
+    Diese Widerrufsbelehrung gilt nur für <strong>Verbraucher</strong> im Sinne des § 13 BGB, also für Personen, die den Vertrag überwiegend zu privaten Zwecken abschließen. Unternehmer im Sinne des § 14 BGB haben kein gesetzliches Widerrufsrecht.
+  </p>
+
+  <h2>Widerrufsrecht</h2>
+  <p>Du hast das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag des Vertragsabschlusses.</p>
+  <p>Um dein Widerrufsrecht auszuüben, musst du uns</p>
+  <p>
+    {site.name}, Inhaber: {site.owner}<br />
+    {site.address.street}<br />
+    {site.address.zip} {site.address.city}, {site.address.country}<br />
+    E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a><br />
+    Telefon: <a href={site.phone.href}>{site.phone.display}</a>
+  </p>
+  <p>
+    mittels einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief oder eine E-Mail) über deinen Entschluss, diesen Vertrag zu widerrufen, informieren. Du kannst dafür das unten stehende Formular verwenden, das jedoch nicht vorgeschrieben ist. Machst du von dieser Möglichkeit Gebrauch, übermitteln wir dir unverzüglich eine Bestätigung über den Eingang des Widerrufs per E-Mail.
+  </p>
+  <p>Zur Wahrung der Widerrufsfrist reicht es aus, dass du die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absendest.</p>
+
+  <h2>Folgen des Widerrufs</h2>
+  <p>
+    Wenn du diesen Vertrag widerrufst, haben wir dir alle Zahlungen, die wir von dir erhalten haben, unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über deinen Widerruf dieses Vertrags bei uns eingegangen ist. Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das du bei der ursprünglichen Transaktion eingesetzt hast, es sei denn, mit dir wurde ausdrücklich etwas anderes vereinbart. In keinem Fall werden dir wegen dieser Rückzahlung Entgelte berechnet.
+  </p>
+  <p>
+    Hast du verlangt, dass die Dienstleistungen während der Widerrufsfrist beginnen sollen, so hast du uns einen angemessenen Betrag zu zahlen, der dem Anteil der bis zu dem Zeitpunkt, zu dem du uns von der Ausübung des Widerrufsrechts hinsichtlich dieses Vertrags unterrichtest, bereits erbrachten Dienstleistungen im Vergleich zum Gesamtumfang der im Vertrag vorgesehenen Dienstleistungen entspricht.
+  </p>
+
+  <h2>Vorzeitiges Erlöschen des Widerrufsrechts</h2>
+  <p>
+    Das Widerrufsrecht erlischt bei einem Vertrag über die Erbringung von Dienstleistungen, wenn wir die Dienstleistung vollständig erbracht haben und mit der Ausführung erst begonnen haben, nachdem du dazu deine ausdrückliche Zustimmung gegeben und gleichzeitig deine Kenntnis davon bestätigt hast, dass du dein Widerrufsrecht bei vollständiger Vertragserfüllung durch uns verlierst.
+  </p>
+
+  <h2 id="formular">Muster-Widerrufsformular</h2>
+  <p>
+    Wenn du den Vertrag widerrufen willst, kannst du das folgende Formular ausfüllen und absenden. Alternativ genügt eine formlose E-Mail an <a href={`mailto:${site.email}`}>{site.email}</a> oder ein Brief an die oben genannte Anschrift.
+  </p>
+  <div class="form-panel">
+    <AnfrageForm variant="widerruf" idPrefix="wf" />
+  </div>
+</Legal>

@@ -1,0 +1,29 @@
+---
+import Crumbs from "./Crumbs.astro";
+import type { Crumb } from "../data/schema";
+
+interface Props {
+  crumbs: Crumb[];
+  title: string;
+  lead?: string;
+  /** Zweispaltig mit Inhalt im Slot "aside" (z. B. „Auf einen Blick“) */
+  split?: boolean;
+}
+
+const { crumbs, title, lead, split = false } = Astro.props;
+const hasAside = Astro.slots.has("aside");
+---
+
+<section class="night night--glow page-hero">
+  <div class="shell">
+    <Crumbs items={crumbs} />
+    <div class:list={["page-hero__inner", { "page-hero__grid": split && hasAside }]}>
+      <div>
+        <h1 set:html={title} />
+        {lead && <p class="lead">{lead}</p>}
+        <slot />
+      </div>
+      {split && hasAside && <slot name="aside" />}
+    </div>
+  </div>
+</section>
