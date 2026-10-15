@@ -1,0 +1,138 @@
+---
+import Base from "../layouts/Base.astro";
+import Crumbs from "../components/Crumbs.astro";
+import Icon from "../components/Icon.astro";
+import AnfrageForm from "../components/AnfrageForm.astro";
+import Faq from "../components/Faq.astro";
+import { seoGeoEinstieg, eur } from "../data/pakete";
+import { site } from "../data/site";
+import { service, faqPage, type FaqEntry } from "../data/schema";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "KI-Sichtbarkeits-Check", href: "/ki-sichtbarkeits-check" },
+];
+
+const faq: FaqEntry[] = [
+  {
+    q: "Kostet der Check wirklich nichts?",
+    a: "Ja. Der KI-Sichtbarkeits-Check ist kostenlos und verpflichtet dich zu nichts. Er zeigt mir, ob und wo ich helfen kann, und dir, wie du aktuell dastehst.",
+  },
+  {
+    q: "Was passiert mit meinen Angaben?",
+    a: "Ich nutze sie nur für den Check und die Antwort an dich. Sie werden nicht weitergegeben und nicht für Newsletter verwendet. Details stehen in der <a href=\"/datenschutz\">Datenschutzerklärung</a>.",
+  },
+  {
+    q: "Ich habe noch keine Website. Lohnt sich der Check trotzdem?",
+    a: "Ja. Der Check zeigt dann, welche Betriebe in deiner Branche und Stadt genannt werden und welche Quellen die KI-Systeme dafür nutzen. Das ist eine gute Grundlage für die Planung deiner Website.",
+  },
+  {
+    q: "Was ist der Unterschied zum Audit?",
+    a: `Der Check ist ein schneller Überblick über 10 Fragen. Das SEO & GEO Audit für ${eur(seoGeoEinstieg[1].betrag)} ist eine vollständige Analyse von Website, Google-Profil, Firmendaten und KI-Sichtbarkeit im Vergleich mit 3 Mitbewerbern, mit priorisierter Maßnahmenliste und 60-Minuten-Besprechung.`,
+  },
+];
+
+const schema = [
+  service({
+    name: "KI-Sichtbarkeits-Check",
+    serviceType: "Analyse der Sichtbarkeit in KI-Suchsystemen",
+    description: "Kostenloser Check: 10 typische Kundenfragen in ChatGPT, Perplexity, Gemini und der Google-Suche mit KI-Übersicht, Kurzbericht und 15-Minuten-Gespräch.",
+    url: "/ki-sichtbarkeits-check",
+    pakete: [seoGeoEinstieg[0]],
+    area: "de",
+  }),
+  faqPage(faq),
+];
+---
+
+<Base
+  title="Kostenloser KI-Sichtbarkeits-Check für Betriebe | VistaFlows"
+  description="Wirst du in ChatGPT, Perplexity, Gemini und der Google-KI-Übersicht genannt? Der kostenlose KI-Sichtbarkeits-Check prüft 10 echte Kundenfragen für dich."
+  path="/ki-sichtbarkeits-check"
+  og="/og/ki-check.png"
+  ogAlt="Kostenloser KI-Sichtbarkeits-Check von VistaFlows"
+  crumbs={crumbs}
+  schema={schema}
+  stickyCta={false}
+>
+  <section class="night night--glow page-hero">
+    <div class="shell">
+      <Crumbs items={crumbs} />
+      <div class="page-hero__inner contact-grid">
+        <div>
+          <h1>Kostenloser KI-Sichtbarkeits-Check: Wirst du in ChatGPT & Co. genannt?</h1>
+          <p class="lead">
+            Ich stelle ChatGPT, Perplexity, Gemini und der Google-Suche mit KI-Übersicht 10 Fragen, die deine Kunden wirklich stellen. Du erfährst, wer genannt wird, welche Quellen die Systeme nutzen und was dir für eine Nennung fehlt.
+          </p>
+          <ul class="facts-row">
+            <li><Icon name="check" /> kostenlos und unverbindlich</li>
+            <li><Icon name="check" /> 2 Minuten zum Ausfüllen</li>
+            <li><Icon name="check" /> persönlich ausgewertet, nicht automatisch</li>
+          </ul>
+        </div>
+        <div class="form-panel" id="check">
+          <h2 class="title-form">Check anfordern</h2>
+          <AnfrageForm variant="ki-check" idPrefix="kc" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="ablauf-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="ablauf-titel">So läuft der Check</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Du füllst das Formular aus</h3><p>Branche, Ort und Website reichen. Mitbewerber kannst du optional nennen.</p></li>
+        <li><h3>Ich stelle 10 Fragen</h3><p>Typische Kundenfragen zu deiner Branche und Stadt, in ChatGPT, Perplexity, Gemini und der Google-Suche.</p></li>
+        <li><h3>Du bekommst den Kurzbericht</h3><p>Wer genannt wird, welche Quellen zitiert werden und was bei dir fehlt, per E-Mail.</p></li>
+        <li><h3>Optional: 15 Minuten Gespräch</h3><p>Wir sprechen über die drei wichtigsten Hebel. Ohne Verkaufsdruck.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="fragen-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="fragen-titel">So klingen die Fragen</h2>
+        <p class="muted">
+          Menschen fragen eine KI anders, als sie googeln: in ganzen Sätzen, mit Ort und Bedingung. Genau solche Fragen nutze ich für den Check, zugeschnitten auf deine Branche.
+        </p>
+        <p class="small muted">Beispiele zur Veranschaulichung:</p>
+      </div>
+      <ul class="checks">
+        <li>„Welche Physiotherapie in Essen hat auch abends Termine?“</li>
+        <li>„Ich suche ein ruhiges Hotel in Bottrop für eine Geschäftsreise. Was empfiehlst du?“</li>
+        <li>„Welcher Elektriker in Gladbeck installiert Wallboxen und hat gute Bewertungen?“</li>
+        <li>„Wo kann ich in Oberhausen einen Raum für 30 Personen mieten?“</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="nicht-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="nicht-titel">Was der Check nicht ist</h2>
+        <p class="muted">
+          Kein automatischer Score aus einem Tool und kein Einstieg in ein Abo. Du bekommst eine ehrliche Einschätzung. Wenn bei dir alles gut aussieht, sage ich dir das auch. Wer mehr Tiefe braucht, findet sie im <a class="text-link" href="/leistungen/seo-geo#pakete">SEO & GEO Audit</a>.
+        </p>
+      </div>
+      <ul class="checks checks--minus">
+        <li>Keine Garantie, dass sich Nennungen danach von selbst einstellen</li>
+        <li>Keine Weitergabe deiner Daten, kein Newsletter</li>
+        <li>Kein Anruf ohne deinen Wunsch</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-titel">
+    <div class="shell split split--top">
+      <div class="section-head">
+        <h2 id="faq-titel">Fragen zum Check</h2>
+        <p>Lieber direkt sprechen? <a class="text-link" href={site.phone.href}>{site.phone.display}</a>, {site.hours.display}.</p>
+      </div>
+      <Faq items={faq} />
+    </div>
+  </section>
+</Base>

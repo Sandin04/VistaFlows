@@ -1,0 +1,11 @@
+{
+  "name": "vistaflows-website",
+  "version": "3.0.0",
+  "private": true,
+  "description": "VistaFlows – Websites & 360° Touren. Statische Multi-Page-Website ohne Build-Schritt.",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "author": "Sandin Jagurdzija",
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,99 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { site } from "../data/site";
+---
+
+<Legal
+  title="Datenschutzerklärung | VistaFlows"
+  description="Informationen zur Verarbeitung personenbezogener Daten auf vistaflows.com nach DSGVO: Hosting, Formulare, E-Mail-Versand und Reichweitenmessung ohne Cookies."
+  path="/datenschutz"
+  heading="Datenschutzerklärung"
+  crumb="Datenschutz"
+>
+  <h2>1. Verantwortlicher</h2>
+  <p>
+    Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br />
+    {site.name}, Inhaber: {site.owner}<br />
+    {site.address.street}<br />
+    {site.address.zip} {site.address.city}, {site.address.country}<br />
+    E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a><br />
+    Telefon: <a href={site.phone.href}>{site.phone.display}</a>
+  </p>
+
+  <h2>2. Allgemeines zur Datenverarbeitung</h2>
+  <p>
+    Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung dieser Website, zur Bearbeitung von Anfragen oder zur Erfüllung gesetzlicher Pflichten erforderlich ist. Rechtsgrundlagen sind die Datenschutz-Grundverordnung (DSGVO) und das Bundesdatenschutzgesetz (BDSG). Diese Website setzt <strong>keine Cookies</strong> und nutzt keine Tracking- oder Werbedienste. Ein Einwilligungsbanner ist deshalb nicht erforderlich.
+  </p>
+
+  <h2>3. Hosting und Server-Logfiles</h2>
+  <p>
+    Diese Website wird bei der Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA, gehostet. Beim Aufruf der Website werden technisch notwendige Daten verarbeitet: IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Adresse, Browsertyp, Betriebssystem und Referrer-URL. Diese Daten werden in Server-Logfiles gespeichert, um die Website sicher und fehlerfrei bereitzustellen und Angriffe zu erkennen.
+  </p>
+  <p>
+    Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in einer technisch fehlerfreien und sicheren Bereitstellung der Website. Mit Vercel besteht ein Vertrag über die Auftragsverarbeitung. Die Übermittlung in die USA erfolgt auf Grundlage des EU-US Data Privacy Framework und ergänzend der EU-Standardvertragsklauseln.
+  </p>
+
+  <h2>4. Reichweitenmessung mit Vercel Web Analytics</h2>
+  <p>
+    Wir nutzen Vercel Web Analytics, um zu verstehen, welche Seiten wie oft aufgerufen werden. Der Dienst arbeitet ohne Cookies und ohne Speicherung von Informationen auf deinem Endgerät. Es werden keine Nutzerprofile erstellt und Besucher nicht über mehrere Websites hinweg wiedererkannt. Erfasst werden zusammengefasste Werte wie aufgerufene Seiten, ungefähre Herkunftsregion, Gerätetyp und Referrer sowie, ohne Inhalte, ob ein Formular abgeschickt oder ein Telefon- oder E-Mail-Link angeklickt wurde.
+  </p>
+  <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in einer datensparsamen Auswertung der Websitenutzung, um das Angebot zu verbessern.</p>
+
+  <h2>5. Anfrage- und Kontaktformulare</h2>
+  <p>
+    Wenn du eines der Formulare auf dieser Website nutzt (Anfrage, KI-Sichtbarkeits-Check oder Widerruf), verarbeiten wir die Angaben, die du eingibst. Je nach Formular sind das Name, E-Mail-Adresse, Telefonnummer, Unternehmen, Website, Branche und Ort, gewähltes Paket, deine Nachricht sowie beim Widerruf Anschrift und Vertragsdaten.
+  </p>
+  <p>
+    Die Angaben werden von einer Funktion auf unserem Hosting bei Vercel geprüft und anschließend als E-Mail an unser Postfach gesandt. Du erhältst eine automatische Eingangsbestätigung an die angegebene E-Mail-Adresse. Zum Schutz vor Missbrauch prüft die Funktion außerdem, wie viele Anfragen in kurzer Zeit von derselben IP-Adresse kommen. Die IP-Adresse wird dafür nur kurzzeitig im Arbeitsspeicher gehalten und nicht dauerhaft gespeichert.
+  </p>
+  <p>
+    Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit deine Anfrage auf einen Vertrag oder vorvertragliche Maßnahmen zielt, sonst Art. 6 Abs. 1 lit. f DSGVO aufgrund unseres berechtigten Interesses an der Beantwortung deiner Anfrage. Für den Widerruf ist Rechtsgrundlage Art. 6 Abs. 1 lit. c DSGVO (Erfüllung gesetzlicher Pflichten).
+  </p>
+
+  <h2>6. E-Mail-Versand über Resend</h2>
+  <p>
+    Für den Versand der E-Mails aus den Formularen nutzen wir den Dienst Resend der Plus Five Five, Inc., USA. Dabei werden die Formularangaben und deine E-Mail-Adresse an Resend übermittelt. Resend speichert Versanddaten nach eigenen Angaben für 30 Tage, die Daten werden in den USA gespeichert. Mit Resend besteht ein Vertrag über die Auftragsverarbeitung, der die EU-Standardvertragsklauseln enthält. Resend ist zudem nach dem EU-US Data Privacy Framework zertifiziert.
+  </p>
+  <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. b und f DSGVO. Unser berechtigtes Interesse liegt in einer zuverlässigen Zustellung deiner Anfrage und der Eingangsbestätigung.</p>
+
+  <h2>7. KI-Sichtbarkeits-Check</h2>
+  <p>
+    Für den kostenlosen Check stelle ich KI-Systemen wie ChatGPT, Perplexity, Gemini und der Google-Suche Fragen zu deiner Branche, deinem Ort und deinem Unternehmen als öffentlich auftretendem Betrieb. Personenbezogene Angaben aus dem Formular, etwa deine E-Mail-Adresse oder Telefonnummer, gebe ich dort nicht ein. Das Ergebnis schicke ich dir per E-Mail.
+  </p>
+
+  <h2>8. Kontakt per E-Mail und Telefon</h2>
+  <p>
+    Wenn du uns per E-Mail oder Telefon kontaktierst, verarbeiten wir deine Angaben zur Bearbeitung des Anliegens. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b oder f DSGVO.
+  </p>
+
+  <h2>9. Schriftarten, 360°-Rundgänge und Inhalte ohne Drittanbieter</h2>
+  <p>
+    Schriftarten, Bilder, Panoramen und der 360°-Viewer (Pannellum, Open Source) werden direkt von unserem Server geladen. Es findet dabei keine Verbindung zu Drittanbietern wie Google Fonts oder Bilddiensten statt.
+  </p>
+
+  <h2>10. Links zu sozialen Netzwerken und anderen Websites</h2>
+  <p>
+    Auf dieser Website verlinken wir unsere Profile bei Instagram, Facebook und TikTok sowie weitere externe Seiten. Es handelt sich um einfache Links ohne eingebettete Inhalte oder Plugins. Daten werden erst übertragen, wenn du einen Link anklickst und die jeweilige Seite aufrufst. Dort gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
+  </p>
+
+  <h2>11. Speicherdauer</h2>
+  <p>
+    Personenbezogene Daten werden gelöscht, sobald der Zweck der Verarbeitung entfällt und keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Anfragen bewahren wir so lange auf, wie es für die Bearbeitung und mögliche Rückfragen erforderlich ist. Kommt ein Vertrag zustande, gelten die handels- und steuerrechtlichen Aufbewahrungsfristen von bis zu zehn Jahren.
+  </p>
+
+  <h2>12. Deine Rechte</h2>
+  <p>
+    Du hast im Rahmen der gesetzlichen Voraussetzungen das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16 DSGVO), Löschung (Art. 17 DSGVO), Einschränkung der Verarbeitung (Art. 18 DSGVO), Datenübertragbarkeit (Art. 20 DSGVO) sowie Widerspruch gegen die Verarbeitung (Art. 21 DSGVO). Soweit eine Verarbeitung auf einer Einwilligung beruht, kannst du sie jederzeit mit Wirkung für die Zukunft widerrufen. Eine formlose Nachricht an <a href={`mailto:${site.email}`}>{site.email}</a> genügt.
+  </p>
+
+  <h2>13. Beschwerderecht bei der Aufsichtsbehörde</h2>
+  <p>
+    Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn du der Ansicht bist, dass die Verarbeitung deiner personenbezogenen Daten gegen Datenschutzrecht verstößt. Zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen, Kavalleriestraße 2–4, 40213 Düsseldorf.
+  </p>
+
+  <h2>14. Verschlüsselung</h2>
+  <p>Diese Website nutzt eine TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennst du an „https://“ in der Adresszeile deines Browsers.</p>
+
+  <h2>15. Änderungen</h2>
+  <p>Wir passen diese Datenschutzerklärung an, wenn sich technische, rechtliche oder organisatorische Änderungen ergeben. Es gilt die auf dieser Seite veröffentlichte Fassung.</p>
+</Legal>

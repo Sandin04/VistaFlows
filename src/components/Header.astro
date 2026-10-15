@@ -1,0 +1,211 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import logoHell from "../assets/img/logo-hell.png";
+import { site } from "../data/site";
+import { hauptmenu, leistungenMenu } from "../data/navigation";
+
+interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+const isCurrent = (href: string) => href.split("#")[0] === path;
+const inLeistungen = path === "/leistungen" || path.startsWith("/leistungen/");
+const inSection = (href: string) => path === href || path.startsWith(`${href}/`);
+---
+
+<header class="site-header">
+  <div class="shell nav">
+    <a href="/" class="brand" aria-label="VistaFlows – zur Startseite">
+      <Image src={logoHell} alt="" width={38} height={38} densities={[1, 2]} class="brand__mark" loading="eager" />
+      <span class="brand__name" translate="no">Vista<span>Flows</span></span>
+    </a>
+
+    <nav aria-label="Hauptnavigation">
+      <ul class="nav__menu">
+        <li class="nav__group">
+          <a href="/leistungen" class="nav__link" aria-current={path === "/leistungen" ? "page" : undefined} data-active={inLeistungen && path !== "/leistungen" ? "" : undefined}>Leistungen</a>
+          <button
+            class="nav__link nav__toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="leistungen-panel"
+            data-nav-toggle
+          >
+            <span class="visually-hidden">Leistungen-Untermenü</span>
+            <Icon name="chevron" size="sm" />
+          </button>
+          <div class="nav__panel" id="leistungen-panel" hidden data-nav-panel>
+            {
+              leistungenMenu.map((l) => (
+                <a href={l.href} aria-current={isCurrent(l.href) && !l.href.includes("#") ? "page" : undefined}>
+                  <strong>{l.label}</strong>
+                  <span>{l.hint}</span>
+                </a>
+              ))
+            }
+            <a href="/leistungen" class="nav__all">Alle Leistungen im Überblick</a>
+          </div>
+        </li>
+        {
+          hauptmenu.map((l) => (
+            <li>
+              <a href={l.href} class="nav__link" aria-current={path === l.href ? "page" : undefined} data-active={path !== l.href && inSection(l.href) ? "" : undefined}>
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="nav__actions">
+      <a class="nav__call" href={site.phone.href} aria-label={`Anrufen: ${site.phone.display}`}>
+        <Icon name="phone" size="sm" />
+        <span class="nav__call-label">{site.phone.display}</span>
+      </a>
+      <a class="btn btn--primary btn--sm nav__cta" href="/kontakt">Erstgespräch anfragen</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-open>
+        <Icon name="menu" />
+        <span class="visually-hidden">Menü öffnen</span>
+      </button>
+      <a class="menu-fallback nav__call" href="/sitemap">Menü</a>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menü" hidden data-menu>
+    <div class="mobile-menu__top">
+      <a href="/" class="brand" aria-label="VistaFlows – zur Startseite">
+        <Image src={logoHell} alt="" width={34} height={34} densities={[1, 2]} class="brand__mark" />
+        <span class="brand__name" translate="no">Vista<span>Flows</span></span>
+      </a>
+      <button class="mobile-menu__close" type="button" data-menu-close>
+        <Icon name="close" />
+        <span class="visually-hidden">Menü schließen</span>
+      </button>
+    </div>
+    <nav aria-label="Mobile Navigation">
+      <ul class="mobile-menu__list">
+        <li>
+          <a href="/leistungen" aria-current={path === "/leistungen" ? "page" : undefined}>Leistungen <Icon name="arrow" size="sm" /></a>
+          <ul class="mobile-menu__sub">
+            {
+              leistungenMenu.map((l) => (
+                <li>
+                  <a href={l.href} aria-current={isCurrent(l.href) && !l.href.includes("#") ? "page" : undefined}>
+                    {l.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
+        {
+          hauptmenu.map((l) => (
+            <li>
+              <a href={l.href} aria-current={path === l.href ? "page" : undefined}>
+                {l.label} <Icon name="arrow" size="sm" />
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="/faq" aria-current={path === "/faq" ? "page" : undefined}>FAQ <Icon name="arrow" size="sm" /></a>
+        </li>
+      </ul>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a class="btn btn--primary btn--block" href="/kontakt"><span><span class="hide-narrow">Kostenloses </span>Erstgespräch anfragen</span></a>
+      <a class="nav__call" href={site.phone.href}><Icon name="phone" size="sm" /> {site.phone.display}</a>
+      <p class="mobile-menu__note">{site.responsePromise}</p>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Leistungen-Untermenü (Disclosure) und mobiles Menü mit Fokusfalle.
+  const toggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]");
+  const panel = document.querySelector<HTMLElement>("[data-nav-panel]");
+
+  function closePanel(returnFocus = false) {
+    if (!toggle || !panel || panel.hidden) return;
+    panel.hidden = true;
+    toggle.setAttribute("aria-expanded", "false");
+    if (returnFocus) toggle.focus();
+  }
+
+  if (toggle && panel) {
+    toggle.addEventListener("click", () => {
+      const open = panel.hidden;
+      panel.hidden = !open;
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+    document.addEventListener("click", (e) => {
+      const t = e.target as Node;
+      if (!panel.contains(t) && !toggle.contains(t)) closePanel();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closePanel(true);
+    });
+    panel.addEventListener("focusout", (e) => {
+      const next = e.relatedTarget as Node | null;
+      if (next && !panel.contains(next) && next !== toggle) closePanel();
+    });
+  }
+
+  const menu = document.querySelector<HTMLElement>("[data-menu]");
+  const openBtn = document.querySelector<HTMLButtonElement>("[data-menu-open]");
+  const closeBtn = document.querySelector<HTMLButtonElement>("[data-menu-close]");
+
+  const focusables = () =>
+    Array.from(menu?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? []).filter((el) => el.offsetParent !== null);
+
+  function openMenu() {
+    if (!menu || !openBtn) return;
+    menu.hidden = false;
+    openBtn.setAttribute("aria-expanded", "true");
+    document.body.classList.add("is-locked");
+    closeBtn?.focus();
+  }
+
+  function closeMenu() {
+    if (!menu || !openBtn || menu.hidden) return;
+    menu.hidden = true;
+    openBtn.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("is-locked");
+    openBtn.focus();
+  }
+
+  openBtn?.addEventListener("click", openMenu);
+  closeBtn?.addEventListener("click", closeMenu);
+  menu?.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      closeMenu();
+      return;
+    }
+    if (e.key !== "Tab") return;
+    const items = focusables();
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+  // Links im Menü schließen es (wichtig bei Ankern auf derselben Seite).
+  menu?.querySelectorAll("a[href]").forEach((a) => a.addEventListener("click", () => {
+    menu.hidden = true;
+    openBtn?.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("is-locked");
+  }));
+  // Wird das Fenster breit, gehört das mobile Menü nicht mehr offen.
+  window.matchMedia("(min-width: 1081px)").addEventListener("change", (mq) => {
+    if (mq.matches) closeMenu();
+  });
+</script>

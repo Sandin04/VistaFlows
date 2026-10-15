@@ -1,0 +1,45 @@
+---
+import Icon from "./Icon.astro";
+import { preisText, intervallText, type Paket } from "../data/pakete";
+
+interface Props {
+  paket: Paket;
+  /** Überschriftenebene der Paketnamen, passend zur Seite */
+  level?: "h3" | "h4";
+}
+
+const { paket, level = "h3" } = Astro.props;
+const Heading = level;
+const featured = paket.empfohlen === true;
+const kurzName = paket.name.replace(/^Rundgang /, "");
+// Lange Paketnamen würden den Button mehrzeilig machen; der volle Name steht im aria-label
+const ctaLabel =
+  paket.intervall === "kostenlos" ? "Kostenlos anfordern" : kurzName.length <= 20 ? `${kurzName} anfragen` : "Paket anfragen";
+---
+
+<article class:list={["plan", { "plan--featured": featured }]} id={`paket-${paket.id}`}>
+  <div class="plan__head">
+    <Heading class="plan__name">{paket.name}</Heading>
+    {featured && <span class="badge-rec">Empfohlen</span>}
+  </div>
+  <p class="plan__for">{paket.fuer}</p>
+  <p class="plan__price tabular">{preisText(paket)}</p>
+  <span class="plan__interval">{intervallText(paket)}</span>
+  {
+    paket.leistungen.length > 0 && (
+      <ul class="checks">
+        {paket.leistungen.map((l) => (
+          <li>{l}</li>
+        ))}
+      </ul>
+    )
+  }
+  <a
+    class:list={["btn", featured ? "btn--primary" : "btn--secondary"]}
+    href={paket.id === "ki-check" ? "/ki-sichtbarkeits-check" : `/kontakt?paket=${paket.id}`}
+    aria-label={`${paket.name} ${paket.intervall === "kostenlos" ? "kostenlos anfordern" : "anfragen"}`}
+  >
+    {ctaLabel}
+    <Icon name="arrow" size="sm" class="ico-arrow" />
+  </a>
+</article>

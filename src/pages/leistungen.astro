@@ -1,0 +1,193 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import Faq from "../components/Faq.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { websitePakete, seoGeoPakete, rundgangPakete, eur } from "../data/pakete";
+import { service } from "../data/schema";
+import { faqAblauf, faqTechnik } from "../data/faq";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "Leistungen", href: "/leistungen" },
+];
+
+const schema = [
+  service({
+    name: "Website-Entwicklung",
+    serviceType: "Webdesign und Website-Entwicklung",
+    description: "Individuell gestaltete, schnelle Websites für lokale Unternehmen mit SEO- und GEO-Grundlage.",
+    url: "/leistungen#website",
+    pakete: websitePakete,
+    area: "de",
+  }),
+  service({
+    name: "Automatisierung mit n8n",
+    serviceType: "Workflow-Automatisierung",
+    description: "Formularanfragen automatisch an E-Mail, Tabelle oder CRM übergeben, mit Eingangsbestätigung und Erinnerungen.",
+    url: "/leistungen#automatisierung",
+    area: "de",
+  }),
+];
+---
+
+<Base
+  title="Website erstellen lassen: Leistungen von VistaFlows"
+  description="Website erstellen lassen, mit lokaler SEO, GEO für KI-Suchsysteme, Anfrage-Automatisierung und 360°-Rundgang. Alle Leistungen von VistaFlows im Überblick."
+  path="/leistungen"
+  og="/og/leistungen.png"
+  crumbs={crumbs}
+  schema={schema}
+>
+  <PageHero
+    crumbs={crumbs}
+    title="Website erstellen lassen, mit allem, was daraus Anfragen macht."
+    lead="Im Kern steht die Website. Dazu kommen SEO und GEO, damit dich Kunden bei Google und in KI-Antworten finden, und Automatisierung, damit keine Anfrage liegen bleibt. Wenn deine Räume mitverkaufen, kommt ein 360°-Rundgang dazu."
+  >
+    <div class="actions">
+      <a class="btn btn--primary" href="/kontakt"><span><span class="hide-narrow">Kostenloses </span>Erstgespräch anfragen</span> <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+      <a class="btn btn--on-dark" href="/preise">Preise ansehen</a>
+    </div>
+  </PageHero>
+
+  <nav class="section--paper trades-strip" aria-label="Leistungen auf dieser Seite">
+    <div class="shell">
+      <p>Auf dieser Seite:</p>
+      <ul class="trades">
+        <li><a href="#website">Website-Entwicklung</a></li>
+        <li><a href="#seo">SEO & GEO</a></li>
+        <li><a href="#automatisierung">Automatisierung</a></li>
+        <li><a href="#tour">360°-Rundgang</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section section--paper" id="website" aria-labelledby="website-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="website-titel">Website-Entwicklung: in Sekunden klar, was du anbietest.</h2>
+        <p class="muted">
+          Deine Website ist meist der erste echte Kontakt mit deinem Unternehmen. Ich baue sie so, dass Besucher sofort verstehen, was du anbietest, für wen du arbeitest und warum sie dich kontaktieren sollten. Kein Baukasten-Look, keine überladenen Vorlagen, keine Seite, die erst nach fünf Sekunden lädt.
+        </p>
+        <p class="muted">
+          Jede Website bekommt von Anfang an eine saubere SEO-Grundlage und eine GEO-Grundlage: strukturierte Daten, eine llms.txt und freien Zugang für die Crawler von Google, ChatGPT & Co. So bleibt später nichts nachzurüsten.
+        </p>
+        <p class="tile__price">ab {eur(websitePakete[0].betrag)} einmalig · {websitePakete.map((p) => p.name).join(", ")}</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="/kontakt?paket=professional">Website anfragen <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+          <a class="link-arrow" href="/preise#website">Website-Pakete vergleichen <Icon name="arrow" size="sm" /></a>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Das ist enthalten</h3>
+        <ul class="checks">
+          <li>Individuelles Design passend zu deiner Marke</li>
+          <li>Zuerst für das Smartphone gebaut, die meisten Besucher kommen mobil</li>
+          <li>Schnelle Ladezeiten durch schlanken Code und optimierte Bilder</li>
+          <li>Klare Seitenstruktur statt endloser One-Pager</li>
+          <li>Anfrage-Strecke: Formular mit Paketauswahl, Eingangsbestätigung, Danke-Seite</li>
+          <li>Seiten für Impressum, Datenschutz und AGB eingebunden</li>
+          <li>Barrierearm: Tastatur, Kontraste, lesbare Schriftgrößen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone" id="seo" aria-labelledby="seo-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="seo-titel">SEO & GEO: gefunden werden, wo heute gesucht wird.</h2>
+        <p>
+          Die beste Website bringt wenig, wenn niemand sie findet. Klassische SEO sorgt für Platzierungen bei Google und in Google Maps. GEO sorgt dafür, dass KI-Systeme wie ChatGPT, Perplexity, Gemini und die KI-Übersicht von Google dein Unternehmen nennen und als Quelle verlinken. Beides gehört zusammen.
+        </p>
+      </div>
+      <div class="services">
+        <article class="tile tile--half tile--dark tile--link">
+          <h3 class="has-glyph"><Icon name="sparkle" class="glyph" /><span><a class="tile__link" href="/leistungen/seo-geo">SEO & GEO Betreuung</a></span></h3>
+          <p>Laufende Optimierung für Google und KI-Antworten mit monatlichem Bericht: Wirst du genannt, und wo nicht?</p>
+          <p class="tile__price">ab {eur(seoGeoPakete[0].betrag)} pro Monat · KI-Check kostenlos</p>
+          <span class="link-arrow" aria-hidden="true">Zu SEO & GEO <Icon name="arrow" size="sm" /></span>
+        </article>
+        <article class="tile tile--half tile--link">
+          <h3 class="has-glyph"><Icon name="map" class="glyph" /><span><a class="tile__link" href="/leistungen/lokale-seo">Lokale SEO</a></span></h3>
+          <p>Google-Unternehmensprofil, Maps, Bewertungen und einheitliche Firmendaten, damit du in deiner Stadt vorne auftauchst.</p>
+          <p class="tile__price">in jedem SEO-&-GEO-Paket enthalten</p>
+          <span class="link-arrow" aria-hidden="true">Zu lokaler SEO <Icon name="arrow" size="sm" /></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="automatisierung" aria-labelledby="auto-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="auto-titel">Automatisierung mit n8n: keine Anfrage bleibt liegen.</h2>
+        <p class="muted">
+          Anfragen kommen rein und versanden dann im Postfach. Mit n8n verbinde ich dein Kontaktformular mit den Werkzeugen, die du ohnehin nutzt. Jede Anfrage landet automatisch dort, wo sie hingehört, und niemand muss mehr manuell nachhalten.
+        </p>
+        <p class="tile__price">im Growth-Paket enthalten, einzeln auf Anfrage</p>
+        <a class="btn btn--secondary" href="/kontakt?paket=Automatisierung%20mit%20n8n">Automatisierung anfragen <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+      </div>
+      <div class="panel">
+        <h3>Das ist möglich</h3>
+        <ul class="checks">
+          <li>Formularanfragen automatisch an E-Mail, Tabelle oder CRM</li>
+          <li>Eingangsbestätigung an den Interessenten</li>
+          <li>Erinnerungen und Follow-ups, wenn niemand reagiert hat</li>
+          <li>Benachrichtigung an dich oder dein Team</li>
+          <li>Saubere Liste aller Anfragen statt verstreuter E-Mails</li>
+          <li>Erweiterbar, sobald neue Abläufe dazukommen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone" id="tour" aria-labelledby="tour-titel">
+    <div class="shell split">
+      <div>
+        <h2 id="tour-titel">360°-Rundgang: das Extra, wenn deine Räume mitverkaufen.</h2>
+        <p class="muted">
+          Ein Rundgang lohnt sich nicht für jeden Betrieb. Wenn aber Räume, Ausstattung oder Atmosphäre über den Auftrag entscheiden, zeigt er mehr als jedes Foto. Er läuft direkt in deiner Website, erklärt Leistungen mit Infopunkten und führt mit einem Button zur Anfrage, ohne Abo-Kosten.
+        </p>
+        <p class="tile__price">ab {eur(rundgangPakete[0].betrag)} einmalig · Anfahrt im Ruhrgebiet inklusive</p>
+        <a class="btn btn--primary" href="/leistungen/360-grad-rundgang">Rundgang und Demo ansehen <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+      </div>
+      <ul class="checks">
+        <li>Aufnahme deiner Räume vor Ort</li>
+        <li>Infopunkte erklären Leistungen dort, wo Besucher hinsehen</li>
+        <li>Anfrage- oder Buchungs-Buttons direkt im Rundgang</li>
+        <li>Läuft auf Smartphone, Tablet und Desktop</li>
+        <li>Ausgewählte 360°-Fotos zusätzlich im Google-Unternehmensprofil</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="ablauf-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="ablauf-titel">Ein klarer Ablauf statt wochenlangem Website-Chaos.</h2>
+        <p>Du bekommst kein halbfertiges Designprojekt, sondern einen festen Weg von der ersten Idee bis zur veröffentlichten Website.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Erstgespräch</h3><p>Etwa 20 Minuten per Telefon oder Video: Ziel, Zielgruppe, Umfang. Kostenlos und unverbindlich.</p></li>
+        <li><h3>Festpreisangebot</h3><p>Du bekommst ein schriftliches Angebot mit klarem Leistungsumfang und Zeitplan.</p></li>
+        <li><h3>Design und Umsetzung</h3><p>Struktur, Texte und Gestaltung entstehen gemeinsam, zuerst für das Smartphone gedacht.</p></li>
+        <li><h3>Livegang</h3><p>Die Seite wird getestet und veröffentlicht: Formulare, Ladezeit und Darstellung auf dem Handy werden geprüft.</p></li>
+      </ol>
+      <p class="plans-note">Dauer: Projekte aus dem Starter-Paket sind üblicherweise in 2–3 Wochen live, größere Websites mit mehreren Landingpages in 4–6 Wochen. Den genauen Zeitplan bekommst du mit dem Angebot.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-titel">
+    <div class="shell split split--top">
+      <div class="section-head">
+        <h2 id="faq-titel">Fragen zu Technik und Ablauf</h2>
+        <p>Weitere Antworten findest du in den <a class="text-link" href="/faq">häufigen Fragen</a>.</p>
+      </div>
+      <Faq items={[faqAblauf[0], faqAblauf[1], ...faqTechnik, faqAblauf[3]]} />
+    </div>
+  </section>
+
+  <CtaBand title="Welcher Baustein passt zu deinem Unternehmen?" text="Im kostenlosen Erstgespräch schauen wir gemeinsam, was bei dir den größten Unterschied macht und was du dir sparen kannst." />
+</Base>

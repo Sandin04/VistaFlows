@@ -1,0 +1,79 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import logoHell from "../assets/img/logo-hell.png";
+import { site } from "../data/site";
+import { footerSpalten, rechtlichLinks } from "../data/navigation";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="shell footer__grid">
+    <div class="footer__brand">
+      <a href="/" class="brand" aria-label="VistaFlows – zur Startseite">
+        <Image src={logoHell} alt="" width={38} height={38} densities={[1, 2]} class="brand__mark" />
+        <span class="brand__name" translate="no">Vista<span>Flows</span></span>
+      </a>
+      <p>
+        Websites für lokale Unternehmen, mit lokaler SEO, GEO für KI-Suchsysteme, Anfrage-Automatisierung und auf Wunsch einem 360°-Rundgang.
+        Inhaber: {site.owner}, {site.address.city}.
+      </p>
+      <ul class="social" aria-label="VistaFlows in sozialen Netzwerken">
+        {
+          site.social.map((s) => (
+            <li>
+              <a href={s.url} target="_blank" rel="noopener noreferrer me" aria-label={`VistaFlows auf ${s.name} (öffnet in neuem Tab)`}>
+                <Icon name={s.icon} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {
+      footerSpalten.map((spalte) => (
+        <div class="footer__col">
+          <h2>{spalte.titel}</h2>
+          <ul>
+            {spalte.links.map((l) => (
+              <li>
+                <a href={l.href}>{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+
+    <div class="footer__contact">
+      <h2>Direkter Draht</h2>
+      <a href={site.phone.href}>
+        <Icon name="phone" />
+        <span><strong>{site.phone.display}</strong><small>{site.hours.display}</small></span>
+      </a>
+      <a href={`mailto:${site.email}`}>
+        <Icon name="mail" />
+        <span><strong>{site.email}</strong><small>{site.responsePromise}</small></span>
+      </a>
+      <div>
+        <Icon name="pin" />
+        <span><strong>{site.address.street}</strong><small>{site.address.zip} {site.address.city} · Termine vor Ort im Ruhrgebiet</small></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell footer__bottom">
+    <span>© {year} VistaFlows · {site.owner} · {site.address.city}</span>
+    <ul aria-label="Rechtliches">
+      {
+        rechtlichLinks.map((l) => (
+          <li>
+            <a href={l.href}>{l.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

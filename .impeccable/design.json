@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-12T23:10:07+02:00",
+  "title": "Design System: VistaFlows",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Tinte (Nacht)",
+        "canonical": "oklch(15.5% 0.011 268.0)",
+        "tonalRamp": [
+          "#090b10",
+          "#22242a",
+          "#3d4046",
+          "#5b5d64",
+          "#7a7d84",
+          "#9b9ea6",
+          "#c1c4cc",
+          "#ebeef6"
+        ]
+      },
+      "paper-warm": {
+        "role": "neutral",
+        "displayName": "Papier warm",
+        "canonical": "oklch(97.3% 0.004 91.4)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#252422",
+          "#40403d",
+          "#5e5d5b",
+          "#7e7d7a",
+          "#9f9e9b",
+          "#c5c4c1",
+          "#efeeeb"
+        ]
+      },
+      "signal-orange": {
+        "role": "primary",
+        "displayName": "Signal-Orange (das Licht im Fenster)",
+        "canonical": "oklch(72.4% 0.187 48.9)",
+        "tonalRamp": [
+          "#1a0400",
+          "#3d1701",
+          "#662d04",
+          "#93440b",
+          "#c55901",
+          "#f77205",
+          "#fcb087",
+          "#ffeadf"
+        ]
+      },
+      "ember": {
+        "role": "primary",
+        "displayName": "Glut (Orange auf Dunkel)",
+        "canonical": "oklch(78.3% 0.150 57.1)",
+        "tonalRamp": [
+          "#180600",
+          "#3b1a00",
+          "#603208",
+          "#8d4900",
+          "#b9640f",
+          "#e2832f",
+          "#fdb077",
+          "#feeadd"
+        ]
+      },
+      "accent-ink": {
+        "role": "primary",
+        "displayName": "Akzent-Tinte (Orange-Text auf Hell)",
+        "canonical": "oklch(53.6% 0.155 44.3)",
+        "tonalRamp": [
+          "#1c0300",
+          "#3f1501",
+          "#6a2905",
+          "#973f0e",
+          "#c5581e",
+          "#eb7a45",
+          "#fcaf8d",
+          "#feeae1"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Gedämpft",
+        "canonical": "oklch(52.6% 0.026 260.7)",
+        "tonalRamp": [
+          "#050b16",
+          "#1d2431",
+          "#38404e",
+          "#555e6d",
+          "#757e8d",
+          "#959faf",
+          "#bbc5d6",
+          "#e6effe"
+        ]
+      },
+      "success": {
+        "role": "neutral",
+        "displayName": "Erfolg",
+        "canonical": "oklch(51.5% 0.110 156.8)",
+        "tonalRamp": [
+          "#001005",
+          "#012d17",
+          "#054d2c",
+          "#0d6f43",
+          "#3a9162",
+          "#5eb382",
+          "#85daa7",
+          "#c7fedb"
+        ]
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "Fehler",
+        "canonical": "oklch(50.0% 0.182 29.5)",
+        "tonalRamp": [
+          "#200000",
+          "#4a0302",
+          "#790d07",
+          "#ad1a10",
+          "#d44536",
+          "#fb6957",
+          "#fbada1",
+          "#ffe9e5"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "H1 der Startseite."
+      },
+      "display-s": {
+        "displayName": "Display S",
+        "purpose": "H1 der Unterseiten."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Abschnittsüberschriften (H2), höchstens drei Zeilen."
+      },
+      "headline-s": {
+        "displayName": "Headline S",
+        "purpose": "H2 in Artikeln, Formularen und Rechtstexten."
+      },
+      "price": {
+        "displayName": "Preis",
+        "purpose": "Betrag in Paketkarten, mit Tabellenziffern."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Karten- und Unterüberschriften (H3)."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Einleitungen unter Überschriften."
+      },
+      "body-long": {
+        "displayName": "Body lang",
+        "purpose": "Ratgeber-Fließtext."
+      },
+      "body-l": {
+        "displayName": "Body L",
+        "purpose": "H4, FAQ-Fragen, hervorgehobene Zeilen."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Fließtext und Kartentext, nie kleiner."
+      },
+      "ui": {
+        "displayName": "UI",
+        "purpose": "Buttons, Navigation, Listen in Karten, Fußzeilen-Links."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Meta, Feldhinweise, Brotkrumen, Formularlabels."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Bildnachweise und Kleingedrucktes."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Versalien-Marker: Empfohlen, Beispiel-Panorama, Tabellenköpfe. Nie als Kicker."
+      },
+      "brand": {
+        "displayName": "Wortmarke",
+        "purpose": "Nur „VistaFlows“ im Logo (mobil 17,5 px)."
+      },
+      "brand-s": {
+        "displayName": "Wortmarke mobil",
+        "purpose": "Wortmarke unter 620 px."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "System-Monospace nur für Codebeispiele im Ratgeber."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ruhe",
+        "value": "0 1px 2px rgba(10,12,17,.06), 0 4px 12px rgba(10,12,17,.05)",
+        "purpose": "Formular-Panel und Gründer-Karte über einem Abschnittswechsel."
+      },
+      {
+        "name": "anheben",
+        "value": "0 2px 6px rgba(10,12,17,.06), 0 16px 40px rgba(10,12,17,.09)",
+        "purpose": "Hover klickbarer Karten, empfohlene Preiskarte."
+      },
+      {
+        "name": "schweben",
+        "value": "0 4px 12px rgba(10,12,17,.07), 0 32px 72px rgba(10,12,17,.14)",
+        "purpose": "Modal, Rahmen des 360°-Viewers."
+      },
+      {
+        "name": "nacht-ruhe",
+        "value": "0 6px 18px rgba(0,0,0,.4)",
+        "purpose": "Infopunkte über dem Panorama."
+      },
+      {
+        "name": "nacht-anheben",
+        "value": "0 10px 30px rgba(0,0,0,.35)",
+        "purpose": "„Rundgang starten“ über dem Vorschaubild."
+      },
+      {
+        "name": "nacht-schweben",
+        "value": "0 20px 50px rgba(0,0,0,.4)",
+        "purpose": "Infobox im Viewer, Untermenü im dunklen Header."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-soft",
+        "value": "cubic-bezier(.22,.9,.3,1)",
+        "purpose": "Standard für Einblenden, Menü und Infopunkt-Karten."
+      },
+      {
+        "name": "duration-fast",
+        "value": "160ms",
+        "purpose": "Farb- und Linienwechsel bei Hover und Fokus."
+      },
+      {
+        "name": "duration-base",
+        "value": "240ms",
+        "purpose": "Panels, Karten, Akkordeon."
+      },
+      {
+        "name": "window-light",
+        "value": "420ms cubic-bezier(0.22, 0.9, 0.3, 1)",
+        "purpose": "Der eine inszenierte Moment: Das 360°-Fenster hellt beim Start auf (bei reduzierter Bewegung nur Überblendung)."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "nav-collapse",
+        "value": "1080px"
+      },
+      {
+        "name": "two-column",
+        "value": "980px"
+      },
+      {
+        "name": "tablet",
+        "value": "760px"
+      },
+      {
+        "name": "phone",
+        "value": "620px"
+      },
+      {
+        "name": "label-short",
+        "value": "420px"
+      },
+      {
+        "name": "small-phone",
+        "value": "400px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Die eine Handlung pro Bildschirm: Signal-Orange, Text Tinte, Pille.",
+      "html": "<button class=\"ds-btn-primary\">Erstgespräch anfragen <svg viewBox=\"0 0 24 24\" width=\"17\" height=\"17\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></button>",
+      "css": ".ds-btn-primary { font-family: var(--font-inter, Inter, system-ui, sans-serif); display: inline-flex; align-items: center; gap: 9px; min-height: 50px; padding: 14px 24px; border: 1px solid transparent; border-radius: var(--r-pill, 999px); background: var(--signal, #ff7a1a); color: var(--ink, #0a0c11); font-size: var(--fs-ui, 15px); font-weight: 600; letter-spacing: -0.008em; text-wrap: balance; cursor: pointer; transition: background-color 160ms ease, transform 160ms cubic-bezier(0.22,0.9,0.3,1); } .ds-btn-primary:hover { background: var(--signal-hover, #ff8a33); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2.5px solid var(--signal, #ff7a1a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Zweite Handlung auf Papier: transparent mit Haarlinie.",
+      "html": "<button class=\"ds-btn-secondary\">Preise ansehen</button>",
+      "css": ".ds-btn-secondary { font-family: var(--font-inter, Inter, system-ui, sans-serif); display: inline-flex; align-items: center; min-height: 50px; padding: 14px 24px; border: 1px solid var(--line-2, rgba(10,12,17,.16)); border-radius: var(--r-pill, 999px); background: transparent; color: var(--text, #14181f); font-size: var(--fs-ui, 15px); font-weight: 600; cursor: pointer; transition: background-color 160ms ease, border-color 160ms ease, transform 160ms cubic-bezier(0.22,0.9,0.3,1); } .ds-btn-secondary:hover { background: var(--paper, #fff); border-color: var(--ink, #0a0c11); } .ds-btn-secondary:active { transform: scale(0.97); } .ds-btn-secondary:focus-visible { outline: 2.5px solid var(--signal, #ff7a1a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button auf Dunkel",
+      "kind": "button",
+      "refersTo": "button-secondary-on-dark",
+      "description": "Zweite Handlung auf Nacht, etwa Anrufen im CTA-Band.",
+      "html": "<div class=\"ds-night\"><button class=\"ds-btn-on-dark\">Anrufen: +49 174 3154839</button></div>",
+      "css": ".ds-night { padding: 24px; border-radius: var(--r-xl, 24px); background: var(--ink, #0a0c11); } .ds-btn-on-dark { font-family: var(--font-inter, Inter, system-ui, sans-serif); display: inline-flex; align-items: center; min-height: 50px; padding: 14px 24px; border: 1px solid var(--d-line-2, rgba(255,255,255,.2)); border-radius: var(--r-pill, 999px); background: transparent; color: var(--on-dark, #f4f5f7); font-size: var(--fs-ui, 15px); font-weight: 600; cursor: pointer; transition: background-color 160ms ease, border-color 160ms ease, transform 160ms cubic-bezier(0.22,0.9,0.3,1); } .ds-btn-on-dark:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.4); } .ds-btn-on-dark:active { transform: scale(0.97); } .ds-btn-on-dark:focus-visible { outline: 2.5px solid var(--signal, #ff7a1a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Eingabefeld",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Feld mit sichtbarem Label, 16 px Schrift gegen iOS-Zoom, Platzhalter in Gedämpft.",
+      "html": "<label class=\"ds-field\"><span>E-Mail-Adresse</span><input type=\"email\" placeholder=\"name@unternehmen.de\" spellcheck=\"false\" autocapitalize=\"none\"></label>",
+      "css": ".ds-field { font-family: var(--font-inter, Inter, system-ui, sans-serif); display: grid; gap: 6px; max-width: 360px; } .ds-field span { font-size: var(--fs-small, 14px); font-weight: 600; color: var(--text, #14181f); } .ds-field input { min-height: 50px; padding: 13px 15px; border: 1px solid var(--line-2, rgba(10,12,17,.16)); border-radius: var(--r-sm, 12px); background: var(--paper-warm, #f7f6f3); color: var(--text, #14181f); font: inherit; font-size: 16px; transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease; } .ds-field input::placeholder { color: var(--muted, #626b7a); opacity: 1; } .ds-field input:focus { outline: none; background: var(--paper, #fff); border-color: var(--signal, #ff7a1a); box-shadow: 0 0 0 3.5px rgba(255,122,26,.16); }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Sticky Header in voller Tinte, aktiver Link mit 2-px-Orange-Marke, Primär-Button rechts.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-brand\" translate=\"no\">Vista<b>Flows</b></span><a href=\"#\" aria-current=\"page\">Leistungen</a><a href=\"#\">Preise</a><a href=\"#\">Ratgeber</a><a class=\"ds-nav-cta\" href=\"#\">Erstgespräch anfragen</a></nav>",
+      "css": ".ds-nav { font-family: var(--font-inter, Inter, system-ui, sans-serif); display: flex; align-items: center; gap: 22px; min-height: 68px; padding: 0 24px; background: var(--ink, #0a0c11); border-bottom: 1px solid rgba(255,255,255,.07); } .ds-brand { font-size: var(--fs-brand, 19px); font-weight: 750; letter-spacing: -0.028em; color: #fff; margin-right: 12px; } .ds-brand b { color: var(--signal, #ff7a1a); font-weight: inherit; } .ds-nav a { position: relative; font-size: var(--fs-ui, 15px); font-weight: 550; color: var(--on-dark-muted, #a2aab7); text-decoration: none; transition: color 160ms ease; } .ds-nav a:hover { color: #fff; } .ds-nav a[aria-current] { color: #fff; } .ds-nav a[aria-current]::after { content: \"\"; position: absolute; left: 0; right: 0; bottom: -8px; height: 2px; border-radius: var(--r-pill, 999px); background: var(--signal, #ff7a1a); } .ds-nav .ds-nav-cta { margin-left: auto; padding: 10px 18px; border-radius: var(--r-pill, 999px); background: var(--signal, #ff7a1a); color: var(--ink, #0a0c11); font-weight: 600; } .ds-nav a:focus-visible { outline: 2.5px solid var(--signal, #ff7a1a); outline-offset: 3px; border-radius: var(--r-2xs, 4px); }"
+    },
+    {
+      "name": "Preis-Label „Empfohlen“",
+      "kind": "chip",
+      "refersTo": "price-label",
+      "description": "Funktionaler Marker auf der empfohlenen Paketkarte, Label-Typo in Versalien.",
+      "html": "<span class=\"ds-chip\">Empfohlen</span>",
+      "css": ".ds-chip { font-family: var(--font-inter, Inter, system-ui, sans-serif); display: inline-flex; padding: 5px 13px; border-radius: var(--r-pill, 999px); background: var(--accent-wash, #fff1e6); color: var(--accent-ink, #b34700); font-size: var(--fs-label, 12px); font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Leistungskarte",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flach mit Haarlinie, Glyphe in der Überschriftenzeile, Link nur auf dem Titel; die Fläche klickt per ::after mit.",
+      "html": "<article class=\"ds-card\"><h3 class=\"ds-card-title\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><ellipse cx=\"12\" cy=\"12\" rx=\"9\" ry=\"3.5\"/></svg><a href=\"#\">360°-Rundgang</a></h3><p>Räume, Ausstattung und Atmosphäre zeigen, bevor jemand anruft. Ohne Abo.</p><p class=\"ds-card-price\">ab 590 € einmalig</p><span class=\"ds-card-more\" aria-hidden=\"true\">Rundgang ansehen →</span></article>",
+      "css": ".ds-card { font-family: var(--font-inter, Inter, system-ui, sans-serif); position: relative; display: flex; flex-direction: column; max-width: 420px; padding: clamp(22px, 2.6vw, 32px); border: 1px solid var(--line, rgba(10,12,17,.1)); border-radius: var(--r-md, 16px); background: var(--paper, #fff); color: var(--text, #14181f); overflow-wrap: anywhere; transition: transform 240ms cubic-bezier(0.22,0.9,0.3,1), box-shadow 240ms ease, border-color 240ms ease; } .ds-card-title { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 10px; font-size: var(--fs-title, 22px); font-weight: 700; line-height: 1.25; letter-spacing: -0.015em; } .ds-card-title svg { flex: none; width: 1.05em; height: 1.05em; margin-top: 0.1em; color: var(--accent-ink, #b34700); } .ds-card-title a { color: inherit; text-decoration: none; } .ds-card-title a::after { content: \"\"; position: absolute; inset: 0; border-radius: inherit; } .ds-card p { margin: 0 0 12px; font-size: var(--fs-body, 16px); line-height: 1.65; color: var(--muted, #626b7a); } .ds-card-price { font-size: var(--fs-ui, 15px) !important; font-weight: 650; color: var(--text-2, #3d4551) !important; } .ds-card-more { margin-top: auto; font-size: var(--fs-ui, 15px); font-weight: 650; color: var(--accent-ink, #b34700); } .ds-card:hover { transform: translateY(-3px); border-color: var(--line-2, rgba(10,12,17,.16)); box-shadow: 0 2px 6px rgba(10,12,17,.06), 0 16px 40px rgba(10,12,17,.09); } .ds-card:has(a:focus-visible) { outline: 2.5px solid var(--signal, #ff7a1a); outline-offset: 3px; } .ds-card a:focus-visible { outline: none; }"
+    },
+    {
+      "name": "Preiskarte empfohlen",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Paketkarte mit Festpreis; die Empfehlung trägt Akzent-Haarlinie, Anheben-Schatten und Label, keinen Streifen.",
+      "html": "<article class=\"ds-plan\"><div class=\"ds-plan-head\"><h3>Business</h3><span class=\"ds-chip\">Empfohlen</span></div><p class=\"ds-plan-for\">Für Betriebe mit mehreren Räumen.</p><p class=\"ds-plan-price\">990 €</p><span class=\"ds-plan-int\">einmalig</span><ul><li>Bis zu 8 Standpunkte</li><li>Infopunkte und Anfrage-Button</li></ul><a class=\"ds-plan-cta\" href=\"#\">Business anfragen →</a></article>",
+      "css": ".ds-plan { font-family: var(--font-inter, Inter, system-ui, sans-serif); display: flex; flex-direction: column; max-width: 340px; padding: clamp(22px, 2.6vw, 30px); border: 1px solid var(--accent-line, rgba(255,122,26,.28)); border-radius: var(--r-md, 16px); background: var(--paper, #fff); color: var(--text, #14181f); box-shadow: 0 2px 6px rgba(10,12,17,.06), 0 16px 40px rgba(10,12,17,.09); overflow-wrap: anywhere; } .ds-plan-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; } .ds-plan-head h3 { margin: 0; font-size: var(--fs-title, 22px); font-weight: 700; } .ds-chip { display: inline-flex; padding: 5px 13px; border-radius: var(--r-pill, 999px); background: var(--accent-wash, #fff1e6); color: var(--accent-ink, #b34700); font-size: var(--fs-label, 12px); font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; } .ds-plan-for { margin: 8px 0 14px; font-size: var(--fs-ui, 15px); color: var(--muted, #626b7a); } .ds-plan-price { margin: 0; font-size: var(--fs-price, 38px); font-weight: 800; line-height: 1.1; letter-spacing: -0.032em; font-variant-numeric: tabular-nums; } .ds-plan-int { font-size: var(--fs-small, 14px); color: var(--muted, #626b7a); } .ds-plan ul { margin: 16px 0 22px; padding-left: 1.1em; font-size: var(--fs-ui, 15px); } .ds-plan-cta { margin-top: auto; display: inline-flex; justify-content: center; min-height: 50px; align-items: center; border-radius: var(--r-pill, 999px); background: var(--signal, #ff7a1a); color: var(--ink, #0a0c11); font-weight: 600; text-decoration: none; transition: transform 160ms cubic-bezier(0.22,0.9,0.3,1); } .ds-plan-cta:active { transform: scale(0.97); } .ds-plan-cta:focus-visible { outline: 2.5px solid var(--signal, #ff7a1a); outline-offset: 3px; }"
+    },
+    {
+      "name": "„Kurz gesagt“-Kasten",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Antwort zuerst (GEO): zwei bis drei Sätze, fetter Auftakt im Absatz statt Label, Zeilenlänge 60ch.",
+      "html": "<div class=\"ds-answer\"><p><strong>Kurz gesagt:</strong> SEO bringt dich in die Google-Trefferliste und nach vorne in Google Maps. GEO sorgt dafür, dass KI-Systeme dein Unternehmen nennen und als Quelle verlinken.</p></div>",
+      "css": ".ds-answer { font-family: var(--font-inter, Inter, system-ui, sans-serif); padding: clamp(18px, 2.4vw, 26px) clamp(20px, 2.6vw, 30px); border: 1px solid var(--accent-line, rgba(255,122,26,.28)); border-radius: var(--r-md, 16px); background: var(--accent-wash, #fff1e6); } .ds-answer p { max-width: 60ch; margin: 0; font-size: var(--fs-long, 18px); line-height: 1.6; color: var(--text, #14181f); } .ds-answer strong { color: var(--accent-ink, #b34700); font-weight: 700; }"
+    },
+    {
+      "name": "360°-Schaufenster",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Das erleuchtete Fenster: Vorschaubild im Tinte-Rahmen, Start-Button, gekennzeichnetes Beispiel, Infopunkte zusätzlich als Liste.",
+      "html": "<figure class=\"ds-tour\"><div class=\"ds-tour-screen\"><span class=\"ds-tour-badge\">Beispiel-Panorama · CC0</span><button class=\"ds-tour-start\">Rundgang starten</button><span class=\"ds-tour-dot\" aria-hidden=\"true\"></span></div><figcaption><button class=\"ds-tour-point\">+ Infopunkt: Plätze am Fenster</button></figcaption></figure>",
+      "css": ".ds-tour { font-family: var(--font-inter, Inter, system-ui, sans-serif); margin: 0; max-width: 520px; padding: 8px 8px 14px; border-radius: var(--r-xl, 24px); background: var(--ink, #0a0c11); box-shadow: 0 4px 12px rgba(10,12,17,.07), 0 32px 72px rgba(10,12,17,.14); } .ds-tour-screen { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 10; border-radius: var(--r-lg, 20px); background: linear-gradient(180deg, rgba(6,8,12,.35), transparent 32%, transparent 58%, rgba(6,8,12,.82)), #3a3530; overflow: hidden; } .ds-tour-badge { position: absolute; top: 12px; left: 12px; padding: 5px 11px; border: 1px solid rgba(255,255,255,.2); border-radius: var(--r-pill, 999px); background: rgba(6,8,12,.66); color: #fff; font-size: var(--fs-label, 12px); font-weight: 600; } .ds-tour-start { min-height: 50px; padding: 12px 24px; border: 0; border-radius: var(--r-pill, 999px); background: var(--signal, #ff7a1a); color: var(--ink, #0a0c11); font: inherit; font-size: var(--fs-ui, 15px); font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,.35); cursor: pointer; } .ds-tour-start:focus-visible, .ds-tour-point:focus-visible { outline: 2.5px solid var(--signal, #ff7a1a); outline-offset: 3px; } .ds-tour-dot { position: absolute; right: 22%; top: 38%; width: 16px; height: 16px; border: 2px solid #fff; border-radius: 50%; background: var(--signal, #ff7a1a); box-shadow: 0 6px 18px rgba(0,0,0,.4); } .ds-tour figcaption { padding: 12px 6px 0; } .ds-tour-point { min-height: 40px; padding: 8px 14px; border: 1px solid var(--d-line-2, rgba(255,255,255,.2)); border-radius: var(--r-pill, 999px); background: transparent; color: var(--on-dark, #f4f5f7); font: inherit; font-size: var(--fs-small, 14px); cursor: pointer; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Schaufenster bei Nacht",
+    "overview": "Eine Straße nach Feierabend: Die Umgebung ist dunkel und ruhig, ein einziges Schaufenster ist erleuchtet, und genau dort bleibt der Blick hängen. VistaFlows gestaltet so. Dunkle Tinten-Flächen (Kopf, Hero, Bänder, Footer) sind die Nacht, die hellen, warmen Papierflächen dazwischen sind das Innere des Ladens, in dem man in Ruhe liest. Orange ist das Licht im Fenster. Es zeigt, wo man klicken soll, und sonst nichts. Die Idee stammt aus dem Kern des Angebots: Der Standort des Kunden „arbeitet digital weiter, auch nach Feierabend“.\n\nDie Dichte ist mittel und großzügig: wenige, klare Abschnitte mit viel Luft, große, eng gesetzte Überschriften, ruhige Fließtexte. Seit Oktober 2026 gilt **ruhiger und präziser**. Es gibt keine Glanz-Wischer auf Buttons, keine mausfolgenden Lichter auf Karten, keine mehrfachen Leuchtflecken, keinen Verlaufstext und keine Kicker-Labels über Überschriften: Die Überschrift trägt sich selbst. Tiefe entsteht durch den Wechsel von Nacht und Papier, durch Haarlinien und durch wenige weiche Schatten. Es gibt genau einen inszenierten Moment, das Aufleuchten des 360°-Schaufensters beim Start des Rundgangs. Jede andere Bewegung erklärt etwas (Menü öffnet, Infopunkt erscheint) oder sie entfällt. Abschnitte werden nicht beim Scrollen eingeblendet, Inhalte sind ab dem ersten Byte sichtbar.\n\nFotografie ist echt oder fehlt. Gezeigt werden das Porträt des Gründers und 360°-Panoramen. Fremde Beispielpanoramen sind immer als Beispiel gekennzeichnet. Icons sind eigene Linien-Icons (1,6 px Strich, runde Enden), keine Emojis. Sie stehen als Glyphe in der Zeile der Überschrift, nie als Kachel darüber.",
+    "keyCharacteristics": [
+      "Nacht (Tinte `#0a0c11`) gegen warmes Papier (`#f7f6f3`), hart geschnitten, ohne Verläufe zwischen den Welten",
+      "Orange als einziges Licht: Aktionen, aktiver Zustand, Schlüsselzahlen",
+      "Eng gesetzte, schwere Inter-Überschriften mit negativer Laufweite",
+      "Haarlinien statt Schattenkaskaden, Pill-Buttons, weich gerundete Karten",
+      "Echte Inhalte statt Dekoration: keine Stockfotos von Menschen, keine erfundenen Belege"
+    ],
+    "rules": [
+      {
+        "name": "The Lit Window Rule",
+        "body": "Orange ist Licht, keine Farbe zum Anstreichen. Es markiert pro Bildschirm die eine Handlung, den aktiven Zustand und höchstens eine Schlüsselzahl. Unter 10 % der Fläche.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink-on-Fire Rule",
+        "body": "Auf Signal-Orange steht immer Tinte, nie Weiß (Weiß erreicht nur 2,6 : 1). Weißer Text steht nur auf Tinte. Platzhaltertext in Feldern nutzt Gedämpft (#626b7a, 5,0 : 1), nie ein helleres Grau.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Light Source Rule",
+        "body": "Jede dunkle Fläche bekommt höchstens eine Lichtquelle: einen weichen Orange-Schein oben rechts mit maximal 18 % Deckkraft. Keine zweiten Flecken, keine Raster-Overlays, kein Glas und keine Unschärfe als Dekoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Break Headline Rule",
+        "body": "Überschriften werden nie automatisch getrennt („Ver-trauen“ ist verboten): `hyphens: manual` und `text-wrap: balance`. Zusammengesetzte Begriffe mit Bindestrich, die zusammenbleiben müssen („GEO-Agentur“), stehen in `.nowrap`. Fließtext darf auf schmalen Spalten getrennt werden (`lang=\"de\"`, `hyphens: auto`), aber nur Wörter ab 12 Zeichen mit mindestens 5 Zeichen je Teil (`hyphenate-limit-chars: 12 5 5`), damit Namen wie „Perplexity“ ganz bleiben. Zwischen Zahl und Einheit („590 €“, „§ 19“, „z. B.“) steht ein geschütztes Leerzeichen.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "Nur Inter. Hierarchie entsteht über Gewicht, Größe und Laufweite, nicht über eine zweite Schrift. Hervorhebung in Überschriften durch Signal-Orange als Vollton, nie als Verlauf.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Kicker Rule",
+        "body": "Über Überschriften stehen keine Eyebrow-Labels („LEISTUNGEN“, „PREISE“, „FEHLER 404“, „RATGEBER · GEO“). Die Überschrift sagt selbst, worum es geht. Ein Auftakt wie „Kurz gesagt:“ steht fett im Absatz, nicht als Label darüber.",
+        "section": "typography"
+      },
+      {
+        "name": "The Glyph Rule",
+        "body": "Ein Icon begleitet eine Überschrift als Glyphe in derselben Zeile (1,05em, Akzent-Tinte, auf Nacht Signal-Orange). Icon-Kacheln über Überschriften gibt es nicht.",
+        "section": "typography"
+      },
+      {
+        "name": "The Varied Rhythm Rule",
+        "body": "Keine Seite besteht nur aus Dreier-Kartenrastern. Zwischen Kartenabschnitten stehen Text-Bild-Splits, Listen, Tabellen oder ein dunkles Band.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat-at-Rest Rule",
+        "body": "Karten liegen flach mit Haarlinie. Nur klickbare Karten heben sich beim Hover (−3 px, Anheben-Schatten, nur bei `hover: hover`). Statische Karten bewegen sich nie. Die empfohlene Preiskarte hebt sich durch Akzent-Haarlinie und Anheben-Schatten ab, nicht durch Streifen.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** Orange nur für die nächste Handlung, den aktiven Zustand und eine Schlüsselzahl pro Bildschirm einsetzen (The Lit Window Rule).",
+      "**Do** auf Signal-Orange (#ff7a1a) immer Tinte (#0a0c11) setzen und orangen Text auf Hell immer in Akzent-Tinte (#b34700).",
+      "**Do** dunkle und helle Abschnitte hart wechseln lassen: Nacht für Hero, Bänder und Footer, Papier zum Lesen.",
+      "**Do** Abschnitte mit Inhalten füllen, die etwas belegen: Preise, Ablauf, echte Beispiele, ehrliche Grenzen.",
+      "**Do** Bewegung kurz halten (160–240 ms, `cubic-bezier(.22,.9,.3,1)`), `prefers-reduced-motion` respektieren und Inhalte ohne JavaScript sichtbar lassen."
+    ],
+    "donts": [
+      "**Don't** Weiß auf Signal-Orange als Text verwenden.",
+      "**Don't** mehr als eine Lichtquelle pro dunkler Fläche, keine Raster-Overlays, kein Glas.",
+      "**Don't** Eyebrow-Labels über Überschriften, Verlaufstext, Kennzahlen-Kacheln ohne echte Zahlen oder Abschnittsnummern ohne Reihenfolge.",
+      "**Don't** Icon-Kacheln über Überschriften, farbige Streifen an Karten oder Karten in Karten.",
+      "**Don't** ganze Karten in einen einzigen Link packen; Link ist die Überschrift, die Fläche klickt per `::after` mit.",
+      "**Don't** Abschnitte beim Scrollen einblenden. Inhalte sind sofort sichtbar.",
+      "**Don't** Glanz-Wischer auf Buttons oder mausfolgende Lichter auf Karten wieder einführen.",
+      "**Don't** Stockfotos von Menschen, Unsplash-Hotlinks oder Emojis als Icons verwenden.",
+      "**Don't** Überschriften automatisch trennen, Fließtext unter 16 px setzen oder Schriftgrößen außerhalb der Skala verwenden.",
+      "**Don't** fremde Beispielpanoramen ohne Kennzeichnung zeigen."
+    ]
+  }
+}

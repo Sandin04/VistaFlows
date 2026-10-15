@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../data/site";
+---
+
+<Base
+  title="Übermittlung fehlgeschlagen | VistaFlows"
+  description="Die Übermittlung des Formulars hat nicht geklappt. Bitte versuche es erneut oder kontaktiere VistaFlows per Telefon oder E-Mail."
+  path="/fehler"
+  noindex
+  stickyCta={false}
+>
+  <section class="night status-page">
+    <div class="shell">
+      <h1>Das hat leider nicht geklappt.</h1>
+      <p class="lead">
+        Deine Nachricht konnte nicht übermittelt werden. Häufige Ursachen: Ein Pflichtfeld war leer, die E-Mail-Adresse unvollständig oder die Verbindung kurz unterbrochen. Deine Eingaben wurden nicht gespeichert.
+      </p>
+      <div class="actions">
+        <a class="btn btn--primary" href="/kontakt">Zurück zum Formular <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+        <a class="btn btn--on-dark" href={site.phone.href}><Icon name="phone" size="sm" /> {site.phone.display}</a>
+      </div>
+      <p class="promise">Oder schreib direkt an <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</Base>

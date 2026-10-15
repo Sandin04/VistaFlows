@@ -1,0 +1,151 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import PlanCard from "../components/PlanCard.astro";
+import Faq from "../components/Faq.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { websitePakete, seoGeoEinstieg, seoGeoPakete, rundgangPakete, betreuungPakete, vertragsbedingungen, eur } from "../data/pakete";
+import { site } from "../data/site";
+import { service } from "../data/schema";
+import { faqPreise } from "../data/faq";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "Preise", href: "/preise" },
+];
+
+const schema = [
+  service({ name: "Website-Pakete", serviceType: "Website-Entwicklung", description: "Website Starter, Professional und Growth.", url: "/preise#website", pakete: websitePakete, area: "de" }),
+  service({ name: "SEO & GEO", serviceType: "Suchmaschinenoptimierung und Generative Engine Optimization", description: "KI-Sichtbarkeits-Check, Audit und laufende Betreuung.", url: "/preise#seo-geo", pakete: [...seoGeoEinstieg, ...seoGeoPakete], area: "region" }),
+  service({ name: "360°-Rundgang", serviceType: "Virtueller 360-Grad-Rundgang", description: "Rundgang Kompakt, Business und Premium.", url: "/preise#rundgang", pakete: rundgangPakete, area: "region" }),
+  service({ name: "Betreuung", serviceType: "Website-Wartung und -Pflege", description: "Technik und Pflege als monatliche Betreuung.", url: "/preise#betreuung", pakete: betreuungPakete, area: "de" }),
+];
+---
+
+<Base
+  title="Preise: Website, SEO & GEO, 360°-Rundgang | VistaFlows"
+  description={`Offene Preise: Websites ab ${eur(websitePakete[0].betrag)}, SEO & GEO ab ${eur(seoGeoPakete[0].betrag)} im Monat, 360°-Rundgang ab ${eur(rundgangPakete[0].betrag)}. Endpreise, Festpreis nach dem kostenlosen Erstgespräch.`}
+  path="/preise"
+  og="/og/preise.png"
+  ogAlt="Preise von VistaFlows: Website, SEO & GEO, 360°-Rundgang"
+  crumbs={crumbs}
+  schema={schema}
+>
+  <PageHero
+    crumbs={crumbs}
+    title="Preise: offene Pakete statt „Preis auf Anfrage“."
+    lead="Jedes Paket hat einen klaren Rahmen. Website-Preise sind Ab-Preise: Den genauen Umfang legen wir im kostenlosen Erstgespräch fest, danach bekommst du ein schriftliches Festpreisangebot. Alle Preise sind Endpreise, es kommt keine Umsatzsteuer dazu."
+  >
+    <div class="actions">
+      <a class="btn btn--primary" href="/kontakt"><span><span class="hide-narrow">Kostenloses </span>Erstgespräch anfragen</span> <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+      <a class="btn btn--on-dark" href="/ki-sichtbarkeits-check">KI-Check kostenlos</a>
+    </div>
+  </PageHero>
+
+  <nav class="section--paper trades-strip" aria-label="Preisgruppen">
+    <div class="shell">
+      <p>Springen zu:</p>
+      <ul class="trades">
+        <li><a href="#website">Website</a></li>
+        <li><a href="#seo-geo">SEO & GEO</a></li>
+        <li><a href="#rundgang">360°-Rundgang</a></li>
+        <li><a href="#betreuung">Betreuung</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section section--paper" id="website" aria-labelledby="website-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="website-titel">Website-Pakete</h2>
+        <p>{vertragsbedingungen.website}</p>
+      </div>
+      <div class="plans">
+        {websitePakete.map((p) => <PlanCard paket={p} />)}
+      </div>
+      <p class="plans-note">Ein 360°-Rundgang ist in keinem Website-Paket enthalten und lässt sich zu jedem Paket dazubuchen. Laufende SEO- und GEO-Betreuung ist ebenfalls separat.</p>
+    </div>
+  </section>
+
+  <section class="section" id="seo-geo" aria-labelledby="seo-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="seo-titel">SEO & GEO</h2>
+        <p>Sichtbar bei Google, in Google Maps und in KI-Antworten. {vertragsbedingungen.seoGeo} <a class="text-link" href="/leistungen/seo-geo">Was SEO & GEO bei mir umfasst</a>.</p>
+      </div>
+      <h3>Einstieg</h3>
+      <div class="plans mt-s">
+        {seoGeoEinstieg.map((p) => <PlanCard paket={p} level="h4" />)}
+      </div>
+      <h3 class="mt-l">Laufende Betreuung</h3>
+      <div class="plans mt-s">
+        {seoGeoPakete.map((p) => <PlanCard paket={p} level="h4" />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="rundgang" aria-labelledby="rundgang-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="rundgang-titel">360°-Rundgang</h2>
+        <p>{vertragsbedingungen.rundgang} <a class="text-link" href="/leistungen/360-grad-rundgang">Beispiel-Rundgang ansehen</a>.</p>
+      </div>
+      <div class="plans">
+        {rundgangPakete.map((p) => <PlanCard paket={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="betreuung" aria-labelledby="betreuung-titel">
+    <div class="shell split split--top">
+      <div class="section-head">
+        <h2 id="betreuung-titel">Betreuung nach dem Livegang</h2>
+        <p>{vertragsbedingungen.betreuung}</p>
+      </div>
+      <div class="plans">
+        {betreuungPakete.map((p) => <PlanCard paket={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone" aria-labelledby="nicht-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="nicht-titel">Was in den Preisen nicht enthalten ist</h2>
+        <p class="muted">Damit es keine Überraschungen gibt: Diese Kosten entstehen bei dir direkt, und ich sage dir vorher, wenn etwas davon anfällt.</p>
+      </div>
+      <ul class="checks checks--minus">
+        <li>Domain und Hosting, üblicherweise 5 bis 15 € pro Monat direkt bei deinem Anbieter</li>
+        <li>Lizenzen für spezielle Fremdsoftware, falls dein Projekt sie braucht</li>
+        <li>Anfahrt für 360°-Aufnahmen außerhalb des Ruhrgebiets, nach Absprache</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="festpreis-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="festpreis-titel">Vom Erstgespräch zum Festpreis in drei Schritten</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Kostenloses Erstgespräch</h3><p>Rund 20 Minuten per Telefon oder Video. Wir klären, was du brauchst und ob ich der richtige Partner dafür bin.</p></li>
+        <li><h3>Schriftliches Festpreisangebot</h3><p>Ein konkretes Angebot mit klarem Leistungsumfang. Keine Nachforderungen mitten im Projekt.</p></li>
+        <li><h3>Umsetzung mit festem Termin</h3><p>Nach der Beauftragung starten wir mit einem vereinbarten Zeitplan. Du weißt immer, woran gerade gearbeitet wird.</p></li>
+      </ol>
+      <p class="plans-note">{site.taxNote} Bei Projekten ab 1.000 € kann eine Anzahlung von bis zu 50 % vor Leistungsbeginn vereinbart werden (siehe <a class="text-link" href="/agb">AGB</a>).</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-titel">
+    <div class="shell split split--top">
+      <div class="section-head">
+        <h2 id="faq-titel">Fragen zu Preisen</h2>
+        <p>Alle weiteren Antworten in den <a class="text-link" href="/faq">häufigen Fragen</a>.</p>
+      </div>
+      <Faq items={faqPreise} />
+    </div>
+  </section>
+
+  <CtaBand title="Nicht sicher, welches Paket passt?" text="Sag mir kurz, was du vorhast. Ich sage dir ehrlich, welches Paket sinnvoll ist und wo du dir Geld sparen kannst." />
+</Base>

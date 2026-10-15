@@ -1,0 +1,405 @@
+---
+// 360°-Schaufenster: zeigt zuerst ein gerendertes Vorschaubild. Pannellum (MIT, selbst
+// gehostet unter /vendor/pannellum) lädt erst, wenn jemand „Rundgang starten“ wählt.
+// Die Beispielpanoramen sind fremde CC0-Aufnahmen und werden sichtbar gekennzeichnet.
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Icon from "./Icon.astro";
+import { szenen as alleSzenen, type Szene } from "../data/rundgaenge";
+
+interface Props {
+  /** IDs der Szenen in Anzeigereihenfolge */
+  scenes?: string[];
+  /** Vorschaubild als LCP-Bild priorisieren (nur im Hero) */
+  eager?: boolean;
+  /** Eindeutiges Präfix, falls mehrere Viewer auf einer Seite stehen */
+  uid?: string;
+  sizes?: string;
+}
+
+const {
+  scenes = ["cafe", "hotelzimmer"],
+  eager = false,
+  uid = "tour",
+  sizes = "(max-width: 980px) calc(100vw - 2 * var(--gutter)), 560px",
+} = Astro.props;
+
+const posters = import.meta.glob<{ default: ImageMetadata }>("../assets/img/tour-*.jpg", { eager: true });
+const posterFor = (s: Szene) => posters[`../assets/img/${s.poster}.jpg`]?.default;
+
+const list = scenes.map((id) => alleSzenen.find((s) => s.id === id)).filter((s): s is Szene => Boolean(s));
+const start = list[0];
+// Fremde CC0-Panoramen tragen eine „quelle“ und werden als Beispiel gekennzeichnet, eigene Aufnahmen nicht
+const nurBeispiele = list.every((s) => s.quelle);
+const clientData = JSON.stringify(
+  list.map((s) => ({
+    id: s.id,
+    titel: s.titel,
+    kurz: s.kurz,
+    panorama: s.panorama,
+    start: s.start,
+    infopunkte: s.infopunkte,
+  })),
+);
+---
+
+<figure class="tour" data-tour data-scenes={clientData} aria-label={nurBeispiele ? "360°-Rundgang (Beispiel)" : "360°-Rundgang"}>
+  <div class="tour__screen">
+    {
+      list.map((s, i) => {
+        const img = posterFor(s);
+        return img ? (
+          <div class="tour__poster" data-poster={s.id} hidden={i !== 0 ? true : undefined}>
+            <Picture
+              src={img}
+              formats={["avif", "webp"]}
+              widths={[480, 800, 1200, 1600]}
+              sizes={sizes}
+              alt={`Vorschau des ${s.quelle ? "Beispiel-Rundgangs" : "Rundgangs"}: ${s.titel} (${s.kurz})`}
+              loading={eager && i === 0 ? "eager" : "lazy"}
+              fetchpriority={eager && i === 0 ? "high" : "auto"}
+            />
+          </div>
+        ) : null;
+      })
+    }
+    <div class="tour__shade" aria-hidden="true"></div>
+    {
+      list.map((s, i) => (
+        <span class="tour__badge" data-badge={s.id} hidden={i !== 0 ? true : undefined}>
+          <Icon name="cube360" size="sm" /> {s.quelle ? "Beispiel-Panorama · CC0" : "360°-Rundgang"}
+        </span>
+      ))
+    }
+    <button class="btn btn--primary tour__start" type="button" data-tour-start>
+      <Icon name="play" size="sm" />
+      <span>Rundgang starten</span>
+    </button>
+    <p class="tour__hint">
+      <strong data-tour-hint-title>{start.titel}: {start.kurz}</strong>
+      <span>Ziehen zum Umsehen, orange Punkte öffnen Infos.</span>
+    </p>
+    <div class="tour__viewer" id={`${uid}-viewer`} hidden data-tour-viewer></div>
+    <button class="tour__fs" type="button" hidden data-tour-fs>
+      <Icon name="expand" size="sm" />
+      <span data-tour-fs-label>Vollbild</span>
+    </button>
+    <p class="tour__status" role="status" hidden data-tour-status>Rundgang lädt …</p>
+    <div class="tour__card" role="dialog" aria-labelledby={`${uid}-card-title`} hidden data-tour-card>
+      <button class="tour__card-close" type="button" data-tour-card-close>
+        <Icon name="close" size="sm" />
+        <span class="visually-hidden">Infopunkt schließen</span>
+      </button>
+      <p class="tour__card-title" id={`${uid}-card-title`} data-tour-card-title></p>
+      <p data-tour-card-text></p>
+      <a class="btn btn--primary btn--sm" href="/kontakt?paket=rundgang-business" hidden data-tour-card-cta>Eigenen Rundgang anfragen</a>
+    </div>
+  </div>
+
+  <figcaption class="tour__bar">
+    {
+      list.length > 1 && (
+        <div class="tour__scenes" role="group" aria-label={nurBeispiele ? "Beispiel auswählen" : "Raum auswählen"}>
+          {list.map((s, i) => (
+            <button class="tour__scene" type="button" aria-pressed={i === 0 ? "true" : "false"} data-tour-scene={s.id}>
+              {s.titel}
+            </button>
+          ))}
+        </div>
+      )
+    }
+    {
+      list.map((s, i) =>
+        s.quelle ? (
+          <p class="tour__credit" data-credit={s.id} hidden={i !== 0 ? true : undefined}>
+            Beispiel-Panorama „{s.quelle.name}“ von {s.quelle.autor},{" "}
+            <a href={s.quelle.url} target="_blank" rel="noopener noreferrer">Poly Haven</a> (CC0). Nicht von VistaFlows aufgenommen.
+          </p>
+        ) : null,
+      )
+    }
+  </figcaption>
+
+  {
+    list.map((s, i) => (
+      <ul class="tour__points" aria-label={`Infopunkte ${s.quelle ? "im Beispiel" : "im Raum"} ${s.titel}`} data-points={s.id} hidden={i !== 0 ? true : undefined}>
+        {s.infopunkte.map((p) => (
+          <li>
+            <button type="button" data-tour-point={p.id}>
+              <Icon name="plus" size="sm" />
+              {p.titel}
+            </button>
+          </li>
+        ))}
+      </ul>
+    ))
+  }
+</figure>
+
+<script>
+  type Infopunkt = { id: string; pitch: number; yaw: number; titel: string; text: string; cta?: { label: string; href: string } };
+  type Szene = {
+    id: string;
+    titel: string;
+    kurz: string;
+    panorama: { gross: string; klein: string };
+    start: { yaw: number; pitch: number; hfov: number };
+    infopunkte: Infopunkt[];
+  };
+  type Viewer = {
+    on: (ev: string, fn: (...args: unknown[]) => void) => void;
+    loadScene: (id: string) => void;
+    getScene: () => string;
+    lookAt: (pitch: number, yaw: number, hfov?: number, animated?: boolean | number) => void;
+    resize: () => void;
+  };
+  type Pannellum = { viewer: (el: HTMLElement, cfg: object) => Viewer };
+
+  let loader: Promise<Pannellum> | null = null;
+
+  function loadPannellum(): Promise<Pannellum> {
+    const w = window as unknown as { pannellum?: Pannellum };
+    if (w.pannellum) return Promise.resolve(w.pannellum);
+    if (loader) return loader;
+    loader = new Promise((resolve, reject) => {
+      const css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = "/vendor/pannellum/pannellum.css";
+      document.head.append(css);
+      const js = document.createElement("script");
+      js.src = "/vendor/pannellum/pannellum.js";
+      js.async = true;
+      js.onload = () => (w.pannellum ? resolve(w.pannellum) : reject(new Error("Pannellum fehlt")));
+      js.onerror = () => reject(new Error("Pannellum konnte nicht geladen werden"));
+      document.head.append(js);
+    });
+    return loader;
+  }
+
+  function maxTexture(): number {
+    try {
+      const gl = document.createElement("canvas").getContext("webgl");
+      return gl ? (gl.getParameter(gl.MAX_TEXTURE_SIZE) as number) : 0;
+    } catch {
+      return 0;
+    }
+  }
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const plusIcon =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5.25v13.5M5.25 12h13.5"/></svg>';
+
+  document.querySelectorAll<HTMLElement>("[data-tour]").forEach((root) => {
+    const scenes: Szene[] = JSON.parse(root.dataset.scenes || "[]");
+    if (!scenes.length) return;
+    let current = scenes[0].id;
+    let viewer: Viewer | null = null;
+    let lastTrigger: HTMLElement | null = null;
+
+    const q = <T extends HTMLElement>(sel: string) => root.querySelector<T>(sel);
+    const startBtn = q<HTMLButtonElement>("[data-tour-start]");
+    const viewerEl = q<HTMLDivElement>("[data-tour-viewer]");
+    const status = q<HTMLElement>("[data-tour-status]");
+    const card = q<HTMLElement>("[data-tour-card]");
+    const cardTitle = q<HTMLElement>("[data-tour-card-title]");
+    const cardText = q<HTMLElement>("[data-tour-card-text]");
+    const cardCta = q<HTMLAnchorElement>("[data-tour-card-cta]");
+    const cardClose = q<HTMLButtonElement>("[data-tour-card-close]");
+    const hintTitle = q<HTMLElement>("[data-tour-hint-title]");
+    if (!startBtn || !viewerEl || !status || !card || !cardTitle || !cardText || !cardCta || !cardClose) return;
+
+    const scene = (id: string) => scenes.find((s) => s.id === id) ?? scenes[0];
+
+    function showFor(id: string) {
+      root.querySelectorAll<HTMLElement>("[data-poster]").forEach((el) => (el.hidden = el.dataset.poster !== id));
+      root.querySelectorAll<HTMLElement>("[data-credit]").forEach((el) => (el.hidden = el.dataset.credit !== id));
+      root.querySelectorAll<HTMLElement>("[data-badge]").forEach((el) => (el.hidden = el.dataset.badge !== id));
+      root.querySelectorAll<HTMLElement>("[data-points]").forEach((el) => (el.hidden = el.dataset.points !== id));
+      root.querySelectorAll<HTMLButtonElement>("[data-tour-scene]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.tourScene === id)));
+      if (hintTitle) {
+        const s = scene(id);
+        hintTitle.textContent = `${s.titel}: ${s.kurz}`;
+      }
+      root.querySelectorAll(".hotspot.is-active").forEach((h) => h.classList.remove("is-active"));
+      closeCard(false);
+    }
+
+    function openCard(p: Infopunkt, trigger?: HTMLElement | null) {
+      cardTitle!.textContent = p.titel;
+      cardText!.textContent = p.text;
+      if (p.cta) {
+        cardCta!.hidden = false;
+        cardCta!.href = p.cta.href;
+        cardCta!.textContent = p.cta.label;
+      } else {
+        cardCta!.hidden = true;
+      }
+      card!.hidden = false;
+      root.querySelectorAll(".hotspot").forEach((h) => h.classList.toggle("is-active", (h as HTMLElement).dataset.point === p.id));
+      lastTrigger = trigger ?? null;
+      if (trigger) cardClose!.focus();
+    }
+
+    function closeCard(returnFocus = true) {
+      if (card!.hidden) return;
+      card!.hidden = true;
+      root.querySelectorAll(".hotspot.is-active").forEach((h) => h.classList.remove("is-active"));
+      if (returnFocus && lastTrigger) lastTrigger.focus();
+      lastTrigger = null;
+    }
+
+    cardClose.addEventListener("click", () => closeCard());
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeCard();
+    });
+
+    async function start(focusPoint?: string) {
+      if (viewer) return viewer;
+      root.classList.add("is-loading");
+      startBtn!.disabled = true;
+      status!.hidden = false;
+      status!.textContent = "Rundgang lädt …";
+      try {
+        const p = await loadPannellum();
+        const max = maxTexture();
+        const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+        const small = max < 4096 || conn?.saveData === true;
+        viewerEl!.hidden = false;
+        if (!reduced) viewerEl!.classList.add("is-revealing");
+        viewer = p.viewer(viewerEl!, {
+          default: { firstScene: current, sceneFadeDuration: reduced ? 0 : 450, autoLoad: true },
+          scenes: Object.fromEntries(
+            scenes.map((s) => [
+              s.id,
+              {
+                type: "equirectangular",
+                panorama: small ? s.panorama.klein : s.panorama.gross,
+                yaw: s.start.yaw,
+                pitch: s.start.pitch,
+                hfov: s.start.hfov,
+                minHfov: 50,
+                maxHfov: 120,
+                hotSpots: s.infopunkte.map((pt) => ({
+                  id: pt.id,
+                  pitch: pt.pitch,
+                  yaw: pt.yaw,
+                  cssClass: "hotspot",
+                  createTooltipFunc: (div: HTMLElement) => {
+                    div.dataset.point = pt.id;
+                    const b = document.createElement("button");
+                    b.type = "button";
+                    b.className = "hotspot__btn";
+                    b.setAttribute("aria-label", `Infopunkt: ${pt.titel}`);
+                    b.innerHTML = plusIcon;
+                    div.append(b);
+                  },
+                  clickHandlerFunc: (e: Event) => openCard(pt, e.target as HTMLElement),
+                })),
+              },
+            ]),
+          ),
+          showControls: true,
+          showZoomCtrl: true,
+          // Eigener Vollbild-Button (unten), damit Infopunkt-Karten im Vollbild sichtbar bleiben
+          showFullscreenCtrl: false,
+          compass: false,
+          mouseZoom: false,
+          keyboardZoom: true,
+          draggable: true,
+          autoRotate: false,
+          orientationOnByDefault: false,
+          // Nur in `npm run dev`: Klick ins Panorama schreibt Pitch und Yaw in die Browser-Konsole
+          // (Hilfe beim Platzieren neuer Infopunkte in src/data/rundgaenge.ts)
+          hotSpotDebug: import.meta.env.DEV,
+          strings: {
+            loadButtonLabel: "Rundgang laden",
+            loadingLabel: "Lädt …",
+            bylineLabel: "von %s",
+            noPanoramaError: "Für diesen Rundgang ist kein Panorama hinterlegt.",
+            fileAccessError: "Das Panorama %s konnte nicht geladen werden.",
+            malformedURLError: "Die Adresse des Panoramas ist fehlerhaft.",
+            iOS8WebGLError: "Dein Gerät kann dieses Panorama nicht darstellen.",
+            genericWebGLError: "Dein Browser kann den Rundgang nicht darstellen (WebGL fehlt).",
+            textureSizeError: "Dieses Panorama ist zu groß für dein Gerät (%spx, möglich sind %spx).",
+            unknownError: "Der Rundgang konnte nicht geladen werden.",
+          },
+        });
+        viewer.on("load", () => {
+          status!.hidden = true;
+          if (fsBtn && document.fullscreenEnabled) fsBtn.hidden = false;
+          root.classList.remove("is-loading");
+          root.classList.add("is-running");
+          if (focusPoint) {
+            const pt = scene(current).infopunkte.find((x) => x.id === focusPoint);
+            if (pt) {
+              viewer?.lookAt(pt.pitch, pt.yaw, undefined, reduced ? false : 900);
+              openCard(pt, root.querySelector<HTMLElement>(`[data-tour-point="${pt.id}"]`));
+            }
+          } else {
+            viewerEl!.focus({ preventScroll: true });
+          }
+        });
+        viewer.on("scenechange", (...args: unknown[]) => {
+          current = String(args[0]);
+          showFor(current);
+        });
+        viewer.on("error", () => {
+          status!.hidden = false;
+          status!.textContent = "Der Rundgang konnte nicht geladen werden. Bitte lade die Seite neu oder versuch es später noch einmal.";
+          root.classList.remove("is-loading");
+        });
+        return viewer;
+      } catch {
+        status!.hidden = false;
+        status!.textContent = "Der Rundgang konnte nicht geladen werden. Bitte lade die Seite neu oder versuch es später noch einmal.";
+        root.classList.remove("is-loading");
+        startBtn!.disabled = false;
+        return null;
+      }
+    }
+
+    startBtn.addEventListener("click", () => start());
+
+    const screen = q<HTMLElement>(".tour__screen");
+    const fsBtn = q<HTMLButtonElement>("[data-tour-fs]");
+    const fsLabel = q<HTMLElement>("[data-tour-fs-label]");
+    fsBtn?.addEventListener("click", async () => {
+      try {
+        if (document.fullscreenElement) await document.exitFullscreen();
+        else await screen?.requestFullscreen();
+      } catch {
+        fsBtn.hidden = true;
+      }
+    });
+    document.addEventListener("fullscreenchange", () => {
+      const on = document.fullscreenElement === screen;
+      root.classList.toggle("is-fullscreen", on);
+      if (fsLabel) fsLabel.textContent = on ? "Vollbild beenden" : "Vollbild";
+      window.setTimeout(() => viewer?.resize(), 60);
+    });
+
+    root.querySelectorAll<HTMLButtonElement>("[data-tour-scene]").forEach((b) =>
+      b.addEventListener("click", () => {
+        const id = b.dataset.tourScene!;
+        if (id === current) return;
+        current = id;
+        showFor(id);
+        if (viewer) viewer.loadScene(id);
+      }),
+    );
+
+    root.querySelectorAll<HTMLButtonElement>("[data-tour-point]").forEach((b) =>
+      b.addEventListener("click", async () => {
+        const id = b.dataset.tourPoint!;
+        if (!viewer) {
+          await start(id);
+          return;
+        }
+        const pt = scene(current).infopunkte.find((x) => x.id === id);
+        if (!pt) return;
+        viewer.lookAt(pt.pitch, pt.yaw, undefined, reduced ? false : 900);
+        openCard(pt, b);
+      }),
+    );
+  });
+</script>

@@ -1,0 +1,57 @@
+---
+import { Picture } from "astro:assets";
+import Icon from "./Icon.astro";
+import portrait from "../assets/img/sandin-jagurdzija.jpg";
+
+interface Props {
+  heading?: string;
+  text?: string;
+  /** Link zur Über-mich-Seite anzeigen */
+  link?: boolean;
+  headingLevel?: "h2" | "h3";
+  /** Porträt sofort laden (wenn es im ersten Bildschirm steht) */
+  eager?: boolean;
+  /** ID der Überschrift, auf die sich aria-labelledby des Abschnitts bezieht */
+  headingId?: string;
+}
+
+const {
+  heading = "Ich bin Sandin, und bei VistaFlows sprichst du direkt mit mir.",
+  text = "Lokale Unternehmen kaufen nicht nur Technik. Sie kaufen Vertrauen, eine klare Umsetzung und jemanden, der Verantwortung übernimmt. Deshalb siehst du hier nicht nur ein Logo, sondern die Person hinter VistaFlows.",
+  link = true,
+  headingLevel = "h2",
+  eager = false,
+  headingId,
+} = Astro.props;
+const H = headingLevel;
+---
+
+<div class="founder">
+  <div class="founder__img">
+    <Picture
+      src={portrait}
+      formats={["avif", "webp"]}
+      widths={[320, 480, 640, 800]}
+      sizes="(max-width: 980px) min(380px, 100vw), 420px"
+      alt="Sandin Jagurdzija, Gründer und Inhaber von VistaFlows aus Bottrop"
+      loading={eager ? "eager" : "lazy"}
+      fetchpriority={eager ? "high" : "auto"}
+    />
+  </div>
+  <div>
+    <H id={headingId}>{heading}</H>
+    <p class="muted">{text}</p>
+    <ul class="founder__points">
+      <li><strong>Direkter Kontakt</strong><span>Kein Projektmanager zwischen dir und der Umsetzung, auch nicht nach dem Livegang.</span></li>
+      <li><strong>Festpreis vor dem Start</strong><span>Du bekommst ein schriftliches Angebot mit klarem Umfang. Was drinsteht, wird umgesetzt.</span></li>
+      <li><strong>Ehrliche Einschätzung</strong><span>Wenn sich ein Rundgang oder eine laufende SEO-Betreuung bei dir nicht lohnt, sage ich das.</span></li>
+    </ul>
+    {
+      link && (
+        <a class="btn btn--secondary" href="/ueber-mich">
+          Mehr über mich <Icon name="arrow" size="sm" class="ico-arrow" />
+        </a>
+      )
+    }
+  </div>
+</div>

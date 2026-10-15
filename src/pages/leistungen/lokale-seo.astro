@@ -1,0 +1,167 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Icon from "../../components/Icon.astro";
+import PlanCard from "../../components/PlanCard.astro";
+import Faq from "../../components/Faq.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { seoGeoPakete, seoGeoEinstieg, eur } from "../../data/pakete";
+import { service, faqPage, type FaqEntry } from "../../data/schema";
+
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: "Leistungen", href: "/leistungen" },
+  { name: "Lokale SEO", href: "/leistungen/lokale-seo" },
+];
+
+const faq: FaqEntry[] = [
+  {
+    q: "Was ist das Google-Unternehmensprofil?",
+    a: "Das kostenlose Profil deines Betriebs bei Google, früher „Google My Business“. Es erscheint in Google Maps und neben den Suchergebnissen, mit Adresse, Öffnungszeiten, Fotos, Bewertungen und einem Button für Anruf oder Website. Für lokale Suchen ist es oft wichtiger als die Website selbst.",
+  },
+  {
+    q: "Kann ich in Städten erscheinen, in denen ich keinen Standort habe?",
+    a: "Nur eingeschränkt. Google berücksichtigt die Entfernung zwischen Suchendem und Betrieb. Wer zu Kunden fährt, kann ein Einzugsgebiet angeben, landet aber in weiter entfernten Städten seltener im Kartenbereich. Gute Leistungsseiten mit echtem Bezug zum Einzugsgebiet helfen in der normalen Trefferliste.",
+  },
+  {
+    q: "Darf ich Bewertungen kaufen oder belohnen?",
+    a: "Nein. Gekaufte oder belohnte Bewertungen verstoßen gegen die Richtlinien von Google und können zur Löschung von Bewertungen oder Einschränkungen des Profils führen. Erlaubt und sinnvoll ist, zufriedene Kunden aktiv und einfach um eine ehrliche Bewertung zu bitten, etwa mit Link oder QR-Code.",
+  },
+  {
+    q: "Wie schnell wirkt lokale SEO?",
+    a: "Ein vollständiges Profil und bereinigte Firmendaten zeigen oft schon nach einigen Wochen Wirkung. In Branchen mit vielen Mitbewerbern dauert es mehrere Monate, bis sich Platzierungen stabil verbessern.",
+  },
+];
+
+const schema = [
+  service({
+    name: "Lokale SEO",
+    serviceType: "Lokale Suchmaschinenoptimierung",
+    description: "Google-Unternehmensprofil, Google Maps, Bewertungen, einheitliche Firmendaten und lokale Inhalte für Unternehmen im Ruhrgebiet.",
+    url: "/leistungen/lokale-seo",
+    pakete: seoGeoPakete,
+    area: "region",
+  }),
+  faqPage(faq),
+];
+---
+
+<Base
+  title="Lokale SEO Ruhrgebiet: Google Maps & Unternehmensprofil"
+  description="Lokale SEO für Betriebe im Ruhrgebiet: Google-Unternehmensprofil, Maps, Bewertungen und einheitliche Firmendaten. Damit du in deiner Stadt gefunden wirst."
+  path="/leistungen/lokale-seo"
+  og="/og/lokale-seo.png"
+  ogAlt="Lokale SEO: gefunden werden in Google Maps und in deiner Stadt"
+  crumbs={crumbs}
+  schema={schema}
+>
+  <PageHero
+    crumbs={crumbs}
+    title="Lokale SEO im Ruhrgebiet: vorne in Google Maps und in deiner Stadt."
+    lead="Wenn jemand in Bottrop, Essen oder Oberhausen nach deiner Leistung sucht, entscheidet der Kartenbereich von Google oft schon über den Anruf. Lokale SEO bringt dein Unternehmensprofil, deine Firmendaten und deine Website auf denselben Stand, damit Google dich versteht und anzeigt."
+  >
+    <div class="actions">
+      <a class="btn btn--primary" href="/ki-sichtbarkeits-check">Kostenlosen Check anfordern <Icon name="arrow" size="sm" class="ico-arrow" /></a>
+      <a class="btn btn--on-dark" href="#paket">Paket ansehen</a>
+    </div>
+  </PageHero>
+
+  <section class="section section--paper" aria-labelledby="faktoren-titel">
+    <div class="shell">
+      <div class="answer">
+        <p>
+          <strong>Kurz gesagt:</strong> Lokale SEO sorgt dafür, dass dein Betrieb erscheint, wenn jemand in der Nähe nach deiner Leistung sucht: im Kartenbereich der Google-Suche, in Google Maps und zunehmend in KI-Antworten. Die wichtigsten Hebel sind ein vollständiges Google-Unternehmensprofil, überall gleiche Firmendaten, ehrliche Bewertungen und eine Website mit klarem Ortsbezug.
+        </p>
+      </div>
+      <div class="section-head">
+        <h2 id="faktoren-titel">Was Google für lokale Ergebnisse auswertet</h2>
+        <p>Google nennt drei Faktoren, nach denen lokale Ergebnisse sortiert werden. Zwei davon kannst du beeinflussen.</p>
+      </div>
+      <ol class="journey">
+        <li class="journey__step">
+          <h3 class="has-glyph"><Icon name="target" class="glyph" /><span>Relevanz</span></h3>
+          <p>Passt dein Profil zur Suche? Kategorien, Leistungen, Beschreibung und Website-Inhalte müssen klar sagen, was du anbietest.</p>
+        </li>
+        <li class="journey__step">
+          <h3 class="has-glyph"><Icon name="pin" class="glyph" /><span>Entfernung</span></h3>
+          <p>Wie weit ist dein Standort vom Suchenden entfernt? Daran lässt sich nichts optimieren, aber an der korrekten Adresse und dem Einzugsgebiet.</p>
+        </li>
+        <li class="journey__step">
+          <h3 class="has-glyph"><Icon name="star" class="glyph" /><span>Bekanntheit</span></h3>
+          <p>Wie bekannt ist dein Betrieb? Bewertungen, Erwähnungen auf anderen Seiten und die Stärke deiner Website fließen ein.</p>
+        </li>
+      </ol>
+      <p class="plans-note">Quelle: Google-Unternehmensprofil-Hilfe, „Tipps zur Verbesserung des lokalen Rankings bei Google“ (<a class="text-link" href="https://support.google.com/business/answer/7091?hl=de" target="_blank" rel="noopener noreferrer">support.google.com</a>).</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="enthalten-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="enthalten-titel">Das gehört bei mir zur lokalen SEO</h2>
+        <p class="muted">
+          Lokale SEO ist kein einmaliges Häkchen, sondern Pflege. Die Grundlagen richte ich einmal sauber ein, danach halte ich sie aktuell und baue Bewertungen und Erwähnungen Schritt für Schritt aus.
+        </p>
+        <p class="muted">
+          Alles davon ist in jedem <a class="text-link" href="/leistungen/seo-geo">SEO-&-GEO-Paket</a> enthalten, weil dieselben Signale auch für KI-Antworten zählen: Eine KI empfiehlt eher den Betrieb, dessen Angaben überall gleich und aktuell sind.
+        </p>
+      </div>
+      <div class="panel">
+        <ul class="checks">
+          <li><strong>Google-Unternehmensprofil:</strong> Kategorien, Leistungen, Öffnungszeiten, Fotos, Beschreibung, regelmäßige Beiträge</li>
+          <li><strong>Einheitliche Firmendaten:</strong> Name, Adresse und Telefon gleich bei Google, Bing, Apple und in wichtigen Verzeichnissen</li>
+          <li><strong>Bewertungs-Routine:</strong> Link und QR-Code zum Bewerten, Antwortvorlagen für gute und kritische Bewertungen</li>
+          <li><strong>Website mit Ortsbezug:</strong> Leistungsseiten, Anfahrt, Einzugsgebiet, strukturierte Daten für dein Unternehmen</li>
+          <li><strong>Fotos, die verkaufen:</strong> auf Wunsch 360°-Fotos aus deinem <a class="text-link" href="/leistungen/360-grad-rundgang">Rundgang</a> direkt im Profil</li>
+          <li><strong>Monatlicher Bericht:</strong> Aufrufe, Anrufe und Routenanfragen aus dem Profil, dazu die Sichtbarkeit in KI-Antworten</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone" aria-labelledby="ortsseiten-titel">
+    <div class="shell split split--top">
+      <div>
+        <h2 id="ortsseiten-titel">Ortsseiten nur mit echtem Mehrwert</h2>
+        <p class="muted">
+          Viele Anbieter bauen für jede Stadt im Umkreis eine Seite, bei der nur der Ortsname ausgetauscht wird. Google wertet solche Seiten als „Doorway-Pages“ und kann sie abwerten. Ich baue Ortsseiten nur, wenn es dort wirklich etwas zu sagen gibt: Termine vor Ort, Projekte in der Stadt, konkrete Anfahrt.
+        </p>
+      </div>
+      <div class="panel">
+        <h3>Stattdessen</h3>
+        <ul class="checks">
+          <li>Eine starke Seite pro Leistung, mit klarem Einzugsgebiet</li>
+          <li>Ortsbezug dort, wo er stimmt: Standort, Anfahrt, Termine</li>
+          <li>Inhalte, die Fragen aus deiner Region beantworten</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="paket" aria-labelledby="paket-titel">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="paket-titel">Das passende Paket</h2>
+        <p>Für einen Standort mit einer Kernleistung reicht meist „Lokal sichtbar“. Wenn du nicht weißt, wo du stehst, starte mit dem kostenlosen Check oder dem Audit für {eur(seoGeoEinstieg[1].betrag)}.</p>
+      </div>
+      <div class="plans">
+        <PlanCard paket={seoGeoPakete[0]} />
+        <PlanCard paket={seoGeoEinstieg[0]} />
+        <PlanCard paket={seoGeoEinstieg[1]} />
+      </div>
+      <p class="plans-note">Mehr Inhalte und mehrere Standorte: <a class="text-link" href="/leistungen/seo-geo#pakete">alle SEO-&-GEO-Pakete vergleichen</a>. Mindestlaufzeit 3 Monate, danach monatlich kündbar.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-titel">
+    <div class="shell split split--top">
+      <div class="section-head">
+        <h2 id="faq-titel">Häufige Fragen zur lokalen SEO</h2>
+        <p>Mehr zum Zusammenspiel mit KI-Suche: <a class="text-link" href="/ratgeber/google-ai-overviews">Google AI Overviews für lokale Unternehmen</a>.</p>
+      </div>
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <CtaBand title="Wo stehst du in Google Maps und in KI-Antworten?" text="Der kostenlose Check zeigt, wer bei den Fragen deiner Kunden genannt wird und was dein Profil noch braucht." primary={{ label: "Kostenlosen Check anfordern", href: "/ki-sichtbarkeits-check" }} />
+</Base>

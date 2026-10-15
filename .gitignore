@@ -1,4 +1,22 @@
+# Abhängigkeiten und Build
 node_modules/
-.vercel
+dist/
+.astro/
+
+# Vercel und lokale Umgebungsvariablen (niemals einchecken)
+.vercel/
+.env
+.env.*
+!.env.example
+
+# Prüf-Werkzeuge
+.playwright-cli/
+playwright-report/
+test-results/
+
+# QA-Screenshots (54 MB, jederzeit neu erzeugbar, siehe docs/99-qa-report.md)
+docs/screenshots/
+
+# System
 .DS_Store
 *.log

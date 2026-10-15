@@ -1,0 +1,355 @@
+---
+// Anfrageformular in drei Varianten. Sendet an /api/anfrage (Vercel-Funktion).
+// Ohne JavaScript: normaler POST mit Weiterleitung auf /danke bzw. /fehler.
+// Mit JavaScript: Prüfung in Echtzeit, Absenden ohne Neuladen, dann /danke.
+import Icon from "./Icon.astro";
+import { anfrageOptionen, allePakete } from "../data/pakete";
+import { site } from "../data/site";
+
+interface Props {
+  variant?: "anfrage" | "ki-check" | "widerruf";
+  /** Vorauswahl im Feld „Worum geht es?“ (Paket-ID oder Optionstext) */
+  preselect?: string;
+  submitLabel?: string;
+  idPrefix?: string;
+}
+
+const { variant = "anfrage", preselect = "Kostenloses Erstgespräch", submitLabel, idPrefix = "f" } = Astro.props;
+const id = (name: string) => `${idPrefix}-${name}`;
+const paketIdToOption = Object.fromEntries(allePakete.map((p) => [p.id, p.anfrage]));
+const preselectOption = paketIdToOption[preselect] ?? preselect;
+const label =
+  submitLabel ?? (variant === "ki-check" ? "Kostenlosen KI-Check anfordern" : variant === "widerruf" ? "Widerruf absenden" : "Anfrage absenden");
+---
+
+<form
+  class="form"
+  action="/api/anfrage"
+  method="post"
+  novalidate
+  data-anfrage-form
+  data-variant={variant}
+  data-paket-map={JSON.stringify(paketIdToOption)}
+>
+  <input type="hidden" name="typ" value={variant} />
+  <input type="hidden" name="t" value="" data-form-time />
+  <div class="hp" aria-hidden="true">
+    <label for={id("fax")}>Faxnummer (bitte leer lassen)</label>
+    <input id={id("fax")} name="fax" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="form__status form__status--error" role="alert" hidden data-form-error>
+    <Icon name="alert" />
+    <span data-form-error-text>Bitte prüfe die markierten Felder.</span>
+  </div>
+
+  {
+    variant === "widerruf" ? (
+      <>
+        <p class="muted">Hiermit widerrufe ich den von mir abgeschlossenen Vertrag über die Erbringung der folgenden Dienstleistung:</p>
+        <div class="field">
+          <label for={id("dienstleistung")}>Bezeichnung der Dienstleistung</label>
+          <input id={id("dienstleistung")} name="dienstleistung" required maxlength="200" aria-describedby={`${id("dienstleistung")}-error`} placeholder="z. B. Website Professional" />
+          <p class="field__error" id={`${id("dienstleistung")}-error`} hidden><Icon name="alert" /><span>Bitte gib an, welche Leistung du widerrufst.</span></p>
+        </div>
+        <div class="form__row">
+          <div class="field">
+            <label for={id("bestellt")}>Bestellt am</label>
+            <input id={id("bestellt")} name="bestellt_am" type="date" required aria-describedby={`${id("bestellt")}-error`} />
+            <p class="field__error" id={`${id("bestellt")}-error`} hidden><Icon name="alert" /><span>Bitte gib das Bestelldatum an.</span></p>
+          </div>
+          <div class="field">
+            <label for={id("erhalten")}>Erhalten am <span class="field__opt">(optional)</span></label>
+            <input id={id("erhalten")} name="erhalten_am" type="date" />
+          </div>
+        </div>
+        <div class="field">
+          <label for={id("name")}>Vor- und Nachname</label>
+          <input id={id("name")} name="name" required minlength="2" maxlength="100" autocomplete="name" aria-describedby={`${id("name")}-error`} />
+          <p class="field__error" id={`${id("name")}-error`} hidden><Icon name="alert" /><span>Bitte gib deinen Namen an.</span></p>
+        </div>
+        <div class="field">
+          <label for={id("anschrift")}>Anschrift</label>
+          <textarea id={id("anschrift")} name="anschrift" required maxlength="400" autocomplete="street-address" aria-describedby={`${id("anschrift")}-error`} placeholder="Straße, PLZ, Ort" />
+          <p class="field__error" id={`${id("anschrift")}-error`} hidden><Icon name="alert" /><span>Bitte gib deine Anschrift an.</span></p>
+        </div>
+        <div class="field">
+          <label for={id("email")}>E-Mail-Adresse für die Eingangsbestätigung</label>
+          <input id={id("email")} name="email" type="email" required maxlength="254" autocomplete="email" inputmode="email" spellcheck="false" autocapitalize="none" autocorrect="off" aria-describedby={`${id("email")}-error`} />
+          <p class="field__error" id={`${id("email")}-error`} hidden><Icon name="alert" /><span>Bitte gib eine gültige E-Mail-Adresse an, z. B. name@beispiel.de.</span></p>
+        </div>
+        <p class="form__note">
+          Deine Angaben verwenden wir nur, um den Widerruf zu bearbeiten und dir den Eingang zu bestätigen. Mehr in der <a href="/datenschutz">Datenschutzerklärung</a>.
+        </p>
+      </>
+    ) : (
+      <>
+        <div class="form__row">
+          <div class="field">
+            <label for={id("name")}>Name</label>
+            <input id={id("name")} name="name" required minlength="2" maxlength="100" autocomplete="name" aria-describedby={`${id("name")}-error`} />
+            <p class="field__error" id={`${id("name")}-error`} hidden><Icon name="alert" /><span>Bitte gib deinen Namen an.</span></p>
+          </div>
+          <div class="field">
+            <label for={id("email")}>E-Mail</label>
+            <input id={id("email")} name="email" type="email" required maxlength="254" autocomplete="email" inputmode="email" spellcheck="false" autocapitalize="none" autocorrect="off" aria-describedby={`${id("email")}-error`} placeholder="name@unternehmen.de" />
+            <p class="field__error" id={`${id("email")}-error`} hidden><Icon name="alert" /><span>Bitte gib eine gültige E-Mail-Adresse an, z. B. name@unternehmen.de.</span></p>
+          </div>
+        </div>
+
+        {variant === "ki-check" ? (
+          <>
+            <div class="field">
+              <label for={id("website")}>Deine Website</label>
+              <input id={id("website")} name="website" type="text" required maxlength="200" autocomplete="url" inputmode="url" spellcheck="false" autocapitalize="none" autocorrect="off" aria-describedby={`${id("website")}-hint ${id("website")}-error`} placeholder="deine-firma.de" />
+              <p class="field__hint" id={`${id("website")}-hint`}>Noch keine Website? Dann schreib „keine“. Der Check zeigt trotzdem, wer in deiner Branche genannt wird.</p>
+              <p class="field__error" id={`${id("website")}-error`} hidden><Icon name="alert" /><span>Bitte gib deine Website an oder schreib „keine“.</span></p>
+            </div>
+            <div class="field">
+              <label for={id("branche")}>Branche und Ort</label>
+              <input id={id("branche")} name="branche" required maxlength="160" aria-describedby={`${id("branche")}-hint ${id("branche")}-error`} placeholder="z. B. Physiotherapie in Essen-Rüttenscheid" />
+              <p class="field__hint" id={`${id("branche")}-hint`}>Daraus entstehen die Fragen, die ich den KI-Systemen stelle.</p>
+              <p class="field__error" id={`${id("branche")}-error`} hidden><Icon name="alert" /><span>Bitte gib Branche und Ort an.</span></p>
+            </div>
+            <input type="hidden" name="paket" value="KI-Sichtbarkeits-Check (kostenlos)" />
+          </>
+        ) : (
+          <>
+            <div class="form__row">
+              <div class="field">
+                <label for={id("telefon")}>Telefon <span class="field__opt">(optional)</span></label>
+                <input id={id("telefon")} name="telefon" type="tel" maxlength="40" autocomplete="tel" inputmode="tel" aria-describedby={`${id("telefon")}-error`} />
+                <p class="field__error" id={`${id("telefon")}-error`} hidden><Icon name="alert" /><span>Bitte nur Ziffern, Leerzeichen und + ( ) / -.</span></p>
+              </div>
+              <div class="field">
+                <label for={id("unternehmen")}>Unternehmen <span class="field__opt">(optional)</span></label>
+                <input id={id("unternehmen")} name="unternehmen" maxlength="120" autocomplete="organization" />
+              </div>
+            </div>
+            <div class="field">
+              <label for={id("paket")}>Worum geht es?</label>
+              <select id={id("paket")} name="paket" data-paket-select>
+                {anfrageOptionen.map((g) => (
+                  <optgroup label={g.gruppe}>
+                    {g.optionen.map((o) => (
+                      <option value={o} selected={o === preselectOption ? true : undefined}>
+                        {o}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </div>
+            <div class="field">
+              <label for={id("website")}>Aktuelle Website <span class="field__opt">(optional)</span></label>
+              <input id={id("website")} name="website" type="text" maxlength="200" autocomplete="url" inputmode="url" spellcheck="false" autocapitalize="none" autocorrect="off" placeholder="deine-firma.de" />
+            </div>
+          </>
+        )}
+
+        <div class="field">
+          <label for={id("nachricht")}>
+            {variant === "ki-check" ? "Gibt es Mitbewerber, die ich vergleichen soll?" : "Was hast du vor?"} <span class="field__opt">(optional)</span>
+          </label>
+          <textarea
+            id={id("nachricht")}
+            name="nachricht"
+            maxlength="4000"
+            placeholder={variant === "ki-check" ? "Namen oder Websites von 1–3 Mitbewerbern" : "Welche Leistung, welcher Zeitraum, was soll die Website erreichen?"}
+          />
+        </div>
+
+        <div class="field">
+          <label class="check-field" for={id("datenschutz")}>
+            <input id={id("datenschutz")} name="datenschutz" type="checkbox" value="ja" required aria-describedby={`${id("datenschutz")}-error`} />
+            <span>
+              Ich habe die <a href="/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen. Meine Angaben werden nur zur Bearbeitung dieser Anfrage verwendet.
+            </span>
+          </label>
+          <p class="field__error" id={`${id("datenschutz")}-error`} hidden><Icon name="alert" /><span>Bitte bestätige, dass du die Datenschutzerklärung gelesen hast.</span></p>
+        </div>
+      </>
+    )
+  }
+
+  <button class="btn btn--primary" type="submit" data-form-submit>
+    <svg class="ico ico-sm ico-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3.25a8.75 8.75 0 1 0 8.75 8.75"></path></svg>
+    <span data-form-submit-label>{label}</span>
+  </button>
+  <p class="form__note">
+    {
+      variant === "widerruf"
+        ? "Du bekommst eine Eingangsbestätigung an die angegebene E-Mail-Adresse."
+        : `${site.responsePromise}. Lieber telefonieren? ${site.phone.display}.`
+    }
+  </p>
+</form>
+
+<script>
+  type Mode = "anfrage" | "ki-check" | "widerruf";
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const PHONE = /^[0-9+()/\-\s]{5,40}$/;
+
+  document.querySelectorAll<HTMLFormElement>("[data-anfrage-form]").forEach((form) => {
+    const mode = (form.dataset.variant || "anfrage") as Mode;
+    const errorBox = form.querySelector<HTMLElement>("[data-form-error]");
+    const errorText = form.querySelector<HTMLElement>("[data-form-error-text]");
+    const submit = form.querySelector<HTMLButtonElement>("[data-form-submit]");
+    const submitLabel = form.querySelector<HTMLElement>("[data-form-submit-label]");
+    const time = form.querySelector<HTMLInputElement>("[data-form-time]");
+    if (time) time.value = String(Date.now());
+
+    // Paket aus der URL vorauswählen: /kontakt?paket=professional
+    const select = form.querySelector<HTMLSelectElement>("[data-paket-select]");
+    const paket = new URLSearchParams(location.search).get("paket");
+    if (select && paket) {
+      const map: Record<string, string> = JSON.parse(form.dataset.paketMap || "{}");
+      const wanted = map[paket] ?? paket;
+      const option = Array.from(select.options).find((o) => o.value === wanted);
+      if (option) select.value = option.value;
+    }
+
+    const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null;
+
+    function rule(name: string): string | null {
+      const el = field(name);
+      if (!el) return null;
+      const v = (el.value || "").trim();
+      switch (name) {
+        case "name":
+          return v.length >= 2 ? null : "invalid";
+        case "email":
+          return EMAIL.test(v) ? null : "invalid";
+        case "telefon":
+          return !v || PHONE.test(v) ? null : "invalid";
+        case "website":
+          return mode !== "ki-check" || v.length >= 3 ? null : "invalid";
+        case "branche":
+          return v.length >= 3 ? null : "invalid";
+        case "datenschutz":
+          return (el as HTMLInputElement).checked ? null : "invalid";
+        case "dienstleistung":
+        case "anschrift":
+          return v.length >= 3 ? null : "invalid";
+        case "bestellt_am":
+          return /^\d{4}-\d{2}-\d{2}$/.test(v) ? null : "invalid";
+        default:
+          return null;
+      }
+    }
+
+    const checked: Record<Mode, string[]> = {
+      anfrage: ["name", "email", "telefon", "datenschutz"],
+      "ki-check": ["name", "email", "website", "branche", "datenschutz"],
+      widerruf: ["dienstleistung", "bestellt_am", "name", "anschrift", "email"],
+    };
+
+    function show(name: string, invalid: boolean) {
+      const el = field(name);
+      if (!el) return;
+      const wrap = el.closest(".field");
+      const err = wrap?.querySelector<HTMLElement>(".field__error");
+      wrap?.classList.toggle("field--invalid", invalid);
+      el.setAttribute("aria-invalid", String(invalid));
+      if (err) err.hidden = !invalid;
+    }
+
+    function validate(): string[] {
+      const bad = checked[mode].filter((n) => rule(n) !== null);
+      checked[mode].forEach((n) => show(n, bad.includes(n)));
+      return bad;
+    }
+
+    // Prüfung beim Verlassen eines Feldes und erneut beim Tippen, sobald ein Fehler angezeigt wird
+    checked[mode].forEach((n) => {
+      const el = field(n);
+      if (!el) return;
+      el.addEventListener("blur", () => {
+        if ((el.value || "").trim() || el.getAttribute("aria-invalid") === "true") show(n, rule(n) !== null);
+      });
+      el.addEventListener(el.type === "checkbox" ? "change" : "input", () => {
+        if (el.getAttribute("aria-invalid") === "true") show(n, rule(n) !== null);
+      });
+    });
+
+    function setBusy(busy: boolean) {
+      if (!submit) return;
+      submit.disabled = busy;
+      submit.setAttribute("aria-busy", String(busy));
+      if (submitLabel) submitLabel.textContent = busy ? "Wird gesendet …" : submitLabel.dataset.label || submitLabel.textContent || "";
+    }
+    if (submitLabel) submitLabel.dataset.label = submitLabel.textContent || "";
+
+    // Wer schon eine längere Nachricht geschrieben hat, bekommt beim Verlassen der Seite eine
+    // Rückfrage des Browsers. Der Listener hängt nur, solange wirklich Text auf dem Spiel steht.
+    const nachricht = field("nachricht");
+    let guarded = false;
+    const guard = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+    };
+    const setGuard = (on: boolean) => {
+      if (on === guarded) return;
+      guarded = on;
+      if (on) window.addEventListener("beforeunload", guard);
+      else window.removeEventListener("beforeunload", guard);
+    };
+    nachricht?.addEventListener("input", () => setGuard((nachricht.value || "").trim().length >= 30));
+
+    // Server-Meldungen immer als Text, eigene Meldungen mit Links als HTML
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function fail(message: string, asHtml = false, scroll = true) {
+      if (errorText) {
+        if (asHtml) errorText.innerHTML = message;
+        else errorText.textContent = message;
+      }
+      if (errorBox) {
+        errorBox.hidden = false;
+        if (scroll) errorBox.scrollIntoView({ block: "center", behavior: reduced ? "auto" : "smooth" });
+      }
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (errorBox) errorBox.hidden = true;
+      const bad = validate();
+      if (bad.length) {
+        fail("Bitte prüfe die markierten Felder.", false, false);
+        field(bad[0])?.focus();
+        return;
+      }
+      setBusy(true);
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form),
+        });
+        const data = (await res.json().catch(() => ({}))) as { ok?: boolean; redirect?: string; error?: string; fields?: string[] };
+        if (res.ok && data.ok) {
+          const w = window as unknown as { va?: (e: string, d: object) => void };
+          w.va?.("event", { name: mode === "ki-check" ? "KI-Check angefordert" : mode === "widerruf" ? "Widerruf gesendet" : "Anfrage gesendet" });
+          setGuard(false);
+          location.assign(data.redirect || "/danke");
+          return;
+        }
+        if (data.fields?.length) {
+          data.fields.forEach((n) => show(n, true));
+          field(data.fields[0])?.focus();
+        }
+        if (data.error) fail(data.error, false, !data.fields?.length);
+        else
+          fail(
+            'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuche es noch einmal oder schreib direkt an <a href="mailto:info@vistaflows.com">info@vistaflows.com</a>.',
+            true,
+          );
+      } catch {
+        fail(
+          'Keine Verbindung. Bitte prüfe deine Internetverbindung und versuche es erneut, oder ruf an: <a href="tel:+491743154839">+49 174 3154839</a>.',
+          true,
+        );
+      } finally {
+        setBusy(false);
+      }
+    });
+  });
+</script>

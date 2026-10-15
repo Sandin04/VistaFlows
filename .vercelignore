@@ -1,0 +1,11 @@
+# Wird für den Build auf Vercel nicht gebraucht und nicht hochgeladen.
+# Achtung: src/content/ratgeber/*.md wird gebraucht, deshalb nur Markdown im Hauptordner ausschließen.
+archiv/
+assets-source/
+docs/
+dev/
+tests/
+tools/render/
+.impeccable/
+.playwright-cli/
+/*.md

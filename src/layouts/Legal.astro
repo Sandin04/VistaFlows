@@ -1,0 +1,49 @@
+---
+import Base from "./Base.astro";
+import Crumbs from "../components/Crumbs.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  heading: string;
+  crumb: string;
+}
+
+const { title, description, path, heading, crumb } = Astro.props;
+const crumbs = [
+  { name: "Start", href: "/" },
+  { name: crumb, href: path },
+];
+---
+
+<Base title={title} description={description} path={path} noindex crumbs={crumbs} og="/og/start.png">
+  <section class="night page-hero">
+    <div class="shell">
+      <Crumbs items={crumbs} />
+      <div class="page-hero__inner">
+        <h1>{heading}</h1>
+        <p class="lead">Stand: {site.rechtstexteStand}</p>
+      </div>
+    </div>
+  </section>
+  <section class="section section--paper">
+    <div class="shell">
+      <div class="legal prose">
+        {
+          !site.rechtstexteGeprueft && (
+            <p class="draft-note">
+              <Icon name="info" />
+              <span>
+                Entwurf: Dieser Text wurde sorgfältig erstellt, ist aber noch nicht rechtlich geprüft. Er ersetzt keine Rechtsberatung.
+              </span>
+            </p>
+          )
+        }
+        <slot />
+      </div>
+    </div>
+  </section>
+</Base>

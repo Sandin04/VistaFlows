@@ -1,0 +1,90 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+
+const artikel = await getCollection("ratgeber");
+const seiten = [
+  { label: "Startseite", href: "/", text: "Überblick über VistaFlows" },
+  { label: "Leistungen", href: "/leistungen", text: "Website, SEO & GEO, Automatisierung, 360°-Rundgang" },
+  { label: "SEO & GEO", href: "/leistungen/seo-geo", text: "Gefunden werden bei Google und in KI-Antworten" },
+  { label: "Lokale SEO", href: "/leistungen/lokale-seo", text: "Google Maps und Unternehmensprofil" },
+  { label: "360°-Rundgang", href: "/leistungen/360-grad-rundgang", text: "Räume zeigen, ohne Abo" },
+  { label: "Preise", href: "/preise", text: "Alle Pakete und Preise" },
+  { label: "KI-Sichtbarkeits-Check", href: "/ki-sichtbarkeits-check", text: "Kostenlos prüfen lassen" },
+  { label: "Branchen", href: "/branchen", text: "Hotels, Praxen, Showrooms, Fitness, Immobilien" },
+  { label: "Über mich", href: "/ueber-mich", text: "Sandin Jagurdzija" },
+  { label: "FAQ", href: "/faq", text: "Häufige Fragen" },
+  { label: "Kontakt", href: "/kontakt", text: "Erstgespräch anfragen" },
+  { label: "Ratgeber", href: "/ratgeber", text: "Alle Artikel" },
+  ...artikel.map((a) => ({ label: a.data.crumb, href: `/ratgeber/${a.id}`, text: a.data.title })),
+];
+---
+
+<Base
+  title="Seite nicht gefunden (404) | VistaFlows"
+  description="Diese Seite gibt es nicht oder nicht mehr. Hier findest du die wichtigsten Seiten von VistaFlows."
+  path="/404"
+  noindex
+  stickyCta={false}
+>
+  <section class="night night--glow status-page">
+    <div class="shell">
+      <h1>Diese Seite gibt es nicht oder nicht mehr.</h1>
+      <p class="lead">Fehler 404: Vielleicht hat sich die Adresse geändert. Such hier nach dem, was du brauchst, oder geh zurück zur Startseite.</p>
+      <div class="field search404">
+        <label for="suche404">Seite suchen</label>
+        <input id="suche404" type="search" placeholder="z. B. Preise, GEO, Rundgang" autocomplete="off" enterkeyhint="search" aria-describedby="suche404-status" data-suche />
+      </div>
+      <ul class="status-links" data-suche-liste>
+        {
+          seiten.map((s) => (
+            <li data-suchtext={`${s.label} ${s.text}`.toLowerCase()}>
+              <a href={s.href}>
+                <span>
+                  {s.label}
+                  <small class="search404__text">{s.text}</small>
+                </span>
+                <Icon name="arrow" size="sm" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="visually-hidden" id="suche404-status" role="status" data-suche-status></p>
+      <p class="promise" hidden data-suche-leer>Nichts gefunden. Versuch ein anderes Wort oder <a href="/kontakt">schreib mir</a>.</p>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>("[data-suche]");
+  const items = Array.from(document.querySelectorAll<HTMLElement>("[data-suche-liste] li"));
+  const leer = document.querySelector<HTMLElement>("[data-suche-leer]");
+  const status = document.querySelector<HTMLElement>("[data-suche-status]");
+  // „über“, „ueber“ und „uber“ finden dasselbe
+  const falten = (s: string) =>
+    s
+      .toLowerCase()
+      .replace(/ä/g, "ae")
+      .replace(/ö/g, "oe")
+      .replace(/ü/g, "ue")
+      .replace(/ß/g, "ss")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  const ohneUmlaut = (s: string) => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  input?.addEventListener("input", () => {
+    const roh = input.value.trim();
+    const q1 = falten(roh);
+    const q2 = ohneUmlaut(roh);
+    let treffer = 0;
+    items.forEach((li) => {
+      const text = li.dataset.suchtext || "";
+      const ok = !roh || falten(text).includes(q1) || ohneUmlaut(text).includes(q2);
+      li.hidden = !ok;
+      if (ok) treffer += 1;
+    });
+    if (leer) leer.hidden = treffer > 0;
+    if (status) status.textContent = !roh ? "" : treffer === 0 ? "Keine passende Seite gefunden." : treffer === 1 ? "1 passende Seite." : `${treffer} passende Seiten.`;
+  });
+</script>

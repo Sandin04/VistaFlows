@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<title>OG</title>
+<style>
+  @font-face { font-family: "InterOG"; src: url("/node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; }
+  html, body { margin: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; background: #0a0c11; font-family: "InterOG", sans-serif; color: #f4f5f7; position: relative; }
+  .glow { position: absolute; inset: 0; background: radial-gradient(56% 80% at 88% 4%, rgba(255,122,26,.24), transparent 64%); }
+  .wrap { position: absolute; inset: 0; padding: 72px 80px; display: flex; flex-direction: column; }
+  .brand { display: flex; align-items: center; gap: 16px; font-size: 34px; font-weight: 750; letter-spacing: -0.028em; }
+  .brand img { width: 60px; height: 60px; border-radius: 14px; background: rgba(255,255,255,.06); padding: 5px; }
+  .brand b { font-weight: inherit; }
+  .brand span { color: #ff7a1a; }
+  .kicker { margin-top: auto; font-size: 22px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #ff9d4d; }
+  h1 { margin: 14px 0 0; font-size: 64px; line-height: 1.06; font-weight: 800; letter-spacing: -0.03em; max-width: 960px; text-wrap: balance; }
+  h1 em { font-style: normal; color: #ff7a1a; }
+  .sub { margin-top: 22px; font-size: 26px; line-height: 1.4; color: #a2aab7; max-width: 900px; }
+  .foot { position: absolute; right: 80px; top: 88px; font-size: 22px; color: #a2aab7; }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="wrap">
+  <div class="brand"><img src="/src/assets/img/logo-hell.png" alt="" /><b>Vista<span>Flows</span></b></div>
+  <div class="kicker" id="k"></div>
+  <h1 id="t"></h1>
+  <div class="sub" id="s"></div>
+</div>
+<div class="foot">vistaflows.com</div>
+<script>
+  const p = new URLSearchParams(location.search);
+  document.getElementById("k").textContent = p.get("k") || "";
+  document.getElementById("t").innerHTML = (p.get("t") || "").replace(/\*(.+?)\*/g, "<em>$1</em>");
+  document.getElementById("s").textContent = p.get("s") || "";
+  document.fonts.ready.then(() => { window.ready = true; });
+</script>
+</body>
+</html>

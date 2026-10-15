@@ -1,0 +1,112 @@
+/* =========================================================================
+   VistaFlows – Design-Tokens („Schaufenster bei Nacht“)
+   Einzige Quelle der Werte: DESIGN.md. Hier nur als CSS-Variablen gespiegelt.
+   ========================================================================= */
+
+:root {
+  /* Nacht */
+  --ink: #0a0c11;
+  --ink-2: #11141b;
+  --ink-3: #191d26;
+  --ink-night: #06080c;
+
+  /* Papier */
+  --paper: #ffffff;
+  --paper-warm: #f7f6f3;
+  --paper-stone: #efede8;
+
+  /* Text auf Papier */
+  --text: #14181f;
+  --text-2: #3d4551;
+  --muted: #626b7a;
+
+  /* Text auf Nacht */
+  --on-dark: #f4f5f7;
+  --on-dark-muted: #a2aab7;
+
+  /* Licht */
+  --signal: #ff7a1a;
+  --signal-hover: #ff8a33;
+  --ember: #ff9d4d;
+  --accent-ink: #b34700;
+  --accent-wash: #fff1e6;
+  --accent-line: rgba(255, 122, 26, 0.28);
+  --accent-glow: rgba(255, 122, 26, 0.18);
+
+  /* Status */
+  --success: #1f7a4d;
+  --success-wash: #e8f5ee;
+  --error: #b42318;
+  --error-wash: #fdecea;
+
+  /* Linien */
+  --line: rgba(10, 12, 17, 0.1);
+  --line-2: rgba(10, 12, 17, 0.16);
+  --d-line: rgba(255, 255, 255, 0.11);
+  --d-line-2: rgba(255, 255, 255, 0.2);
+  --d-fill: rgba(255, 255, 255, 0.045);
+
+  /* Tiefe */
+  --shadow-rest: 0 1px 2px rgba(10, 12, 17, 0.06), 0 4px 12px rgba(10, 12, 17, 0.05);
+  --shadow-lift: 0 2px 6px rgba(10, 12, 17, 0.06), 0 16px 40px rgba(10, 12, 17, 0.09);
+  --shadow-float: 0 4px 12px rgba(10, 12, 17, 0.07), 0 32px 72px rgba(10, 12, 17, 0.14);
+  /* Schatten über Nacht-Flächen und Fotos (Panorama, dunkler Header) */
+  --shadow-night-rest: 0 6px 18px rgba(0, 0, 0, 0.4);
+  --shadow-night-lift: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-night-float: 0 20px 50px rgba(0, 0, 0, 0.4);
+  --line-on-photo: rgba(0, 0, 0, 0.3);
+
+  /* Formen */
+  --r-2xs: 4px; /* Fokusring, Inline-Code, Sprechblasen-Ecke */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 20px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  /* Raster */
+  --shell: 1220px;
+  --gutter: clamp(18px, 5vw, 40px);
+  --section: clamp(56px, 8vw, 108px);
+  --gap: clamp(16px, 2.4vw, 28px);
+  --header-h: 68px;
+  --measure: 60ch; /* Inter: 60ch ≈ 72–78 Zeichen pro Zeile */
+
+  /* Schrift (Inter, selbst gehostet über die Astro-Fonts-API) */
+  --font: var(--font-inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  /* Typo-Skala: jede Schriftgröße der Seite kommt aus dieser Liste (siehe DESIGN.md) */
+  --fs-display: clamp(31px, 5.1vw, 55px); /* H1 Startseite */
+  --fs-display-s: clamp(30px, 4.3vw, 50px); /* H1 Unterseiten */
+  --fs-headline: clamp(25px, 3.5vw, 39px); /* H2 Abschnitte */
+  --fs-headline-s: clamp(22px, 2.6vw, 28px); /* H2 in Artikeln, Formularen, Rechtstexten */
+  --fs-price: clamp(30px, 3.2vw, 38px); /* Preis in Paketkarten */
+  --fs-title: clamp(18px, 1.9vw, 22px); /* H3, Karten */
+  --fs-lead: clamp(16.5px, 1.4vw, 18.5px); /* Einleitungen */
+  --fs-long: clamp(17px, 1.25vw, 18px); /* Ratgeber-Fließtext */
+  --fs-body-l: 17px; /* H4, Fragen, hervorgehobene Zeilen */
+  --fs-body: 16px; /* Fließtext, Kartentext */
+  --fs-ui: 15px; /* Buttons, Navigation, Listen in Karten */
+  --fs-small: 14px; /* Meta, Hinweise, Brotkrumen */
+  --fs-caption: 13px; /* Bildnachweise, Kleingedrucktes */
+  --fs-label: 12px; /* Versalien-Marker, Tabellenköpfe */
+  --fs-brand: 19px; /* Wortmarke im Header */
+  --fs-brand-s: 17.5px; /* Wortmarke mobil */
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; /* nur Codebeispiele */
+
+  /* Bedienelemente des Browsers */
+  --scrollbar-thumb: #b9b3a9;
+  --scrollbar-thumb-dark: rgba(255, 255, 255, 0.28);
+
+  /* Bewegung */
+  --ease-out: cubic-bezier(0.22, 0.9, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 160ms;
+  --t-base: 240ms;
+
+  /* Ebenen */
+  --z-header: 50;
+  --z-sticky: 40;
+  --z-menu: 60;
+  --z-skip: 70;
+}
